@@ -5,73 +5,68 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ── Palette ──────────────────────────────────────────────────────────────
-   Built from five brand colours:
-     #2C3531  deep pine    #116466  teal      #D9B08C  tan
-     #FFCB9A  peach        #D1E8E2  mint
+   Engineering blueprint / drafting sheet (from the prior static site):
+     #050c17  navy-900     #0a1628  navy-800    #22d3ee  cyan
+     #fbbf24  amber        #e8f1fa  ink         #a7bed4  ink-soft
 
-   Light is the base definition; dark overrides the same tokens. Every colour
-   used anywhere in the site resolves to one of these — never hard-code a hex
-   in a component.
-
-   The accent flips role between themes on purpose: teal carries the emphasis
-   on light ground, peach on dark, because neither reads as an accent against
-   both. `--accent-2` is the supporting warm tone. */
+   Dark is the primary look. Light is a paper-blueprint variant. Features
+   (hero rotator, struct card, bento, motion) stay; only tokens change. */
 :root {
-  --background: #f2f8f6;
-  --surface: #e4f0ec;
+  /* Light: pale drafting paper */
+  --background: #eef4f8;
+  --surface: #e2ebf2;
   --surface-raised: #ffffff;
-  --foreground: #2c3531;
-  --muted: #4f615b;
-  --subtle: #7b8d87;
-  --border: #cadfd8;
-  --border-strong: #a8c4bc;
+  --foreground: #050c17;
+  --muted: #3d5166;
+  --subtle: #6b8299;
+  --border: #c5d4e0;
+  --border-strong: #9bb0c2;
 
-  --accent: #116466;
+  --accent: #0e7490;
   --accent-foreground: #ffffff;
-  --accent-soft: #d1e8e2;
-  --accent-2: #b9835a;
+  --accent-soft: #d7f0f7;
+  --accent-2: #b45309;
 
-  /* Background field — the animated blobs behind every page. */
-  --glow-1: #116466;
-  --glow-2: #d9b08c;
-  --glow-3: #d1e8e2;
-  --glow-opacity: 0.3;
-  --grid-line: #2c3531;
-  --grid-opacity: 0.045;
-  --particle: #116466;
-  --particle-opacity: 0.42;
+  --glow-1: #22d3ee;
+  --glow-2: #0e7490;
+  --glow-3: #38bdf8;
+  --glow-opacity: 0.18;
+  --grid-line: #0e7490;
+  --grid-opacity: 0.08;
+  --particle: #0e7490;
+  --particle-opacity: 0.35;
 
-  --radius: 0.875rem;
-  --shadow-card: 0 1px 2px rgb(44 53 49 / 0.05), 0 8px 24px -12px rgb(44 53 49 / 0.14);
-  --shadow-lift: 0 2px 4px rgb(44 53 49 / 0.06), 0 24px 48px -20px rgb(44 53 49 / 0.24);
+  --radius: 0.25rem;
+  --shadow-card: 0 1px 2px rgb(5 12 23 / 0.04), 0 8px 24px -12px rgb(5 12 23 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(5 12 23 / 0.06), 0 24px 48px -20px rgb(5 12 23 / 0.2);
 }
 
 .dark {
-  --background: #232926;
-  --surface: #2c3531;
-  --surface-raised: #354039;
-  --foreground: #d1e8e2;
-  --muted: #a3bab3;
-  --subtle: #788b85;
-  --border: #3a453f;
-  --border-strong: #52615a;
+  --background: #050c17;
+  --surface: #0a1628;
+  --surface-raised: #0e1e35;
+  --foreground: #e8f1fa;
+  --muted: #a7bed4;
+  --subtle: #6b8299;
+  --border: rgba(56, 189, 248, 0.14);
+  --border-strong: rgba(56, 189, 248, 0.32);
 
-  --accent: #ffcb9a;
-  --accent-foreground: #2c3531;
-  --accent-soft: #40453c;
-  --accent-2: #4fb3b5;
+  --accent: #22d3ee;
+  --accent-foreground: #050c17;
+  --accent-soft: #0e2940;
+  --accent-2: #fbbf24;
 
-  --glow-1: #116466;
-  --glow-2: #d9b08c;
-  --glow-3: #2c3531;
-  --glow-opacity: 0.38;
-  --grid-line: #d1e8e2;
-  --grid-opacity: 0.035;
-  --particle: #ffcb9a;
-  --particle-opacity: 0.36;
+  --glow-1: #22d3ee;
+  --glow-2: #0e7490;
+  --glow-3: #38bdf8;
+  --glow-opacity: 0.14;
+  --grid-line: #38bdf8;
+  --grid-opacity: 0.12;
+  --particle: #22d3ee;
+  --particle-opacity: 0.4;
 
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.55);
-  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.35), 0 24px 48px -20px rgb(0 0 0 / 0.7);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 8px 24px -12px rgb(0 0 0 / 0.55);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 24px 48px -20px rgb(0 0 0 / 0.7);
 }
 
 /* ── Theme tokens ─────────────────────────────────────────────────────────
@@ -92,8 +87,8 @@
   --color-accent-2: var(--accent-2);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius-card: var(--radius);
 

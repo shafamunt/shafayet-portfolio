@@ -1,16 +1,12 @@
 import { ParticleField } from "@/components/background/particle-field";
 
 /**
- * The living background behind every page: three drifting colour blobs, a
- * faint grid, and a cursor-reactive particle field.
- *
- * Fixed and pointer-events-none, sitting above the body colour and below all
- * content — see the `relative z-10` wrapper in `app/layout.tsx`.
+ * Living blueprint background: cyan glow blobs, dual drafting grid, particles.
+ * Fixed and pointer-events-none — see `relative z-10` in `app/layout.tsx`.
  */
 export function SiteBackground() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {/* Drifting colour blobs. */}
       <div
         className="absolute -left-[15vw] -top-[20vh] size-[70vw] rounded-full blur-[110px]"
         style={{
@@ -36,13 +32,26 @@ export function SiteBackground() {
         }}
       />
 
-      {/* Engineering-drawing grid, masked so it fades out toward the edges. */}
+      {/* Major drafting grid (120px) */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
             "linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
+          backgroundSize: "120px 120px",
+          opacity: "calc(var(--grid-opacity) * 0.55)",
+          maskImage: "radial-gradient(ellipse 95% 80% at 50% 40%, #000 25%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 95% 80% at 50% 40%, #000 25%, transparent 100%)",
+        }}
+      />
+      {/* Fine drafting grid (24px) */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
           opacity: "var(--grid-opacity)",
           maskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 100%)",
           WebkitMaskImage:

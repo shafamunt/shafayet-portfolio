@@ -72,7 +72,7 @@ export const site = {
 
   // ── URLs ────────────────────────────────────────────────────────────────
   /** No trailing slash. Overridden by NEXT_PUBLIC_SITE_URL in production. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://shafam.dev",
   resumePath: "/resume/shafayet-muntasir-resume.pdf",
 
   // ── Social ──────────────────────────────────────────────────────────────

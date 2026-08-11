@@ -1,8 +1,8 @@
 # shafayet-portfolio
 
-Portfolio for **Shafayet Muntasir**. Next.js App Router, TypeScript, Tailwind v4, Motion, MDX case studies. Production: **[https://shafayetmuntasir.dev](https://shafayetmuntasir.dev)** (Vercel).
+Portfolio for **Shafayet Muntasir**. Next.js App Router, TypeScript, Tailwind v4, Motion, MDX case studies. Production: **[https://shafam.dev](https://shafam.dev)** (Vercel; also [shafayet-portfolio.vercel.app](https://shafayet-portfolio.vercel.app)).
 
-Based on the same architecture as [faiyajr.dev](https://faiyajr.dev/).
+Same feature set as [faiyajr.dev](https://faiyajr.dev/) (hero rotator, C++ struct card, MDX case studies, etc.) with an engineering-blueprint colour system.
 
 ```bash
 npm install
@@ -33,7 +33,7 @@ Copy [`content/projects/_TEMPLATE.mdx`](content/projects/_TEMPLATE.mdx) to add a
 
 1. Push to `main` on GitHub.
 2. Import the repo in [Vercel](https://vercel.com) (framework: Next.js).
-3. Set env vars from [`.env.example`](.env.example) — at least `NEXT_PUBLIC_SITE_URL=https://shafayetmuntasir.dev` and `CONTACT_TO_EMAIL=shafam@umich.edu`.
-4. Add domain `shafayetmuntasir.dev` (+ `www`) in Vercel → Domains and point DNS as instructed.
+3. Set env vars from [`.env.example`](.env.example) — at least `NEXT_PUBLIC_SITE_URL=https://shafam.dev` and `CONTACT_TO_EMAIL=shafam@umich.edu`.
+4. Add domain `shafam.dev` (+ `www`) in Vercel → Domains and point DNS as instructed.
 
 Contact form needs either `RESEND_API_KEY` or `FORMSPREE_ENDPOINT`; without either, the form validates but the API returns a clear “not configured” error.

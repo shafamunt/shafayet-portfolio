@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 
 import { SiteBackground } from "@/components/background/site-background";
 import { SiteHeader } from "@/components/site-header";
@@ -16,17 +16,17 @@ const inter = Inter({
   display: "swap",
 });
 
-const instrument = Instrument_Serif({
+const space = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
+  weight: ["500", "600", "700"],
+  variable: "--font-space",
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
+const plex = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
+  weight: ["400", "500"],
+  variable: "--font-plex",
   display: "swap",
 });
 
@@ -60,8 +60,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f2f8f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#232926" },
+    { media: "(prefers-color-scheme: light)", color: "#eef4f8" },
+    { media: "(prefers-color-scheme: dark)", color: "#050c17" },
   ],
 };
 
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${instrument.variable} ${jetbrains.variable}${
+      className={`${inter.variable} ${space.variable} ${plex.variable}${
         // Development-only escape hatch so animations can be previewed on a
         // machine with OS reduced-motion switched on. Compiled out in
         // production, so it can never override a real preference.
