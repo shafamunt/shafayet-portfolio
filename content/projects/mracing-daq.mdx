@@ -1,0 +1,51 @@
+---
+title: Photosensor Lap-Trigger DAQ
+summary: Lap-timing data acquisition for Michigan's Formula SAE electric car — a photosensor trigger feeding the car's telemetry chain.
+description: >-
+  Designing the sensing and acquisition path that turns a beam break at the
+  start/finish line into a timestamped lap on the team's telemetry, with board
+  work in Altium and weekly CAN and embedded design reviews.
+year: [2025, 2026]
+role: Vehicle software & instrumentation — MRacing FSAE
+status: in-progress
+featured: true
+order: 20
+size: lg
+tech:
+  - C/C++
+  - Embedded Systems
+  - CAN Bus
+  - Altium
+  - PCB Design
+  - Sensors
+metrics:
+  - label: HV system cert
+    value: 600V
+  - label: Vehicle bus
+    value: CAN
+highlights:
+  - Photosensor trigger into on-car lap timing
+  - Level 2 High Voltage certification for the 600V tractive system
+  - Weekly CAN bus and embedded control design reviews
+draft: false
+---
+
+## The problem
+
+Lap times only matter if the car can capture them reliably at the line and fold
+them into the rest of the telemetry stack — not as a stopwatch on the wall.
+
+## Approach
+
+**Sense, then timestamp.** A photosensor beam break at start/finish becomes a
+clean event into the acquisition path, then a lap record on the team's
+telemetry chain.
+
+**Vehicle realities.** Work goes through weekly CAN bus and embedded control
+reviews. Board work is in Altium. High Voltage Level 2 certification covers
+safe work around the car's 600V tractive system.
+
+## Status
+
+In progress with MRacing FSAE — iterating the sensing and acquisition path
+against the car's real harness and review cadence.

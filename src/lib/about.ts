@@ -24,56 +24,35 @@ export type Watch = {
 
 export const interests: Interest[] = [
   {
-    emoji: "⚽",
-    label: "Football",
+    emoji: "🏎️",
+    label: "Formula SAE",
     detail:
-      "No, it's not soccer. My team is Barcelona. Força Barça! My favourite player is Messi and my favourite national team is Spain.",
+      "Lap-timing DAQ and HV work on Michigan's electric race car — where embedded meets the track.",
   },
   {
-    emoji: "🏋️",
-    label: "The gym",
+    emoji: "🔌",
+    label: "Boards & firmware",
     detail:
-      "Lifting heavy metal circles. Squat 335, bench 265, deadlift 435. Yes, I have to hit legs more (I won't).",
+      "Schematic to solder: Altium layouts, SMT assembly at MESH, and C/C++ on the wire.",
   },
   {
-    emoji: "🎮",
-    label: "Gaming",
+    emoji: "🏫",
+    label: "Shipping for real users",
     detail:
-      "Late-night lobbies. Mainly Fortnite, Roblox, and occasionally Valorant. Fun fact: I killed Peterbot (the LeBron of Fortnite) in 2022. On God, no cap bro.",
+      "A school platform with 70+ people logging in — RLS, Edge Functions, and tests that gate Monday morning.",
   },
   {
-    emoji: "☪️",
-    label: "Islamic studies",
+    emoji: "🛠️",
+    label: "Hardware help desk",
     detail:
-      "Being a devout Muslim, I try to learn as much about my religion as I can — currently working toward becoming an Islamic scholar (Alim).",
+      "Shift lead at Michigan ITS — escalations, mentoring, and keeping the floor moving.",
   },
 ];
 
 /**
- * Posters live in `public/images/watches/`. To add one: drop the image in,
- * then add an entry here.
- *
- * Entries whose poster file is missing are skipped rather than rendering a
- * broken image — see `src/lib/watches.ts`. So it is safe to add the entry
- * first and the file later.
+ * Posters live in `public/images/watches/`. Empty until posters are added.
  */
-export const watches: Watch[] = [
-  { title: "Interstellar", year: 2014, kind: "film", poster: "interstellar.jpg" },
-  { title: "The Dark Knight", year: 2008, kind: "film", poster: "the-dark-knight.jpg" },
-  { title: "Oppenheimer", year: 2023, kind: "film", poster: "oppenheimer.jpg" },
-  { title: "Fight Club", year: 1999, kind: "film", poster: "fight-club.jpg" },
-  { title: "The Batman", year: 2022, kind: "film", poster: "the-batman.jpg" },
-  {
-    title: "Spider-Man: Brand New Day",
-    year: 2026,
-    kind: "film",
-    poster: "spider-man-brand-new-day.jpg",
-  },
-  { title: "Breaking Bad", year: 2008, kind: "series", poster: "breaking-bad.jpg" },
-  { title: "Dexter", year: 2006, kind: "series", poster: "dexter.jpg" },
-  { title: "Naruto", year: 2002, kind: "anime", poster: "naruto.jpg" },
-  { title: "Death Note", year: 2006, kind: "anime", poster: "death-note.jpg" },
-];
+export const watches: Watch[] = [];
 
 /** Line above the watches grid. */
-export const watchesIntro = "I've watched these too much for my own good…";
+export const watchesIntro = "Favorites rotate — more soon.";

@@ -25,81 +25,79 @@ export type StructField = {
 
 export const site = {
   // ── Identity ────────────────────────────────────────────────────────────
-  name: "Faiyaj Rahman",
-  firstName: "Faiyaj",
-  title: "Computer Engineering Student & Software Engineer",
-  headline: "Turning complex problems into usable solutions.",
+  name: "Shafayet Muntasir",
+  firstName: "Shafayet",
+  title: "Computer Engineering Student & Embedded Builder",
+  headline: "Building where software meets silicon.",
   intro:
-    "Hey! I'm Faiyaj. I like dabbling in building, programming, playing football, going to the gym, and the occasional late-night gaming session. Hope you enjoy your stay!",
+    "Hey! I'm Shafayet. I build firmware on a race car, platforms schools actually use, and boards I route myself. Hope you enjoy your stay!",
 
   /**
    * Cycled through by the decode effect under the hero heading.
-   * Each one has to read correctly after "I'm Faiyaj,".
+   * Each one has to read correctly after "I'm Shafayet,".
    */
   headlinePhrases: [
-    "a Computer Engineering student at Michigan.",
-    "a software engineer.",
-    "a builder.",
-    "a tinkerer.",
-    "a designer.",
-    "an entrepreneur.",
+    "a computer engineering student at Michigan.",
+    "an embedded systems engineer.",
+    "a hardware tinkerer.",
+    "a full-stack builder.",
+    "a PCB designer.",
   ],
 
   location: "Ann Arbor, MI",
-  email: "faiyajr@umich.edu",
+  email: "shafam@umich.edu",
 
   // ── The C++ struct card on the home page ────────────────────────────────
-  structName: "Faiyaj",
+  structName: "Shafayet",
   structFields: [
     { type: "std::string", name: "school", value: "University of Michigan" },
     { type: "std::string", name: "major", value: "Computer Engineering" },
-    { type: "std::string", name: "graduation", value: "May 2028" },
-    { type: "std::string", name: "role", value: "SWE Intern @ Bosch" },
+    { type: "std::string", name: "graduation", value: "May 2029" },
+    { type: "std::string", name: "role", value: "SWE Intern @ Darul Uloom Michigan" },
     { type: "std::string", name: "location", value: "Ann Arbor, MI" },
-    { type: "std::string", name: "email", value: "faiyajr@umich.edu" },
+    { type: "std::string", name: "email", value: "shafam@umich.edu" },
     {
       type: "std::vector<std::string>",
       name: "interests",
-      value: ["low-level", "high-performance", "embedded", "ML infra"],
+      value: ["embedded", "PCB", "full-stack", "FSAE"],
     },
   ] satisfies StructField[],
 
   // ── About page bio ──────────────────────────────────────────────────────
   bio: [
-    "I'm a Computer Engineering student at the University of Michigan with a deep interest in low-level software, high-performance systems, ML architectures, and embedded platforms. I enjoy digging into complex systems, squeezing out maximum performance, and building things from the bare metal up.",
-    "Right now I'm a Software Engineering Intern at Bosch working on agentic AI and cloud platforms, and Software Developer at Saf. On the side my focus is split across three builds: a sub-millisecond, cache-efficient C++ limit order book and matching engine; Overround, a transformer backed by a multithreaded Monte Carlo engine that predicts UEFA Champions League matches; and Kestrel, a custom autonomous drone tying low-level control systems to real-time flight logic.",
-    "When I'm not debugging software or optimizing architectures, you'll usually find me lifting heavy metal circles, playing football (no, it's not soccer), or running through lobbies in games 🤪.",
-    "Whether it's low-latency C++, embedded firmware, or ML infrastructure, I'm always up for connecting on hard engineering problems. Reach me at faiyajr@umich.edu.",
+    "I'm a Computer Engineering student at the University of Michigan. I like work that sits where software meets silicon — firmware on a Formula SAE car, a grading platform 70+ people log into every week, and boards I route and solder myself.",
+    "Right now I'm a Software Engineering Intern at Darul Uloom Michigan, shipping a role-based educational platform in production; a Computer Consultant II and shift lead at Michigan ITS; and on MRacing FSAE building lap-timing DAQ with a Level 2 High Voltage cert for the car's 600V system. Out of MESH I'm sharpening PCB layout and SMT assembly skills that feed the racing work.",
+    "I'm hunting embedded and systems roles in metro Detroit and beyond. Reach me at shafam@umich.edu.",
   ],
 
   // ── URLs ────────────────────────────────────────────────────────────────
   /** No trailing slash. Overridden by NEXT_PUBLIC_SITE_URL in production. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  resumePath: "/resume/faiyaj-rahman-resume.pdf",
+  resumePath: "/resume/shafayet-muntasir-resume.pdf",
 
   // ── Social ──────────────────────────────────────────────────────────────
   socials: [
     {
       label: "GitHub",
-      href: "https://github.com/faiyajr",
+      href: "https://github.com/shafamunt",
       icon: GithubIcon,
-      handle: "@faiyajr",
+      handle: "@shafamunt",
     },
     {
       label: "LinkedIn",
-      href: "https://linkedin.com/in/faiyajrahman",
+      href: "https://www.linkedin.com/in/shafayetmuntasir",
       icon: LinkedinIcon,
-      handle: "in/faiyajrahman",
+      handle: "in/shafayetmuntasir",
     },
     {
       label: "Email",
-      href: "mailto:faiyajr@umich.edu",
+      href: "mailto:shafam@umich.edu",
       icon: Mail,
-      handle: "faiyajr@umich.edu",
+      handle: "shafam@umich.edu",
     },
     {
       label: "Resume",
-      href: "/resume/faiyaj-rahman-resume.pdf",
+      href: "/resume/shafayet-muntasir-resume.pdf",
       icon: FileText,
       handle: "PDF",
     },

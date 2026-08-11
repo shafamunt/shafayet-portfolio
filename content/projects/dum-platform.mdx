@@ -1,0 +1,58 @@
+---
+title: Darul Uloom Michigan Platform
+summary: A role-based educational platform in production for a Michigan school — grading, records, and administration behind five tiers of access.
+description: >-
+  Built and shipped end to end: PostgreSQL with Row-Level Security, serverless
+  Edge Functions for auth, and a React front end that five user roles each see
+  differently. Live for 70+ users with CI gating every deploy.
+year: 2026
+role: Software engineering intern — full-stack
+status: live
+featured: true
+order: 10
+size: wide
+tech:
+  - TypeScript
+  - React
+  - Supabase
+  - PostgreSQL
+  - Vite
+  - GitHub Actions
+metrics:
+  - label: Active users
+    value: 70+
+  - label: Access levels
+    value: "5"
+  - label: DB tables
+    value: 30+
+highlights:
+  - Production platform with 70+ users across five access levels
+  - 30+ table Postgres schema with Row-Level Security
+  - 75+ automated tests gating GitHub Actions deploys
+draft: false
+---
+
+## The problem
+
+A school needed more than spreadsheets for grades, records, and administration.
+Access had to be role-aware — admins, teachers, and others should never see the
+same rows — and Monday morning could not be when the system broke.
+
+## Approach
+
+**Schema first.** A normalized PostgreSQL model of 30+ tables, with Row-Level
+Security enforcing who can read or write what at the database layer rather than
+only in the UI.
+
+**Serverless auth and privileged ops.** Edge Functions handle authentication and
+operations that should not live in the client. The React front end renders five
+distinct experiences from the same codebase.
+
+**CI that blocks bad deploys.** GitHub Actions runs 75+ automated tests before
+anything ships. A grading system that fails quietly is not an abstract risk.
+
+## Outcome
+
+The platform is live in production. The interesting lesson is that scoping
+access and tests as seriously as features is what made it trustworthy enough
+for a real school to depend on.

@@ -1,9 +1,8 @@
 /**
- * Structured resume data, rendered on /about.
+ * Structured resume data, rendered on /experience and the home timeline.
  *
- * A typed mirror of `resume/resume.tex`. The PDF in `public/resume/` is the
- * canonical download; this is the crawlable web version, which is what
- * keyword filters and search engines actually read. Keep the two in sync.
+ * The PDF in `public/resume/` is the canonical download; this is the
+ * crawlable web version. Keep the two in sync.
  */
 
 export type Experience = {
@@ -70,9 +69,6 @@ function toSortKey(value: string): number {
 /**
  * Experience in true reverse-chronological order: most recent start first,
  * ties broken by whichever role is still running.
- *
- * Sorted here rather than by hand so adding a role to the array below never
- * requires putting it in the right slot.
  */
 export function getExperience(): Experience[] {
   return [...experience].sort(
@@ -82,131 +78,120 @@ export function getExperience(): Experience[] {
 
 export const experience: Experience[] = [
   {
-    company: "Bosch",
+    company: "Darul Uloom Michigan",
     role: "Software Engineering Intern",
     start: "May 2026",
     end: "Present",
-    location: "Farmington Hills, MI",
-    points: [
-      "Architecting a modular platform hosting all organization file-conversion tools, first shipping CAN .asc to MF4 with DBC channel mapping for MDA — dropping the licensed CANalyzer dependency and saving 20+ engineer-hours monthly.",
-      "Prototyping org-wide agentic AI by wiring LLM agents to internal CLIs and Git, cutting development time by 30%.",
-      "Deployed a fleet monitoring platform to AWS and scripted multi-tenant vehicle analytics scaling to 5000+ vehicles.",
-      "Engineered a multi-threaded GUI used by 100+ developers to build Python executables, saving $15K in costs.",
-    ],
-    tech: ["Python", "AWS", "Agentic AI", "REST API", "Docker", "Kubernetes", "CI/CD", "Bash"],
-  },
-  {
-    company: "Saf · Darul Uloom Michigan",
-    role: "Software Developer",
-    start: "Nov 2025",
-    end: "Present",
     location: "Warren, MI",
     points: [
-      "Built and deployed the beta version of a school-management system, implementing a normalized Postgres schema, Express REST API, and React client that gated role-based access across admin, teacher, parent, and student views.",
-      "Implemented assignment making, grading, attendance, and an admin panel, replacing paper grades for 20+ educators.",
-      "Ran the school's live pilot on the beta for 3 months, shipping 5 iterations on the grading flow from classroom feedback.",
-      "Currently contributing to the production platform and implementing AI feature work ahead of scholar-backed launch.",
+      "Built and shipped a role-based educational platform now in production with 70+ users across 5 access levels.",
+      "Designed a 30+ table PostgreSQL schema with Row-Level Security governing access at the row level.",
+      "Wrote serverless Edge Functions handling authentication and privileged operations.",
+      "Set up CI/CD on GitHub Actions with 75+ automated tests gating deploys.",
     ],
-    tech: ["Claude", "TypeScript", "React", "Supabase", "PostgreSQL", "Tailwind CSS", "Git"],
+    tech: ["TypeScript", "React", "Supabase", "PostgreSQL", "Vite", "CI/CD"],
   },
   {
-    company: "MRacing FSAE",
-    role: "Software Engineer",
-    start: "Aug 2025",
-    end: "Present",
-    location: "Ann Arbor, MI",
-    points: [
-      "Built a C++ Raspberry Pi dashboard decoding 1000+ CAN messages/sec into signals and fault states across 3 pages.",
-      "Refactored the legacy Python GUI codebase into C++, cutting latency ~100× and improving signal timing ~50%.",
-      "Collaborated with test engineers to debug and validate software, ensuring ~100% data consistency across signals.",
-    ],
-    tech: ["C/C++", "Embedded Systems", "Linux", "CAN", "Raspberry Pi", "GitLab"],
-  },
-  {
-    company: "University of Michigan Electric Vehicle Center",
-    role: "Undergraduate Research Software Developer",
-    start: "Sep 2025",
-    end: "May 2026",
-    location: "Ann Arbor, MI",
-    points: [
-      "Developed open-source Python software for an EV charging module, contributing to $10K in net savings for an OEM.",
-      "Designed a Simulink FSM for system-safety logic and charging protocols, porting it to Python for pipeline integration.",
-    ],
-    tech: ["Python", "Raspberry Pi", "Simulink", "Figma"],
-  },
-  {
-    // NOT in resume.tex — add the real dates and bullets, then mirror them
-    // back into the LaTeX so the PDF and the site agree.
     company: "University of Michigan ITS",
-    role: "Tech Consultant",
+    role: "Computer Consultant II · Shift Lead",
     start: "Aug 2025",
     end: "Present",
     location: "Ann Arbor, MI",
     points: [
-      "Administered new computers, devices, and ID access credentials for campus customers and students.",
-      "Diagnosed hardware, software, and network issues while escalating complex cases to senior consultants.",
-      "Utilized GSX and TeamDynamix to manage support tickets, track loaner/repaired devices, issues, and resolutions.",
+      "Promoted to Consultant II and shift lead; mentor newer consultants and deliver peer feedback.",
+      "Handle advanced escalations across hardware and software support for the university community.",
+      "Run the floor during shifts — triage, assignment, and keeping queue times sane.",
     ],
-    tech: ["TeamDynamix", "GSX", "Troubleshooting", "Consulting"],
+    tech: ["Troubleshooting", "Hardware Support", "Consulting", "Mentorship"],
+  },
+  {
+    company: "MRacing FSAE (Formula SAE Electric)",
+    role: "Vehicle Software · Instrumentation · Powertrain",
+    start: "Aug 2025",
+    end: "Present",
+    location: "Ann Arbor, MI",
+    points: [
+      "Developing a photosensor lap-trigger data acquisition path for on-car lap timing.",
+      "Certified Level 2 High Voltage for work on the car's 600V tractive system.",
+      "Participate in weekly CAN bus and embedded control design reviews.",
+      "Trained in Altium Designer for the team's board work.",
+    ],
+    tech: ["C/C++", "CAN Bus", "Embedded Systems", "Altium", "PCB Design"],
+  },
+  {
+    company: "Michigan Embedded Systems Hub (MESH)",
+    role: "Authorized Lab User",
+    start: "Jan 2026",
+    end: "Present",
+    location: "Ann Arbor, MI",
+    points: [
+      "PCB design workshops: schematic capture, footprint selection, and layout.",
+      "SMT and through-hole soldering and assembly.",
+    ],
+    tech: ["PCB Design", "Altium", "SMT", "Soldering"],
   },
 ];
 
 export const education: Education[] = [
   {
-    school: "University of Michigan",
+    school: "University of Michigan, Ann Arbor",
     degree: "B.S.E. in Computer Engineering",
     start: "2025",
-    end: "May 2028",
+    end: "May 2029",
     location: "Ann Arbor, MI",
     details: [
-      "Relevant coursework: Data Structures and Algorithms, Computer Organization, Object Oriented Programming, Discrete Math, Computing Systems, Computational Linear Algebra, Vector Calculus",
+      "Dean's List — December 2025",
+      "Coursework: EECS 280 · Programming & Data Structures; EECS 203 · Discrete Mathematics; ENGR 101; ENGR 100; Calculus III; Differential Equations",
+      "In progress (Fall 2026): EECS 270 · Logic Design; PHYSICS 240/241 · Electricity & Magnetism + Lab",
     ],
   },
 ];
 
 export const awards: Award[] = [
   {
-    title: "Jane Street FOCUS Participant",
-    date: "May 2026",
-    location: "New York, NY",
-    description:
-      "Competitive quantitative trading and software engineering program, selected from 1000+ applicants.",
+    title: "Dean's List",
+    issuer: "University of Michigan",
+    date: "Dec 2025",
+    location: "Ann Arbor, MI",
+    description: "Academic distinction for Fall 2025 term.",
+  },
+  {
+    title: "High Voltage Level 2 Certification",
+    issuer: "MRacing FSAE",
+    date: "2025",
+    location: "Ann Arbor, MI",
+    description: "Certified for work on the team's 600V tractive system.",
   },
 ];
 
 export const skills: SkillGroup[] = [
   {
     label: "Languages",
+    items: ["C++", "C", "Python", "MATLAB", "SQL", "TypeScript", "JavaScript", "Verilog"],
+  },
+  {
+    label: "Hardware & CAD",
     items: [
-      "C/C++",
-      "Python",
-      "TypeScript",
-      "JavaScript",
-      "Assembly",
-      "Java",
-      "SQL",
-      "Verilog",
-      "OCaml",
-      "MATLAB",
+      "PCB Design",
+      "Altium Designer",
+      "SMT Soldering",
+      "Through-Hole",
+      "CAN Bus",
+      "Oscilloscopes",
+      "TinkerCAD",
+      "PrusaSlicer",
     ],
   },
   {
-    label: "Tools & Frameworks",
-    items: [
-      "React",
-      "Node",
-      "PostgreSQL",
-      "Supabase",
-      "Linux",
-      "Git",
-      "Docker",
-      "AWS",
-      "PyTorch",
-      "FastAPI",
-    ],
+    label: "Software & Tools",
+    items: ["React", "Supabase", "PostgreSQL", "Vite", "Git", "GitHub Actions", "CI/CD", "Linux"],
   },
   {
-    label: "Hardware & Embedded",
-    items: ["STM32", "Raspberry Pi", "Altium", "CAD", "FPGA", "CAN Bus"],
+    label: "Certifications",
+    items: [
+      "High Voltage Level 2 (600V)",
+      "CompTIA IT Fundamentals Pro",
+      "CompTIA Security Pro",
+    ],
   },
 ];

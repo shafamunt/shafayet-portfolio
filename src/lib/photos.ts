@@ -26,7 +26,7 @@ function altFromFilename(filename: string): string {
   const base = filename.replace(IMAGE_RE, "");
 
   // Camera-roll names carry no meaning — don't pretend otherwise.
-  if (/^(img|dsc|pxl|photo)[-_]?\d+$/i.test(base)) return "Photo of Faiyaj";
+  if (/^(img|dsc|pxl|photo)[-_]?\d+$/i.test(base)) return "Photo of Shafayet";
 
   const words = base.replace(/[-_]+/g, " ").trim();
   return words.charAt(0).toUpperCase() + words.slice(1);

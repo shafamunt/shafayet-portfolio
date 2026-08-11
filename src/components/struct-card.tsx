@@ -110,7 +110,9 @@ export function StructCard({ className }: { className?: string }) {
           <span className="size-2.5 rounded-full bg-[#ff5f57]" />
           <span className="size-2.5 rounded-full bg-[#febc2e]" />
           <span className="size-2.5 rounded-full bg-[#28c840]" />
-          <span className="ml-2 font-mono text-xs text-subtle">faiyaj.hpp</span>
+          <span className="ml-2 font-mono text-xs text-subtle">
+            {site.structName.toLowerCase()}.hpp
+          </span>
         </div>
 
         {/* The snippet is decorative for screen readers — the same facts are on

@@ -1,0 +1,49 @@
+---
+title: Card Game Engine
+summary: A Euchre simulator in C++ with a computer opponent — polymorphism and game logic kept separate from the players who use it.
+description: >-
+  Players, decks, and game state are separate abstractions so a human and an AI
+  player are interchangeable behind one interface. Written for correctness
+  first so the AI's decisions stay debuggable.
+year: 2026
+role: Solo build
+status: archived
+featured: true
+order: 30
+size: md
+tech:
+  - C++
+  - OOP
+  - Data Structures
+  - Git
+metrics:
+  - label: Written in
+    value: C++
+  - label: Design
+    value: OOP
+highlights:
+  - Polymorphic player interface for human and AI
+  - Deterministic, testable game engine
+  - AI for trump selection and card play
+draft: false
+---
+
+## The problem
+
+A card game is a good stress test for object-oriented design: rules, state, and
+players change independently, and a fuzzy AI should not make the engine
+impossible to reason about.
+
+## Approach
+
+**Separate the concerns.** Players, decks, and game state are modelled as their
+own abstractions. A human player and an AI player swap behind one interface.
+
+**Correctness before cleverness.** The engine is deterministic and testable,
+which made trump selection and card-play decisions debuggable instead of
+mysterious.
+
+## What I'd do differently
+
+Push more of the rule surface into explicit state machines and property tests
+so illegal transitions fail loudly in CI, not only in a long playthrough.

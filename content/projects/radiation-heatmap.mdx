@@ -1,0 +1,42 @@
+---
+title: Radiation Heatmap & Image Processing Engine
+summary: A MATLAB image pipeline that denoises raw sensor data and renders it as an HSV heatmap.
+description: >-
+  Custom convolution kernels handle filtering and denoise, then intensity maps
+  into HSV so magnitude reads as colour. Built from matrix operations rather
+  than library calls — the filters are written out, not imported.
+year: 2026
+role: Solo build
+status: archived
+featured: false
+order: 40
+size: md
+tech:
+  - MATLAB
+  - Image Processing
+  - Linear Algebra
+  - Signal Processing
+highlights:
+  - Custom convolution kernels for filter and denoise passes
+  - Intensity mapped to HSV heatmaps
+  - Matrix-level implementation without black-box library filters
+draft: false
+---
+
+## The problem
+
+Raw sensor frames are noisy and hard to read as numbers in a table. The goal
+was a pipeline that cleans the signal and makes magnitude obvious visually.
+
+## Approach
+
+**Write the filters.** Custom convolution kernels for filtering and denoise,
+implemented as matrix operations so the math is visible and inspectable.
+
+**Colour as magnitude.** After cleanup, intensity maps into HSV space so the
+heatmap carries the story instead of a spreadsheet of values.
+
+## Outcome
+
+A small, honest image-processing exercise: understanding the kernels mattered
+more than shipping a polished UI.
