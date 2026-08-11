@@ -26,3 +26,4 @@ resume/*.out
 resume/*.synctex.gz
 resume/*.fls
 resume/*.fdb_latexmk
+.api-park/

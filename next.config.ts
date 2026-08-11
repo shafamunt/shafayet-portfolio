@@ -1,16 +1,23 @@
 import type { NextConfig } from "next";
 
+/** Set STATIC_EXPORT=1 for Cloudflare Pages (same free *.pages.dev model as tajulharamain). */
+const staticExport = process.env.STATIC_EXPORT === "1";
+
 const nextConfig: NextConfig = {
-  images: {
-    // Local screenshots live in /public/images. Add a remotePatterns entry here
-    // if you later move media to Cloudinary / S3 — see README "Media storage".
-    formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      // Spotify album art.
-      { protocol: "https", hostname: "i.scdn.co" },
-      { protocol: "https", hostname: "mosaic.scdn.co" },
-    ],
-  },
+  ...(staticExport
+    ? {
+        output: "export" as const,
+        images: { unoptimized: true },
+      }
+    : {
+        images: {
+          formats: ["image/avif", "image/webp"] as ("image/avif" | "image/webp")[],
+          remotePatterns: [
+            { protocol: "https" as const, hostname: "i.scdn.co" },
+            { protocol: "https" as const, hostname: "mosaic.scdn.co" },
+          ],
+        },
+      }),
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],
   },

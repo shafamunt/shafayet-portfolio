@@ -31,9 +31,23 @@ Copy [`content/projects/_TEMPLATE.mdx`](content/projects/_TEMPLATE.mdx) to add a
 
 ## Deploy
 
+### Cloudflare Pages (free short URL)
+
+Same method as [tajulharamain.pages.dev](https://tajulharamain.pages.dev):
+
+```bash
+npm run deploy:pages
+```
+
+→ **https://shafam.pages.dev**
+
+That is a free `*.pages.dev` subdomain (Cloudflare Pages), not a purchased `shafam.dev` domain.
+
+### Vercel (full app: contact API, etc.)
+
 1. Push to `main` on GitHub.
 2. Import the repo in [Vercel](https://vercel.com) (framework: Next.js).
-3. Set env vars from [`.env.example`](.env.example) — at least `NEXT_PUBLIC_SITE_URL=https://shafam.dev` and `CONTACT_TO_EMAIL=shafam@umich.edu`.
-4. Add domain `shafam.dev` (+ `www`) in Vercel → Domains and point DNS as instructed.
+3. Set env vars from [`.env.example`](.env.example) — at least `NEXT_PUBLIC_SITE_URL=https://shafam.pages.dev` (or your custom domain) and `CONTACT_TO_EMAIL=shafam@umich.edu`.
+4. Optional: buy a real `.dev` apex (`shafam.dev`) and attach DNS in Vercel/Cloudflare.
 
 Contact form needs either `RESEND_API_KEY` or `FORMSPREE_ENDPOINT`; without either, the form validates but the API returns a clear “not configured” error.
