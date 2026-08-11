@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   description:
-    "Software engineering roles, research, and education — Bosch, Saf, MRacing FSAE, the U-M Electric Vehicle Center, and U-M ITS.",
+    "Software and embedded roles at Darul Uloom Michigan, MRacing FSAE, Michigan ITS, and MESH — plus education at U-M.",
 };
 
 export default function ExperiencePage() {

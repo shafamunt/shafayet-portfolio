@@ -56,7 +56,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Experience"
           title="Where I've worked."
-          description="Internships, research, and a startup — the full detail lives on the experience page."
+          description="An internship, a help desk I help run, and a Formula SAE car — full detail on the experience page."
           action={{ label: "Full experience", href: "/experience" }}
         />
         <ExperienceTimeline experience={getExperience()} compact />
