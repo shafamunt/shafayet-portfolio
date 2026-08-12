@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 const KEYWORD = "text-accent";
 const TYPE = "text-accent-2";
 const NAME = "text-foreground";
-const STRING = "text-[#9a5b2e] dark:text-[#e8b48a]";
+const STRING = "text-[#0369a1] dark:text-[#7dd3fc]";
 const PUNCT = "text-subtle";
 
 function Value({ value }: { value: StructField["value"] }) {

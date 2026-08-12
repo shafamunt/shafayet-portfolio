@@ -7,7 +7,7 @@
 /* ── Palette ──────────────────────────────────────────────────────────────
    Engineering blueprint / drafting sheet:
      #050c17  navy-900     #0a1628  navy-800    #22d3ee  cyan
-     #fbbf24  amber        #e8f1fa  ink         #a7bed4  ink-soft
+     #60a5fa  sky          #e8f1fa  ink         #a7bed4  ink-soft
 
    Dark is the primary look. Light is a paper-blueprint variant. */
 :root {
@@ -24,7 +24,7 @@
   --accent: #0e7490;
   --accent-foreground: #ffffff;
   --accent-soft: #d7f0f7;
-  --accent-2: #b45309;
+  --accent-2: #1d4ed8;
 
   --glow-1: #22d3ee;
   --glow-2: #0e7490;
@@ -53,7 +53,7 @@
   --accent: #22d3ee;
   --accent-foreground: #050c17;
   --accent-soft: #0e2940;
-  --accent-2: #fbbf24;
+  --accent-2: #60a5fa;
 
   --glow-1: #22d3ee;
   --glow-2: #0e7490;
