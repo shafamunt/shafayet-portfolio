@@ -8,14 +8,14 @@ import { cn } from "@/lib/utils";
  * a link that looks like a button, use `buttonVariants` on an <a> or <Link>.
  */
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-all duration-200 ease-[var(--ease-out-expo)] disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-medium tracking-tight transition-all duration-200 ease-[var(--ease-out-expo)] disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         primary:
-          "bg-foreground text-background hover:opacity-90 active:scale-[0.98]",
-        accent:
           "bg-accent text-accent-foreground hover:brightness-110 active:scale-[0.98]",
+        accent:
+          "bg-foreground text-background hover:opacity-90 active:scale-[0.98]",
         outline:
           "border border-border bg-transparent text-foreground hover:border-border-strong hover:bg-surface",
         ghost: "text-muted hover:bg-surface hover:text-foreground",

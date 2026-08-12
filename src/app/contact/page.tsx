@@ -19,14 +19,14 @@ export default function ContactPage() {
             <p className="eyebrow mb-4">Contact</p>
           </Reveal>
           <BlurReveal
-            text="Say hello."
+            text="Reach out."
             as="h1"
-            className="font-display text-display-lg text-foreground"
+            className="font-display text-display-lg font-semibold text-foreground"
           />
           <Reveal delay={0.2}>
             <p className="mt-6 text-lead text-muted">
-              Open to internships, contract work, and interesting problems. The form goes
-              straight to my inbox — or use whichever of these you prefer.
+              Looking for embedded and systems internships, plus interesting hardware/software
+              problems. The form goes straight to my inbox — or use whichever channel you prefer.
             </p>
           </Reveal>
 

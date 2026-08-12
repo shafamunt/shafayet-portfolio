@@ -18,14 +18,29 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#050c17",
+          background: "#140f0c",
           padding: 80,
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 12, height: 12, borderRadius: 999, background: "#22d3ee" }} />
-          <div style={{ fontSize: 24, color: "#a7bed4", letterSpacing: 2 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 10,
+              background: "#e8956a",
+              color: "#140f0c",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 22,
+              fontWeight: 700,
+            }}
+          >
+            S
+          </div>
+          <div style={{ fontSize: 22, color: "#b5aea3", letterSpacing: 3 }}>
             {site.title.toUpperCase()}
           </div>
         </div>
@@ -33,19 +48,20 @@ export default function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
             style={{
-              fontSize: 84,
-              color: "#e8f1fa",
+              fontSize: 76,
+              color: "#f3efe8",
               lineHeight: 1.05,
-              letterSpacing: -3,
-              maxWidth: 900,
+              letterSpacing: -2,
+              maxWidth: 920,
+              fontWeight: 600,
             }}
           >
             {site.headline}
           </div>
-          <div style={{ fontSize: 30, color: "#a7bed4" }}>{site.name}</div>
+          <div style={{ fontSize: 28, color: "#e8956a" }}>{site.name}</div>
         </div>
 
-        <div style={{ display: "flex", fontSize: 22, color: "#6b8299" }}>
+        <div style={{ display: "flex", fontSize: 22, color: "#7a746b" }}>
           {site.url.replace(/^https?:\/\//, "")}
         </div>
       </div>

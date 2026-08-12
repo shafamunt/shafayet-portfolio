@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 const KEYWORD = "text-accent";
 const TYPE = "text-accent-2";
 const NAME = "text-foreground";
-const STRING = "text-[#b45309] dark:text-[#fbbf24]";
+const STRING = "text-[#9a5b2e] dark:text-[#e8b48a]";
 const PUNCT = "text-subtle";
 
 function Value({ value }: { value: StructField["value"] }) {
@@ -104,14 +104,15 @@ export function StructCard({ className }: { className?: string }) {
         ))}
       </div>
 
-      <div className="overflow-hidden rounded-card border border-border bg-surface/70 shadow-card backdrop-blur-sm">
-        {/* Window chrome */}
-        <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-3">
-          <span className="size-2.5 rounded-full bg-[#ff5f57]" />
-          <span className="size-2.5 rounded-full bg-[#febc2e]" />
-          <span className="size-2.5 rounded-full bg-[#28c840]" />
-          <span className="ml-2 font-mono text-xs text-subtle">
+      <div className="overflow-hidden rounded-card border border-border bg-surface/80 shadow-card backdrop-blur-sm">
+        {/* Terminal chrome — filename + status, no OS window dots */}
+        <div className="flex items-center justify-between gap-3 border-b border-border bg-surface px-4 py-3">
+          <span className="font-mono text-xs text-subtle">
+            <span className="text-accent">~/</span>
             {site.structName.toLowerCase()}.hpp
+          </span>
+          <span className="font-mono text-[0.625rem] uppercase tracking-widest text-subtle">
+            read-only
           </span>
         </div>
 

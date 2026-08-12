@@ -9,9 +9,9 @@ export function SiteFooter() {
       <div className="container-page py-16 md:py-20">
         <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
           <div className="max-w-md">
-            <p className="eyebrow mb-4">Get in touch</p>
-            <p className="font-display text-display-sm text-foreground">
-              Have something you want built?
+            <p className="eyebrow mb-4">Contact</p>
+            <p className="font-display text-display-sm font-semibold text-foreground">
+              Have a role or project in mind?
             </p>
             <Link
               href="/contact"

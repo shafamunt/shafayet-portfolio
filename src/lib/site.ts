@@ -30,18 +30,18 @@ export const site = {
   title: "Computer Engineering Student & Embedded Builder",
   headline: "Building where software meets silicon.",
   intro:
-    "Hey! I'm Shafayet. I build firmware on a race car, platforms schools actually use, and boards I route myself. Hope you enjoy your stay!",
+    "I'm Shafayet — firmware on a Formula SAE car, platforms schools actually use, and boards I route and solder myself. Looking for embedded and systems roles.",
 
   /**
    * Cycled through by the decode effect under the hero heading.
    * Each one has to read correctly after "I'm Shafayet,".
    */
   headlinePhrases: [
-    "a computer engineering student at Michigan.",
-    "an embedded systems engineer.",
-    "a hardware tinkerer.",
-    "a full-stack builder.",
-    "a PCB designer.",
+    "building where software meets silicon.",
+    "writing firmware for a Formula SAE car.",
+    "routing boards and shipping platforms.",
+    "hunting embedded roles in metro Detroit.",
+    "a CE student at Michigan.",
   ],
 
   location: "Ann Arbor, MI",

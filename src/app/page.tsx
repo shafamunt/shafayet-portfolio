@@ -30,9 +30,9 @@ export default function HomePage() {
 
       <section className="container-page py-16 md:py-24" aria-labelledby="work-heading">
         <SectionHeading
-          eyebrow="Selected work"
-          title="Things I've built."
-          description="An abridged collection of things I've built, broken, and occasionally shipped. Pick one to explore."
+          eyebrow="Projects"
+          title="Selected builds."
+          description="Firmware, platforms, and boards — the work I'd rather talk about in an interview."
           action={{ label: "All projects", href: "/projects" }}
         />
 
@@ -41,7 +41,7 @@ export default function HomePage() {
 
       {rest.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
-          <SectionHeading eyebrow="More work" title="Also worth a look." />
+          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." />
           <BentoGrid>
             {rest.map((project, i) => (
               <BentoItem key={project.slug} size={project.size} index={i}>
@@ -55,7 +55,7 @@ export default function HomePage() {
       <section className="container-page py-16 md:py-24" aria-labelledby="experience-heading">
         <SectionHeading
           eyebrow="Experience"
-          title="Where I've worked."
+          title="Roles & teams."
           description="An internship, a help desk I help run, and a Formula SAE car — full detail on the experience page."
           action={{ label: "Full experience", href: "/experience" }}
         />
@@ -64,13 +64,13 @@ export default function HomePage() {
 
       {tech.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="stack-heading">
-          <SectionHeading eyebrow="Toolkit" title="What I build with." />
+          <SectionHeading eyebrow="Stack" title="Tools I reach for." />
           <Reveal>
             <ul className="flex flex-wrap gap-2.5">
               {tech.map((item) => (
                 <li
                   key={item}
-                  className="rounded-full border border-border bg-surface/40 px-4 py-2 font-mono text-xs text-muted transition-colors hover:border-border-strong hover:text-foreground"
+                  className="rounded-xl border border-border bg-surface/40 px-4 py-2 font-mono text-xs text-muted transition-colors hover:border-border-strong hover:text-foreground"
                 >
                   {item}
                 </li>
@@ -88,22 +88,22 @@ export default function HomePage() {
               className="pointer-events-none absolute inset-x-0 -bottom-32 h-64 opacity-50 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_70%)]"
             />
             <p className="eyebrow relative mb-5">{site.headline}</p>
-            <h2 className="relative mx-auto max-w-3xl font-display text-display-md text-foreground">
-              Let&apos;s build something.
+            <h2 className="relative mx-auto max-w-3xl font-display text-display-md font-semibold text-foreground">
+              Open to the next role.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Reach me at{" "}
+              Embedded and systems work in metro Detroit and beyond — email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"
               >
                 {site.email}
-              </a>
-              , or send a note through the form.
+              </a>{" "}
+              or use the form.
             </p>
             <div className="relative mt-9 flex flex-wrap justify-center gap-3">
               <Link href="/contact" className={cn(buttonVariants({ size: "lg" }))}>
-                Contact me
+                Get in touch
                 <ArrowUpRight className="size-[1.125rem]" />
               </Link>
               <a

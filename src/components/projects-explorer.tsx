@@ -46,19 +46,19 @@ export function ProjectsExplorer({
                 onClick={() => setFilter(item)}
                 aria-pressed={active}
                 className={cn(
-                  "relative rounded-full px-4 py-2 font-mono text-xs transition-colors duration-200",
+                  "relative rounded-xl px-4 py-2 font-mono text-xs transition-colors duration-200",
                   active ? "text-accent-foreground" : "text-muted hover:text-foreground",
                 )}
               >
                 {active && (
                   <motion.span
                     layoutId="filter-pill"
-                    className="absolute inset-0 -z-10 rounded-full bg-accent"
+                    className="absolute inset-0 -z-10 rounded-xl bg-accent"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
                 {!active && (
-                  <span className="absolute inset-0 -z-10 rounded-full border border-border" />
+                  <span className="absolute inset-0 -z-10 rounded-xl border border-border" />
                 )}
                 {item}
               </button>

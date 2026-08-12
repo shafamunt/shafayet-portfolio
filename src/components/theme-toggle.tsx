@@ -14,7 +14,7 @@ export function ThemeToggle() {
       // markup is identical on both sides, so there is nothing to mismatch.
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle colour theme"
-      className="grid size-9 place-items-center rounded-full border border-border text-muted transition-colors duration-200 hover:border-border-strong hover:text-foreground"
+      className="grid size-9 place-items-center rounded-lg border border-border text-muted transition-colors duration-200 hover:border-border-strong hover:text-foreground"
     >
       {/* Both icons render; CSS picks one off the `dark` class on <html>. That
           avoids the mount-flag dance and the flash of the wrong icon. */}

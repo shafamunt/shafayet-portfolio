@@ -50,10 +50,13 @@ export function SiteHeader() {
       <div className="container-page flex h-16 items-center justify-between gap-6 md:h-20">
         <Link
           href="/"
-          className="group flex items-baseline gap-2 text-[0.9375rem] font-medium tracking-tight"
+          className="group flex items-center gap-2.5 text-[0.9375rem] font-semibold tracking-tight"
         >
-          <span className="size-1.5 rounded-full bg-accent transition-transform duration-300 group-hover:scale-150" />
-          {site.name}
+          <span className="grid size-7 place-items-center rounded-lg bg-accent font-display text-xs font-bold text-accent-foreground transition-transform duration-300 group-hover:scale-105">
+            S
+          </span>
+          <span className="hidden sm:inline">{site.name}</span>
+          <span className="sm:hidden">{site.firstName}</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
@@ -63,7 +66,7 @@ export function SiteHeader() {
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
-                "relative rounded-full px-4 py-2 text-sm transition-colors duration-200",
+                "relative rounded-lg px-3.5 py-2 text-sm transition-colors duration-200",
                 isActive(item.href)
                   ? "text-foreground"
                   : "text-muted hover:text-foreground",
@@ -72,7 +75,7 @@ export function SiteHeader() {
               {isActive(item.href) && (
                 <motion.span
                   layoutId="nav-pill"
-                  className="absolute inset-0 -z-10 rounded-full bg-surface"
+                  className="absolute inset-0 -z-10 rounded-lg bg-surface"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
@@ -89,7 +92,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid size-9 place-items-center rounded-full border border-border text-muted md:hidden"
+            className="grid size-9 place-items-center rounded-lg border border-border text-muted md:hidden"
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>

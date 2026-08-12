@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Outfit, Syne, JetBrains_Mono } from "next/font/google";
 
 import { SiteBackground } from "@/components/background/site-background";
 import { SiteHeader } from "@/components/site-header";
@@ -10,23 +10,23 @@ import { site } from "@/lib/site";
 
 import "./globals.css";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
   display: "swap",
 });
 
-const space = Space_Grotesk({
+const syne = Syne({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-space",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 });
 
-const plex = IBM_Plex_Mono({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-plex",
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -60,8 +60,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eef4f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#050c17" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f1ea" },
+    { media: "(prefers-color-scheme: dark)", color: "#140f0c" },
   ],
 };
 
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${space.variable} ${plex.variable}${
+      className={`${outfit.variable} ${syne.variable} ${jetbrains.variable}${
         // Development-only escape hatch so animations can be previewed on a
         // machine with OS reduced-motion switched on. Compiled out in
         // production, so it can never override a real preference.

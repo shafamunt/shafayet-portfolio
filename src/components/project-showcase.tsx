@@ -73,21 +73,21 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(i)}
               className={cn(
-                "relative inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors duration-200",
+                "relative inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-colors duration-200",
                 selected ? "text-foreground" : "text-muted hover:text-foreground",
               )}
             >
               {selected && (
                 <motion.span
                   layoutId="showcase-pill"
-                  className="absolute inset-0 -z-10 rounded-full border border-border-strong bg-surface"
+                  className="absolute inset-0 -z-10 rounded-xl border border-border-strong bg-surface"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
               {!selected && (
-                <span className="absolute inset-0 -z-10 rounded-full border border-border" />
+                <span className="absolute inset-0 -z-10 rounded-xl border border-border" />
               )}
-              <span className={cn("size-2 rounded-full", DOTS[i % DOTS.length])} />
+              <span className={cn("size-2 rounded-sm", DOTS[i % DOTS.length])} />
               {item.title}
             </button>
           );

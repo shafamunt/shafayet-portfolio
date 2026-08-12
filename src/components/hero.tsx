@@ -54,7 +54,7 @@ export function Hero() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
               </span>
-              Computer Engineering @ Michigan · {site.location}
+              Embedded · Michigan CE · {site.location}
             </motion.p>
 
             <motion.h1
@@ -62,9 +62,9 @@ export function Hero() {
               // `break-words` is a backstop: at the smallest widths the longest
               // headline phrase has no slack, and a word breaking mid-way is a
               // better failure than one running off the side of the screen.
-              className="font-display text-display-lg text-foreground [overflow-wrap:break-word]"
+              className="font-display text-display-lg font-semibold text-foreground [overflow-wrap:break-word]"
             >
-              I&apos;m <span className="text-accent">{site.firstName}</span>,
+              <span className="text-accent">{site.firstName}</span>
               <br />
               <BlurCycle phrases={site.headlinePhrases} className="text-foreground" />
             </motion.h1>
@@ -76,7 +76,7 @@ export function Hero() {
             <motion.div {...fadeUp(0.32)} className="mt-9 flex flex-wrap items-center gap-3">
               <Magnetic>
                 <Link href="/projects" className={cn(buttonVariants({ size: "lg" }))}>
-                  View work
+                  See projects
                   <ArrowUpRight className="size-[1.125rem]" />
                 </Link>
               </Magnetic>

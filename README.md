@@ -2,7 +2,7 @@
 
 Portfolio for **Shafayet Muntasir**. Next.js App Router, TypeScript, Tailwind v4, Motion, MDX case studies. Production: **[https://shafam.dev](https://shafam.dev)** (Vercel; also [shafayet-portfolio.vercel.app](https://shafayet-portfolio.vercel.app)).
 
-Same feature set as [faiyajr.dev](https://faiyajr.dev/) (hero rotator, C++ struct card, MDX case studies, etc.) with an engineering-blueprint colour system.
+Warm oxide / copper visual system — Syne + Outfit, instrument-line background, dark-first.
 
 ```bash
 npm install
@@ -32,8 +32,6 @@ Copy [`content/projects/_TEMPLATE.mdx`](content/projects/_TEMPLATE.mdx) to add a
 ## Deploy
 
 ### Cloudflare Pages (free short URL)
-
-Same method as [tajulharamain.pages.dev](https://tajulharamain.pages.dev):
 
 ```bash
 npm run deploy:pages

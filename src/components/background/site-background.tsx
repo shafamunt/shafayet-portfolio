@@ -1,14 +1,14 @@
 import { ParticleField } from "@/components/background/particle-field";
 
 /**
- * Living blueprint background: cyan glow blobs, dual drafting grid, particles.
+ * Warm oxide field: copper/seafoam glows, soft horizontal rules, particles.
  * Fixed and pointer-events-none — see `relative z-10` in `app/layout.tsx`.
  */
 export function SiteBackground() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div
-        className="absolute -left-[15vw] -top-[20vh] size-[70vw] rounded-full blur-[110px]"
+        className="absolute -left-[20vw] -top-[25vh] size-[65vw] rounded-full blur-[120px]"
         style={{
           background: "radial-gradient(circle, var(--glow-1), transparent 68%)",
           opacity: "var(--glow-opacity)",
@@ -16,46 +16,45 @@ export function SiteBackground() {
         }}
       />
       <div
-        className="absolute -right-[10vw] top-[25vh] size-[55vw] rounded-full blur-[120px]"
+        className="absolute -right-[15vw] top-[15vh] size-[50vw] rounded-full blur-[130px]"
         style={{
           background: "radial-gradient(circle, var(--glow-2), transparent 68%)",
-          opacity: "calc(var(--glow-opacity) * 0.85)",
+          opacity: "calc(var(--glow-opacity) * 0.75)",
           animation: "drift-b 43s ease-in-out infinite",
         }}
       />
       <div
-        className="absolute bottom-[-25vh] left-[20vw] size-[60vw] rounded-full blur-[130px]"
+        className="absolute bottom-[-30vh] left-[30vw] size-[55vw] rounded-full blur-[140px]"
         style={{
           background: "radial-gradient(circle, var(--glow-3), transparent 70%)",
-          opacity: "calc(var(--glow-opacity) * 0.7)",
+          opacity: "calc(var(--glow-opacity) * 0.55)",
           animation: "drift-c 51s ease-in-out infinite",
         }}
       />
 
-      {/* Major drafting grid (120px) */}
+      {/* Soft horizontal instrument lines — not a drafting grid. */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
-          backgroundSize: "120px 120px",
-          opacity: "calc(var(--grid-opacity) * 0.55)",
-          maskImage: "radial-gradient(ellipse 95% 80% at 50% 40%, #000 25%, transparent 100%)",
+            "repeating-linear-gradient(0deg, transparent, transparent 47px, var(--grid-line) 47px, var(--grid-line) 48px)",
+          opacity: "var(--grid-opacity)",
+          maskImage: "radial-gradient(ellipse 85% 70% at 50% 35%, #000 20%, transparent 100%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 95% 80% at 50% 40%, #000 25%, transparent 100%)",
+            "radial-gradient(ellipse 85% 70% at 50% 35%, #000 20%, transparent 100%)",
         }}
       />
-      {/* Fine drafting grid (24px) */}
+
+      {/* Sparse diagonal hatch in one corner for depth. */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-          opacity: "var(--grid-opacity)",
-          maskImage: "radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 100%)",
+            "repeating-linear-gradient(-28deg, transparent, transparent 14px, var(--grid-line) 14px, var(--grid-line) 15px)",
+          opacity: "calc(var(--grid-opacity) * 0.45)",
+          maskImage: "radial-gradient(ellipse 50% 45% at 85% 80%, #000 0%, transparent 70%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 100%)",
+            "radial-gradient(ellipse 50% 45% at 85% 80%, #000 0%, transparent 70%)",
         }}
       />
 
