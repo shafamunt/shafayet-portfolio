@@ -5,67 +5,67 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ── Palette ──────────────────────────────────────────────────────────────
-   Ember lab / warm oxide — distinct from cool navy-cyan blueprints:
-     #140f0c  ink           #1c1612  surface     #e8956a  copper
-     #6bb5a2  seafoam       #f3efe8  paper       #b5aea3  muted
+   Engineering blueprint / drafting sheet:
+     #050c17  navy-900     #0a1628  navy-800    #22d3ee  cyan
+     #fbbf24  amber        #e8f1fa  ink         #a7bed4  ink-soft
 
-   Dark is the primary look. Light is a warm paper variant. */
+   Dark is the primary look. Light is a paper-blueprint variant. */
 :root {
-  /* Light: warm paper bench */
-  --background: #f6f1ea;
-  --surface: #ebe4da;
+  /* Light: pale drafting paper */
+  --background: #eef4f8;
+  --surface: #e2ebf2;
   --surface-raised: #ffffff;
-  --foreground: #140f0c;
-  --muted: #5c534a;
-  --subtle: #8a7f73;
-  --border: #d6cdc0;
-  --border-strong: #b8ac9c;
+  --foreground: #050c17;
+  --muted: #3d5166;
+  --subtle: #6b8299;
+  --border: #c5d4e0;
+  --border-strong: #9bb0c2;
 
-  --accent: #b85c2e;
+  --accent: #0e7490;
   --accent-foreground: #ffffff;
-  --accent-soft: #f3ddd0;
-  --accent-2: #2f7a6b;
+  --accent-soft: #d7f0f7;
+  --accent-2: #b45309;
 
-  --glow-1: #e8956a;
-  --glow-2: #6bb5a2;
-  --glow-3: #c4a574;
-  --glow-opacity: 0.22;
-  --grid-line: #b85c2e;
-  --grid-opacity: 0.07;
-  --particle: #b85c2e;
-  --particle-opacity: 0.3;
+  --glow-1: #22d3ee;
+  --glow-2: #0e7490;
+  --glow-3: #38bdf8;
+  --glow-opacity: 0.18;
+  --grid-line: #0e7490;
+  --grid-opacity: 0.08;
+  --particle: #0e7490;
+  --particle-opacity: 0.35;
 
   --radius: 0.75rem;
-  --shadow-card: 0 1px 2px rgb(20 15 12 / 0.04), 0 10px 28px -14px rgb(20 15 12 / 0.14);
-  --shadow-lift: 0 2px 4px rgb(20 15 12 / 0.06), 0 28px 52px -22px rgb(20 15 12 / 0.22);
+  --shadow-card: 0 1px 2px rgb(5 12 23 / 0.04), 0 8px 24px -12px rgb(5 12 23 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(5 12 23 / 0.06), 0 24px 48px -20px rgb(5 12 23 / 0.2);
 }
 
 .dark {
-  --background: #140f0c;
-  --surface: #1c1612;
-  --surface-raised: #26201b;
-  --foreground: #f3efe8;
-  --muted: #b5aea3;
-  --subtle: #7a746b;
-  --border: rgba(243, 239, 232, 0.1);
-  --border-strong: rgba(232, 149, 106, 0.35);
+  --background: #050c17;
+  --surface: #0a1628;
+  --surface-raised: #0e1e35;
+  --foreground: #e8f1fa;
+  --muted: #a7bed4;
+  --subtle: #6b8299;
+  --border: rgba(56, 189, 248, 0.14);
+  --border-strong: rgba(56, 189, 248, 0.32);
 
-  --accent: #e8956a;
-  --accent-foreground: #140f0c;
-  --accent-soft: #3a2418;
-  --accent-2: #6bb5a2;
+  --accent: #22d3ee;
+  --accent-foreground: #050c17;
+  --accent-soft: #0e2940;
+  --accent-2: #fbbf24;
 
-  --glow-1: #e8956a;
-  --glow-2: #6bb5a2;
-  --glow-3: #c4a574;
-  --glow-opacity: 0.12;
-  --grid-line: #e8956a;
-  --grid-opacity: 0.08;
-  --particle: #e8956a;
-  --particle-opacity: 0.35;
+  --glow-1: #22d3ee;
+  --glow-2: #0e7490;
+  --glow-3: #38bdf8;
+  --glow-opacity: 0.14;
+  --grid-line: #38bdf8;
+  --grid-opacity: 0.12;
+  --particle: #22d3ee;
+  --particle-opacity: 0.4;
 
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
-  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.45), 0 24px 48px -20px rgb(0 0 0 / 0.75);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 8px 24px -12px rgb(0 0 0 / 0.55);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 24px 48px -20px rgb(0 0 0 / 0.7);
 }
 
 /* ── Theme tokens ─────────────────────────────────────────────────────────

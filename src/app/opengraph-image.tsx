@@ -18,7 +18,7 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#140f0c",
+          background: "#050c17",
           padding: 80,
           fontFamily: "sans-serif",
         }}
@@ -29,8 +29,8 @@ export default function OpenGraphImage() {
               width: 40,
               height: 40,
               borderRadius: 10,
-              background: "#e8956a",
-              color: "#140f0c",
+              background: "#22d3ee",
+              color: "#050c17",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
           >
             S
           </div>
-          <div style={{ fontSize: 22, color: "#b5aea3", letterSpacing: 3 }}>
+          <div style={{ fontSize: 22, color: "#a7bed4", letterSpacing: 3 }}>
             {site.title.toUpperCase()}
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           <div
             style={{
               fontSize: 76,
-              color: "#f3efe8",
+              color: "#e8f1fa",
               lineHeight: 1.05,
               letterSpacing: -2,
               maxWidth: 920,
@@ -58,10 +58,10 @@ export default function OpenGraphImage() {
           >
             {site.headline}
           </div>
-          <div style={{ fontSize: 28, color: "#e8956a" }}>{site.name}</div>
+          <div style={{ fontSize: 28, color: "#22d3ee" }}>{site.name}</div>
         </div>
 
-        <div style={{ display: "flex", fontSize: 22, color: "#7a746b" }}>
+        <div style={{ display: "flex", fontSize: 22, color: "#6b8299" }}>
           {site.url.replace(/^https?:\/\//, "")}
         </div>
       </div>

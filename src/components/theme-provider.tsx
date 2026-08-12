@@ -2,7 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-/** Warm oxide / copper is the primary look; light is an optional paper variant. */
+/** Navy/cyan blueprint is the primary look; light is an optional paper variant. */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
