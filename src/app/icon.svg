@@ -2,13 +2,21 @@
   <!--
     Browser tab icon. Next.js picks this up from app/icon.svg automatically.
 
-    The S is drawn as path geometry rather than set in a typeface: favicons
+    The S is drawn as five rectangles rather than set in a typeface: favicons
     render at 16x16, where hinting and font availability are both unreliable,
-    and hard edges stay crisp at any size on any machine.
+    and rectangles stay crisp at any size on any machine.
   -->
-  <rect width="64" height="64" rx="12" fill="#140f0c"/>
-  <path
-    fill="#e8956a"
-    d="M44.5 22.2c0-4.6-3.7-7.7-10.2-7.7-6.8 0-11 3.4-11.6 8.6h7.1c.4-2.1 2.1-3.4 4.6-3.4 2.4 0 3.9 1.2 3.9 3.1 0 1.7-1.1 2.7-4.3 3.6l-4.6 1.3c-5.7 1.6-8.9 4.5-8.9 9.6 0 5.3 4.1 8.8 10.6 8.8 6.6 0 11.2-3.3 12-8.7h-7.2c-.5 2.2-2.3 3.5-4.9 3.5-2.5 0-4.1-1.2-4.1-3.2 0-1.7 1.1-2.7 4.5-3.7l4.7-1.3c6-1.7 8.4-4.7 8.4-9.5z"
-  />
+  <rect width="64" height="64" rx="14" fill="#050c17"/>
+  <g fill="#22d3ee">
+    <!-- top bar -->
+    <rect x="16" y="14" width="32" height="9" rx="1.5"/>
+    <!-- upper left stem -->
+    <rect x="16" y="14" width="9" height="20" rx="1.5"/>
+    <!-- middle bar -->
+    <rect x="16" y="28" width="32" height="9" rx="1.5"/>
+    <!-- lower right stem -->
+    <rect x="39" y="28" width="9" height="22" rx="1.5"/>
+    <!-- bottom bar -->
+    <rect x="16" y="41" width="32" height="9" rx="1.5"/>
+  </g>
 </svg>

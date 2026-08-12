@@ -1,6 +1,6 @@
 # shafayet-portfolio
 
-Portfolio for **Shafayet Muntasir**. Next.js App Router, TypeScript, Tailwind v4, Motion, MDX case studies. Production: **[https://shafam.dev](https://shafam.dev)** (Vercel; also [shafayet-portfolio.vercel.app](https://shafayet-portfolio.vercel.app)).
+Portfolio for **Shafayet Muntasir**. Next.js App Router, TypeScript, Tailwind v4, Motion, MDX case studies. Production: **[https://shafam.dev](https://shafam.dev)** on Vercel (also [shafayet-portfolio.vercel.app](https://shafayet-portfolio.vercel.app)). Static preview: [shafam.pages.dev](https://shafam.pages.dev).
 
 Warm oxide / copper visual system — Syne + Outfit, instrument-line background, dark-first.
 
@@ -31,7 +31,17 @@ Copy [`content/projects/_TEMPLATE.mdx`](content/projects/_TEMPLATE.mdx) to add a
 
 ## Deploy
 
-### Cloudflare Pages (free short URL)
+### Vercel (production — `shafam.dev`)
+
+Full Next.js app with contact API, Spotify API, and image optimization.
+
+1. Push to `main` on GitHub (auto-deploys via the linked Vercel project).
+2. Env vars (see [`.env.example`](.env.example)): set `NEXT_PUBLIC_SITE_URL=https://shafam.dev` and `CONTACT_TO_EMAIL=shafam@umich.edu` in Vercel → Project → Settings → Environment Variables.
+3. Contact form needs either `RESEND_API_KEY` or `FORMSPREE_ENDPOINT`; without either, the form validates but the API returns a clear “not configured” error.
+
+DNS for `shafam.dev` is on Cloudflare (nameservers at Porkbun). Apex and `www` point at Vercel (DNS-only / grey cloud).
+
+### Cloudflare Pages (static preview)
 
 ```bash
 npm run deploy:pages
@@ -39,13 +49,4 @@ npm run deploy:pages
 
 → **https://shafam.pages.dev**
 
-That is a free `*.pages.dev` subdomain (Cloudflare Pages), not a purchased `shafam.dev` domain.
-
-### Vercel (full app: contact API, etc.)
-
-1. Push to `main` on GitHub.
-2. Import the repo in [Vercel](https://vercel.com) (framework: Next.js).
-3. Set env vars from [`.env.example`](.env.example) — at least `NEXT_PUBLIC_SITE_URL=https://shafam.pages.dev` (or your custom domain) and `CONTACT_TO_EMAIL=shafam@umich.edu`.
-4. Optional: buy a real `.dev` apex (`shafam.dev`) and attach DNS in Vercel/Cloudflare.
-
-Contact form needs either `RESEND_API_KEY` or `FORMSPREE_ENDPOINT`; without either, the form validates but the API returns a clear “not configured” error.
+Static export only — API routes (`/api/contact`, `/api/spotify`) are not available on Pages.
