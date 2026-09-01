@@ -53,20 +53,20 @@ export const site = {
     { type: "std::string", name: "school", value: "University of Michigan" },
     { type: "std::string", name: "major", value: "Computer Engineering" },
     { type: "std::string", name: "graduation", value: "May 2029" },
-    { type: "std::string", name: "role", value: "SWE Intern @ Darul Uloom Michigan" },
+    { type: "std::string", name: "focus", value: "Embedded Systems & Hardware" },
     { type: "std::string", name: "location", value: "Ann Arbor, MI" },
     { type: "std::string", name: "email", value: "shafam@umich.edu" },
     {
       type: "std::vector<std::string>",
       name: "interests",
-      value: ["embedded", "PCB", "full-stack", "FSAE"],
+      value: ["embedded", "PCB", "hardware", "FSAE"],
     },
   ] satisfies StructField[],
 
   // ── About page bio ──────────────────────────────────────────────────────
   bio: [
     "I'm a Computer Engineering student at the University of Michigan. I like work that sits where software meets silicon — firmware on a Formula SAE car, a grading platform 70+ people log into every week, and boards I route and solder myself.",
-    "Right now I'm a Software Engineering Intern at Darul Uloom Michigan, shipping a role-based educational platform in production; a Computer Consultant II and shift lead at Michigan ITS; and on MRacing FSAE building lap-timing DAQ with a Level 2 High Voltage cert for the car's 600V system. Out of MESH I'm sharpening PCB layout and SMT assembly skills that feed the racing work.",
+    "Right now I'm a Software Engineering Intern at Darul Uloom Michigan, shipping a role-based educational platform in production; a Computer Consultant II and shift lead at Michigan ITS; and on MRacing FSAE building lap-timing DAQ with a Level 2 High Voltage (600V) certification. Out of MESH I'm sharpening PCB layout and SMT assembly skills that feed the racing work.",
     "I'm hunting embedded and systems roles in metro Detroit and beyond. Reach me at shafam@umich.edu.",
   ],
 

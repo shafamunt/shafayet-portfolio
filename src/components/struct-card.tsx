@@ -144,9 +144,9 @@ export function StructCard({ className }: { className?: string }) {
         <p className="sr-only">
           {site.name} studies {site.structFields.find((f) => f.name === "major")?.value} at the
           University of Michigan, graduating{" "}
-          {site.structFields.find((f) => f.name === "graduation")?.value}. Based in {site.location}.
-          Contact:{" "}
-          {site.email}.
+          {site.structFields.find((f) => f.name === "graduation")?.value}. Focus:{" "}
+          {site.structFields.find((f) => f.name === "focus")?.value}. Based in {site.location}.
+          Contact: {site.email}.
         </p>
       </div>
     </div>

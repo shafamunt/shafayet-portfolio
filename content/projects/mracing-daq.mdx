@@ -6,13 +6,13 @@ description: >-
   start/finish line into a timestamped lap on the team's telemetry, with board
   work in Altium and weekly CAN and embedded design reviews.
 year: [2025, 2026]
-role: Vehicle software & instrumentation — MRacing FSAE
+role: Vehicle software, instrumentation & powertrain — MRacing FSAE · Level 2 High Voltage (600V)
 status: in-progress
 featured: true
 order: 20
 size: lg
 tech:
-  - C/C++
+  - C++
   - Embedded Systems
   - CAN Bus
   - Altium
@@ -20,12 +20,12 @@ tech:
   - Sensors
 metrics:
   - label: HV system cert
-    value: 600V
+    value: Level 2 (600V)
   - label: Vehicle bus
     value: CAN
 highlights:
-  - Photosensor trigger into on-car lap timing
-  - Level 2 High Voltage certification for the 600V tractive system
+  - Lap-trigger DAQ with breadboards and photosensors
+  - Level 2 High Voltage (600V) certification for 600V system maintenance
   - Weekly CAN bus and embedded control design reviews
 draft: false
 ---
@@ -39,13 +39,14 @@ them into the rest of the telemetry stack — not as a stopwatch on the wall.
 
 **Sense, then timestamp.** A photosensor beam break at start/finish becomes a
 clean event into the acquisition path, then a lap record on the team's
-telemetry chain.
+telemetry chain. The current prototype uses breadboards and photosensors to
+detect the vehicle passing the line.
 
 **Vehicle realities.** Work goes through weekly CAN bus and embedded control
-reviews. Board work is in Altium. High Voltage Level 2 certification covers
-safe work around the car's 600V tractive system.
+reviews. Board work is in Altium. Level 2 High Voltage (600V) certification
+covers safe maintenance around the car's 600V system.
 
 ## Status
 
-In progress with MRacing FSAE — iterating the sensing and acquisition path
-against the car's real harness and review cadence.
+In progress with MRacing FSAE (Level 2 High Voltage (600V)) — iterating the
+sensing and acquisition path against the car's real harness and review cadence.

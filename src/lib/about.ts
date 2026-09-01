@@ -27,13 +27,13 @@ export const interests: Interest[] = [
     emoji: "🏎️",
     label: "Formula SAE",
     detail:
-      "Lap-timing DAQ and HV work on Michigan's electric race car — where embedded meets the track.",
+      "Lap-timing DAQ and Level 2 High Voltage (600V) work on Michigan's electric race car — where embedded meets the track.",
   },
   {
     emoji: "🔌",
     label: "Boards & firmware",
     detail:
-      "Schematic to solder: Altium layouts, SMT assembly at MESH, and C/C++ on the wire.",
+      "Schematic to solder: Altium layouts, SMT assembly at MESH, and C++ on the wire.",
   },
   {
     emoji: "🏫",

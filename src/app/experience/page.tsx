@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   description:
-    "Software and embedded roles at Darul Uloom Michigan, MRacing FSAE, Michigan ITS, and MESH — plus education at U-M.",
+    "Embedded systems and hardware roles at Darul Uloom Michigan, MRacing FSAE (Level 2 High Voltage (600V)), Michigan ITS, and MESH — plus education at U-M.",
 };
 
 export default function ExperiencePage() {
@@ -115,7 +115,7 @@ export default function ExperiencePage() {
       {/* ── Skills ── */}
       <section className="mt-24 md:mt-32">
         <SectionHeading eyebrow="Toolkit" title="What I work with." />
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {skills.map((group) => (
             <Reveal key={group.label}>
               <div className="h-full rounded-card border border-border bg-surface/50 p-6 backdrop-blur-sm">
