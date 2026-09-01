@@ -30,7 +30,7 @@ export const site = {
   title: "Computer Engineering Student & Embedded Builder",
   headline: "Building where software meets silicon.",
   intro:
-    "I'm Shafayet — firmware on a Formula SAE car, platforms schools actually use, and boards I route and solder myself. Looking for embedded and systems roles.",
+    "I'm Shafayet — building firmware on a Formula SAE car, platforms schools actually use, and boards I route and solder myself. Looking for embedded and systems roles.",
 
   /**
    * Cycled through by the decode effect under the hero heading.
