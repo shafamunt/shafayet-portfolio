@@ -35,8 +35,8 @@ export default function ExperiencePage() {
         />
         <Reveal delay={0.2}>
           <p className="mt-6 max-w-xl text-lead text-muted">
-            Where I&apos;ve worked, what I shipped, and roughly what it was worth. The PDF has
-            the same content in one page.
+            Where I&apos;ve worked and what I shipped. The PDF has the same
+            content in one page.
           </p>
         </Reveal>
         <Reveal delay={0.3}>

@@ -94,7 +94,8 @@ export default function HomePage() {
               Open to the next role.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Embedded and systems work in metro Detroit and beyond — email{" "}
+              Based in Ann Arbor, open to embedded and systems internships
+              nationally — email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"

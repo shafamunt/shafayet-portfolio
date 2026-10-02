@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return {};
 
   return {
-    // Tab stays the site name; the share card still names the project.
-    title: { absolute: site.name },
+    // Tab stays the document title; the share card still names the project.
+    title: { absolute: site.documentTitle },
     description: project.summary,
     openGraph: {
       title: project.title,
