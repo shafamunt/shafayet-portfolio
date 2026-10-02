@@ -33,6 +33,7 @@ export function ExperienceTimeline({
         return (
           <StaggerItem
             as="li"
+            index={i}
             key={`${job.company}-${job.start}`}
             className={cn("relative pl-8 md:pl-[calc(11rem+2rem)]", i > 0 && "mt-10 md:mt-12")}
           >
@@ -62,6 +63,12 @@ export function ExperienceTimeline({
                 "hover:border-border-strong",
               )}
             >
+              {/* Dates also live inside the card so a long role title cannot
+                  make the rail dates easy to miss on the homepage compact view. */}
+              <p className="mb-2 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle">
+                {job.start} — {job.end}
+              </p>
+
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h3 className="font-display text-2xl leading-tight text-foreground">
                   {job.role}

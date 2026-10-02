@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Globe } from "lucide-react";
 
 import { GithubIcon } from "@/components/icons";
+import { ProjectMedia } from "@/components/project-media";
 import { Badge } from "@/components/ui/badge";
 import type { CardSize, Project } from "@/lib/content";
 import { cn, formatYear } from "@/lib/utils";
@@ -39,16 +39,18 @@ export function ProjectCard({
     >
       <div className={cn("relative overflow-hidden bg-surface", aspectBySize[cardSize])}>
         {project.cover ? (
-          <Image
-            src={project.cover.src}
-            alt={project.cover.alt}
-            fill
+          <ProjectMedia
+            image={project.cover}
             priority={priority}
             sizes="(min-width: 1024px) 40vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover object-top transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+            className={
+              project.cover.pending
+                ? undefined
+                : "transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+            }
           />
         ) : (
-          <PlaceholderCover title={project.title} />
+          <EmptyMediaSlot />
         )}
 
         {project.status !== "live" && (
@@ -146,18 +148,14 @@ function IconLink({
   );
 }
 
-/** Shown when a project has no screenshot yet, so the grid never breaks. */
-function PlaceholderCover({ title }: { title: string }) {
-  const initials = title
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-
+/** Fallback when frontmatter has no cover at all. */
+function EmptyMediaSlot() {
   return (
-    <div className="grid h-full place-items-center bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)]">
-      <span className="font-display text-6xl text-subtle/50">{initials}</span>
+    <div className="flex h-full min-h-[10rem] flex-col items-center justify-center gap-2 border border-dashed border-border-strong bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)] px-4 text-center">
+      <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-accent">
+        Media TODO
+      </p>
+      <p className="text-xs text-muted">Add a cover image in project frontmatter.</p>
     </div>
   );
 }

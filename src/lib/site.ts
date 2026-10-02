@@ -1,6 +1,7 @@
 import { Mail, FileText } from "lucide-react";
 
 import { GithubIcon, LinkedinIcon, type IconComponent } from "@/components/icons";
+import { expectedGraduation } from "@/lib/resume";
 
 /**
  * Single source of truth for everything about *you*.
@@ -23,11 +24,18 @@ export type StructField = {
   value: string | string[];
 };
 
+/** Tab / OG title. Keep in sync with what recruiters should see first. */
+export const documentTitle = "Shafayet Muntasir — Embedded & Hardware";
+
+/** Path under `public/`. Replace that one PDF to update every Resume link. */
+const resumePath = "/resume/shafayet-muntasir-resume.pdf";
+
 export const site = {
   // ── Identity ────────────────────────────────────────────────────────────
   name: "Shafayet Muntasir",
   firstName: "Shafayet",
   title: "Computer Engineering Student & Embedded Builder",
+  documentTitle,
   headline: "Building where software meets silicon.",
   intro:
     "I'm Shafayet — building firmware on a Formula SAE car, platforms schools actually use, and boards I route and solder myself. Looking for embedded and systems roles.",
@@ -40,7 +48,7 @@ export const site = {
     "building where software meets silicon.",
     "writing firmware for a Formula SAE car.",
     "routing boards and shipping platforms.",
-    "hunting embedded roles in metro Detroit.",
+    "open to embedded roles nationwide.",
     "a CE student at Michigan.",
   ],
 
@@ -52,7 +60,7 @@ export const site = {
   structFields: [
     { type: "std::string", name: "school", value: "University of Michigan" },
     { type: "std::string", name: "major", value: "Computer Engineering" },
-    { type: "std::string", name: "graduation", value: "May 2029" },
+    { type: "std::string", name: "graduation", value: expectedGraduation },
     { type: "std::string", name: "focus", value: "Embedded Systems & Hardware" },
     { type: "std::string", name: "location", value: "Ann Arbor, MI" },
     { type: "std::string", name: "email", value: "shafam@umich.edu" },
@@ -67,13 +75,13 @@ export const site = {
   bio: [
     "I'm a Computer Engineering student at the University of Michigan. I like work that sits where software meets silicon — firmware on a Formula SAE car, a grading platform 70+ people log into every week, and boards I route and solder myself.",
     "Right now I'm a Software Engineering Intern at Darul Uloom Michigan, shipping a role-based educational platform in production; a Computer Consultant II and shift lead at Michigan ITS; and on MRacing FSAE building lap-timing DAQ with a Level 2 High Voltage (600V) certification. Out of MESH I'm sharpening PCB layout and SMT assembly skills that feed the racing work.",
-    "I'm hunting embedded and systems roles in metro Detroit and beyond. Reach me at shafam@umich.edu.",
+    "Based in Ann Arbor, open to embedded and systems internships nationally. Reach me at shafam@umich.edu.",
   ],
 
   // ── URLs ────────────────────────────────────────────────────────────────
   /** No trailing slash. Overridden by NEXT_PUBLIC_SITE_URL in production. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://shafam.dev",
-  resumePath: "/resume/shafayet-muntasir-resume.pdf",
+  resumePath,
 
   // ── Social ──────────────────────────────────────────────────────────────
   socials: [
@@ -97,7 +105,7 @@ export const site = {
     },
     {
       label: "Resume",
-      href: "/resume/shafayet-muntasir-resume.pdf",
+      href: resumePath,
       icon: FileText,
       handle: "PDF",
     },
@@ -113,3 +121,28 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
+
+/** Person JSON-LD from facts already on the site — no phone, no photo. */
+export function personJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.name,
+    url: site.url,
+    email: site.email,
+    jobTitle: site.title,
+    homeLocation: {
+      "@type": "Place",
+      name: site.location,
+    },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "University of Michigan",
+    },
+    description: `${site.title}. ${expectedGraduation}.`,
+    sameAs: [
+      "https://github.com/shafamunt",
+      "https://www.linkedin.com/in/shafayetmuntasir",
+    ],
+  };
+}

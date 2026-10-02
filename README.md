@@ -25,7 +25,7 @@ npm run dev          # http://localhost:3000
 | Experience, education, skills | [`src/lib/resume.ts`](src/lib/resume.ts) |
 | About interests | [`src/lib/about.ts`](src/lib/about.ts) |
 | Projects | [`content/projects/*.mdx`](content/projects/) |
-| Resume PDF | [`public/resume/shafayet-muntasir-resume.pdf`](public/resume/shafayet-muntasir-resume.pdf) |
+| Resume PDF | [`public/resume/shafayet-muntasir-resume.pdf`](public/resume/shafayet-muntasir-resume.pdf) — **replace this file** with the PDF you submit; every Resume link on the site points here via `site.resumePath`. The checked-in PDF may still say May 2029 until you drop in the current one. |
 
 Copy [`content/projects/_TEMPLATE.mdx`](content/projects/_TEMPLATE.mdx) to add a project. `featured: true` puts it on the home page. Cover images (optional) go in `public/images/projects/<slug>/`.
 

@@ -9,7 +9,7 @@ year: [2025, 2026]
 role: Vehicle software, instrumentation & powertrain — MRacing FSAE · Level 2 High Voltage (600V)
 status: in-progress
 featured: true
-order: 20
+order: 10
 size: lg
 tech:
   - C++
@@ -27,26 +27,62 @@ highlights:
   - Lap-trigger DAQ with breadboards and photosensors
   - Level 2 High Voltage (600V) certification for 600V system maintenance
   - Weekly CAN bus and embedded control design reviews
+cover:
+  src: /images/projects/mracing-daq/bench.jpg
+  alt: Breadboard photosensor lap-trigger prototype on the bench
+  todo: TODO — photo of the breadboard + photosensor bench setup
+gallery:
+  - src: /images/projects/mracing-daq/altium.png
+    alt: Altium schematic or PCB layout for the lap-trigger board
+    todo: TODO — Altium schematic and/or layout screenshot
+  - src: /images/projects/mracing-daq/car.jpg
+    alt: MRacing FSAE electric car on track or in the shop
+    todo: TODO — photo of the FSAE car (shop or track)
+  - src: /images/projects/mracing-daq/scope.png
+    alt: Oscilloscope capture of the photosensor trigger edge
+    todo: TODO — scope capture of the beam-break / trigger edge
 draft: false
 ---
 
 ## The problem
 
 Lap times only matter if the car can capture them reliably at the line and fold
-them into the rest of the telemetry stack — not as a stopwatch on the wall.
+them into the rest of the telemetry stack — not as a stopwatch on the wall. A
+beam break has to become a timestamp the team can trust later.
 
-## Approach
+## Signal path (what exists vs what is still open)
 
-**Sense, then timestamp.** A photosensor beam break at start/finish becomes a
-clean event into the acquisition path, then a lap record on the team's
-telemetry chain. The current prototype uses breadboards and photosensors to
-detect the vehicle passing the line.
+```
+photosensor  →  [conditioning — TODO]  →  [MCU — TODO]
+     beam break at start/finish              edge → timestamp — TODO how
+                                                    │
+                                                    ▼
+                                         telemetry chain — TODO how published
+```
 
-**Vehicle realities.** Work goes through weekly CAN bus and embedded control
-reviews. Board work is in Altium. Level 2 High Voltage (600V) certification
-covers safe maintenance around the car's 600V system.
+**What is real today.** A breadboard prototype with photosensors detects the
+vehicle passing the line. Board work is in Altium. The sensing path iterates
+against the car's harness under weekly CAN bus and embedded control design
+reviews. I hold Level 2 High Voltage (600V) certification for safe maintenance
+around the car's 600V system.
+
+**What is not claimed here.** This page does not invent part numbers, message
+IDs, or a finished CAN node. Weekly reviews on CAN and embedded control are
+exactly that — reviews — until firmware and a capture say otherwise.
+
+- TODO — signal conditioning between the photosensor and the digital input
+- TODO — MCU / board that owns the edge and the timestamp
+- TODO — how the timestamp is published onto the team's telemetry chain
+- TODO — private repo or team-IP note if/when source can be linked
+
+## What broke (debugging)
+
+TODO — the failure that actually bit me (false triggers, missed edges, harness
+noise, timing skew, …) and how I found it. Leave blank until I write the real
+story; do not invent a debounce anecdote.
 
 ## Status
 
-In progress with MRacing FSAE (Level 2 High Voltage (600V)) — iterating the
-sensing and acquisition path against the car's real harness and review cadence.
+In progress with MRacing FSAE — iterating the sensing and acquisition path
+against the car's real harness and review cadence. Media TODOs above: bench
+photo, Altium shot, car photo, scope capture of the trigger edge.

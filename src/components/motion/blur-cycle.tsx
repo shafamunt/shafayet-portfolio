@@ -13,10 +13,14 @@ import { cn } from "@/lib/utils";
  * Markup never depends on reduced motion — only the durations do — so the
  * server and client render identically. See `useMotionScale`.
  *
- * Layout: the phrases are stacked in a single CSS grid cell rather than
- * absolutely positioned. A grid cell grows to fit its tallest child, so a
- * phrase that wraps to two lines pushes the block taller instead of spilling
- * over the paragraph underneath — which is what absolute positioning did.
+ * Layout: phrases stack in one CSS grid cell. Each word is clipped in an
+ * overflow-hidden box so the vertical blur travel cannot paint through the
+ * name above or the intro below. Leading on the cycling line is looser than
+ * the display-lg default (0.98) so motion stays inside the clip.
+ *
+ * First paint (and reduced motion) never starts from opacity 0: `hasCycled`
+ * stays false until the first phrase change, so Motion does not serialize a
+ * blank initial style into the HTML.
  */
 
 const ENTER = 0.8;
@@ -35,6 +39,8 @@ export function BlurCycle({
   const scale = useMotionScale();
   const animate = useMotionEnabled();
   const [index, setIndex] = useState(0);
+  // False on server and first client paint — do not ship opacity:0 in HTML.
+  const [hasCycled, setHasCycled] = useState(false);
 
   const words = (phrases[index] ?? "").split(" ");
 
@@ -45,10 +51,10 @@ export function BlurCycle({
     if (!animate || phrases.length < 2) return;
 
     const enterMs = (ENTER + words.length * STAGGER) * 1000;
-    const timer = setTimeout(
-      () => setIndex((i) => (i + 1) % phrases.length),
-      enterMs + HOLD_MS,
-    );
+    const timer = setTimeout(() => {
+      setHasCycled(true);
+      setIndex((i) => (i + 1) % phrases.length);
+    }, enterMs + HOLD_MS);
 
     return () => clearTimeout(timer);
   }, [index, phrases, animate, words.length]);
@@ -58,7 +64,13 @@ export function BlurCycle({
     // the column to the container. Left implicit, the column is `auto` and
     // grows to the max-content of the longest phrase — every phrase on one
     // line — which this component then pushes up through its ancestors.
-    <span className={cn("grid grid-cols-1 min-w-0 max-w-full", className)}>
+    // Extra line-height keeps blur travel inside the word clip boxes.
+    <span
+      className={cn(
+        "grid grid-cols-1 min-w-0 max-w-full leading-[1.2]",
+        className,
+      )}
+    >
       {/* Every phrase, invisible and stacked, so the cell is always as tall as
           the tallest one and the line below never jumps between phrases.
 
@@ -75,8 +87,11 @@ export function BlurCycle({
           className="invisible flex min-w-0 flex-wrap [grid-area:1/1]"
         >
           {phrase.split(" ").map((word, i) => (
-            <span key={`${word}-${i}`} className="inline-block pr-[0.26em]">
-              {word}
+            <span
+              key={`${word}-${i}`}
+              className="inline-block overflow-hidden py-[0.12em] pr-[0.26em]"
+            >
+              <span className="inline-block">{word}</span>
             </span>
           ))}
         </span>
@@ -96,37 +111,46 @@ export function BlurCycle({
             // `inline-flex` this was shrink-to-fit and could wrap at a
             // different width than what was measured.
             className="flex flex-wrap"
-            initial="hidden"
+            initial={hasCycled ? "hidden" : false}
             animate="show"
             exit="out"
             variants={{
               hidden: {},
               show: { transition: { staggerChildren: STAGGER * scale } },
-              out: { transition: { staggerChildren: 0.03 * scale, staggerDirection: -1 } },
+              out: {
+                transition: {
+                  staggerChildren: 0.03 * scale,
+                  staggerDirection: -1,
+                },
+              },
             }}
           >
             {words.map((word, i) => (
-              <motion.span
+              <span
                 key={`${word}-${i}`}
-                className="inline-block pr-[0.26em] will-change-[transform,filter,opacity]"
-                variants={{
-                  hidden: { opacity: 0, y: "-0.5em", filter: "blur(14px)" },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                    transition: { duration: ENTER * scale, ease: EASE },
-                  },
-                  out: {
-                    opacity: 0,
-                    y: "0.35em",
-                    filter: "blur(10px)",
-                    transition: { duration: EXIT * scale, ease: "easeIn" },
-                  },
-                }}
+                className="inline-block overflow-hidden py-[0.12em] pr-[0.26em]"
               >
-                {word}
-              </motion.span>
+                <motion.span
+                  className="inline-block will-change-[transform,filter,opacity]"
+                  variants={{
+                    hidden: { opacity: 0, y: "-0.5em", filter: "blur(14px)" },
+                    show: {
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
+                      transition: { duration: ENTER * scale, ease: EASE },
+                    },
+                    out: {
+                      opacity: 0,
+                      y: "0.35em",
+                      filter: "blur(10px)",
+                      transition: { duration: EXIT * scale, ease: "easeIn" },
+                    },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              </span>
             ))}
           </motion.span>
         </AnimatePresence>

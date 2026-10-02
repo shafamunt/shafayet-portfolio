@@ -20,8 +20,11 @@ export default function HomePage() {
   const all = getAllProjects();
   const featured = getFeaturedProjects();
   // Anything not in the showcase falls through to the bento grid, so every
-  // project appears exactly once on this page.
-  const rest = all.filter((p) => !featured.some((f) => f.slug === p.slug));
+  // project appears exactly once on this page. Lower `order` sorts first so
+  // stronger hardware work can sit above archived MATLAB exercises.
+  const rest = all
+    .filter((p) => !featured.some((f) => f.slug === p.slug))
+    .sort((a, b) => a.order - b.order);
   const tech = getAllTech().slice(0, 16);
 
   return (
@@ -32,6 +35,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Projects"
           title="Selected builds."
+          titleId="work-heading"
           description="Firmware, platforms, and boards — the work I'd rather talk about in an interview."
           action={{ label: "All projects", href: "/projects" }}
         />
@@ -41,7 +45,7 @@ export default function HomePage() {
 
       {rest.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
-          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." />
+          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." titleId="more-heading" />
           <BentoGrid>
             {rest.map((project, i) => (
               <BentoItem key={project.slug} size={project.size} index={i}>
@@ -56,6 +60,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Experience"
           title="Roles & teams."
+          titleId="experience-heading"
           description="An internship, a help desk I help run, and MRacing FSAE with Level 2 High Voltage (600V) certification — full detail on the experience page."
           action={{ label: "Full experience", href: "/experience" }}
         />
@@ -64,7 +69,7 @@ export default function HomePage() {
 
       {tech.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="stack-heading">
-          <SectionHeading eyebrow="Stack" title="Tools I reach for." />
+          <SectionHeading eyebrow="Stack" title="Tools I reach for." titleId="stack-heading" />
           <Reveal>
             <ul className="flex flex-wrap gap-2.5">
               {tech.map((item) => (
@@ -92,7 +97,8 @@ export default function HomePage() {
               Open to the next role.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Embedded and systems work in metro Detroit and beyond — email{" "}
+              Based in Ann Arbor, open to embedded and systems internships
+              nationally — email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"

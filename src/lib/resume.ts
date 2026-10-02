@@ -38,6 +38,12 @@ export type SkillGroup = {
   items: string[];
 };
 
+/**
+ * Single graduation string for the site struct, education block, and JSON-LD.
+ * Change this once — nowhere else may hardcode a graduation month/year.
+ */
+export const expectedGraduation = "Expected May 2028";
+
 const MONTHS = [
   "jan",
   "feb",
@@ -135,7 +141,7 @@ export const education: Education[] = [
     school: "University of Michigan, Ann Arbor",
     degree: "B.S.E. in Computer Engineering",
     start: "2025",
-    end: "May 2029",
+    end: expectedGraduation,
     location: "Ann Arbor, MI",
     details: [
       "GPA 3.5 · Dean's List",

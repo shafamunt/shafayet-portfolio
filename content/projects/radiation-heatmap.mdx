@@ -9,7 +9,7 @@ year: 2026
 role: Solo build
 status: archived
 featured: false
-order: 40
+order: 80
 size: md
 tech:
   - MATLAB
@@ -20,6 +20,10 @@ highlights:
   - Custom matrix filters to ingest and denoise radiation data
   - HSV heatmap rendering of processed intensity
   - Matrix-level implementation without black-box library filters
+cover:
+  src: /images/projects/radiation-heatmap/before-after.png
+  alt: Before-and-after radiation frames — raw noisy input vs HSV heatmap output
+  todo: TODO — before/after image pair (raw frame vs heatmap)
 draft: false
 ---
 
@@ -33,10 +37,14 @@ was a pipeline that cleans the signal and makes magnitude obvious visually.
 **Write the filters.** Custom matrix filters ingest and denoise the frames,
 implemented as matrix operations so the math is visible and inspectable.
 
+TODO — document the actual kernel coefficients / matrix math used (do not invent
+numbers).
+
 **Colour as magnitude.** After cleanup, intensity maps into HSV space so the
 heatmap carries the story instead of a spreadsheet of values.
 
 ## Outcome
 
 A small, honest image-processing exercise: understanding the kernels mattered
-more than shipping a polished UI.
+more than shipping a polished UI. Promote this page only after the before/after
+media and kernel write-up land.

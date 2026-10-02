@@ -11,12 +11,15 @@ export function SectionHeading({
   description,
   action,
   className,
+  titleId,
 }: {
   eyebrow: string;
   title: string;
   description?: string;
   action?: { label: string; href: string };
   className?: string;
+  /** Optional id for the heading — used by section `aria-labelledby`. */
+  titleId?: string;
 }) {
   return (
     <div
@@ -32,6 +35,7 @@ export function SectionHeading({
         <TextRevealOnScroll
           text={title}
           as="h2"
+          id={titleId}
           className="font-display text-display-md text-foreground"
         />
         {description && (

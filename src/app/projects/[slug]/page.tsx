@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Globe } from "lucide-react";
@@ -8,6 +7,7 @@ import { GithubIcon } from "@/components/icons";
 import { MdxContent } from "@/components/mdx-content";
 import { Reveal } from "@/components/motion/reveal";
 import { BlurReveal } from "@/components/motion/blur-reveal";
+import { ProjectMedia } from "@/components/project-media";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -30,14 +30,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return {};
 
   return {
-    // Tab stays the site name; the share card still names the project.
-    title: { absolute: site.name },
+    // Tab stays the document title; the share card still names the project.
+    title: { absolute: site.documentTitle },
     description: project.summary,
     openGraph: {
       title: project.title,
       description: project.summary,
       type: "article",
-      images: project.cover ? [{ url: project.cover.src }] : undefined,
+      images:
+        project.cover && !project.cover.pending
+          ? [{ url: project.cover.src }]
+          : undefined,
     },
   };
 }
@@ -201,18 +204,17 @@ export default async function ProjectPage({ params }: PageProps) {
         <Reveal delay={0.1} className="mt-14 md:mt-20">
           <figure>
             <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-border bg-surface">
-              <Image
-                src={project.cover.src}
-                alt={project.cover.alt}
-                fill
+              <ProjectMedia
+                image={project.cover}
                 priority
                 sizes="(min-width: 1280px) 1200px, 100vw"
-                className="object-cover object-top"
               />
             </div>
-            {project.cover.caption && (
+            {(project.cover.caption || project.cover.pending) && (
               <figcaption className="mt-3 text-center text-xs text-subtle">
-                {project.cover.caption}
+                {project.cover.pending
+                  ? (project.cover.todo ?? project.cover.caption)
+                  : project.cover.caption}
               </figcaption>
             )}
           </figure>
@@ -230,7 +232,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
       {/* ── Gallery ── */}
       {project.gallery.length > 0 && (
-        <section className="mt-20 md:mt-28" aria-label="Screenshots">
+        <section className="mt-20 md:mt-28" aria-label="Project media">
           <p className="eyebrow mb-6">Gallery</p>
           <div className="grid gap-5 md:grid-cols-2">
             {project.gallery.map((image, i) => (
@@ -246,17 +248,14 @@ export default async function ProjectPage({ params }: PageProps) {
                       i % 3 === 0 ? "aspect-[16/9]" : "aspect-[4/3]",
                     )}
                   >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
+                    <ProjectMedia
+                      image={image}
                       sizes="(min-width: 768px) 50vw, 100vw"
-                      className="object-cover object-top"
                     />
                   </div>
-                  {image.caption && (
+                  {(image.caption || image.pending) && (
                     <figcaption className="mt-2.5 text-xs text-subtle">
-                      {image.caption}
+                      {image.pending ? (image.todo ?? image.caption) : image.caption}
                     </figcaption>
                   )}
                 </figure>

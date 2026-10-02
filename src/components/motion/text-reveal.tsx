@@ -1,48 +1,48 @@
 "use client";
 
-import { motion } from "motion/react";
-
-import { useMotionScale } from "@/components/motion/use-motion-scale";
 import { cn } from "@/lib/utils";
 
 /**
  * Headline animation: each word clips up from behind a mask.
  *
- * The full string stays in the DOM as a visually-hidden node so screen
- * readers and crawlers read one sentence, not a pile of word fragments.
+ * Resting styles leave every word in its final place. Motion is a CSS
+ * progressive enhancement — nothing ships with an off-screen transform in
+ * the HTML, so crawlers and no-JS readers see the finished heading.
+ *
+ * Accessible name lives on `aria-label`; animated spans are aria-hidden so
+ * screen readers announce the heading once.
  */
 export function TextReveal({
   text,
   className,
   delay = 0,
   as: Tag = "h1",
+  id,
 }: {
   text: string;
   className?: string;
   delay?: number;
   as?: "h1" | "h2" | "p";
+  id?: string;
 }) {
-  const scale = useMotionScale();
   const words = text.split(" ");
 
   return (
-    <Tag className={className}>
-      <span className="sr-only">{text}</span>
+    <Tag id={id} aria-label={text} className={className}>
       <span aria-hidden className="inline-flex flex-wrap">
         {words.map((word, i) => (
           <span key={`${word}-${i}`} className="overflow-hidden py-[0.06em] pr-[0.26em]">
-            <motion.span
-              className="inline-block will-change-transform"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: 0.85 * scale,
-                delay: (delay + i * 0.06) * scale,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+            <span
+              className="reveal-word inline-block"
+              style={
+                {
+                  "--word-index": i,
+                  "--word-base-delay": `${delay}s`,
+                } as React.CSSProperties
+              }
             >
               {word}
-            </motion.span>
+            </span>
           </span>
         ))}
       </span>
@@ -55,39 +55,29 @@ export function TextRevealOnScroll({
   text,
   className,
   as: Tag = "h2",
+  id,
 }: {
   text: string;
   className?: string;
   as?: "h1" | "h2" | "p";
+  id?: string;
 }) {
-  const scale = useMotionScale();
   const words = text.split(" ");
 
   return (
-    <Tag className={cn(className)}>
-      <span className="sr-only">{text}</span>
-      <motion.span
-        aria-hidden
-        className="inline-flex flex-wrap"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 * scale } } }}
-      >
+    <Tag id={id} aria-label={text} className={cn(className)}>
+      <span aria-hidden className="inline-flex flex-wrap">
         {words.map((word, i) => (
           <span key={`${word}-${i}`} className="overflow-hidden py-[0.06em] pr-[0.26em]">
-            <motion.span
-              className="inline-block will-change-transform"
-              variants={{
-                hidden: { y: "110%" },
-                show: { y: 0, transition: { duration: 0.8 * scale, ease: [0.16, 1, 0.3, 1] } },
-              }}
+            <span
+              className="reveal-word-scroll inline-block"
+              style={{ "--word-index": i } as React.CSSProperties}
             >
               {word}
-            </motion.span>
+            </span>
           </span>
         ))}
-      </motion.span>
+      </span>
     </Tag>
   );
 }
