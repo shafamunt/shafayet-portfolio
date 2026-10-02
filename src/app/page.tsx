@@ -20,8 +20,11 @@ export default function HomePage() {
   const all = getAllProjects();
   const featured = getFeaturedProjects();
   // Anything not in the showcase falls through to the bento grid, so every
-  // project appears exactly once on this page.
-  const rest = all.filter((p) => !featured.some((f) => f.slug === p.slug));
+  // project appears exactly once on this page. Lower `order` sorts first so
+  // stronger hardware work can sit above archived MATLAB exercises.
+  const rest = all
+    .filter((p) => !featured.some((f) => f.slug === p.slug))
+    .sort((a, b) => a.order - b.order);
   const tech = getAllTech().slice(0, 16);
 
   return (

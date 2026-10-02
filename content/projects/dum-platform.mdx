@@ -9,7 +9,7 @@ year: 2026
 role: Software engineering intern — full-stack
 status: live
 featured: true
-order: 10
+order: 20
 size: wide
 tech:
   - TypeScript
@@ -47,13 +47,43 @@ gallery:
 draft: false
 ---
 
+## Privacy
+
+This platform holds real student data. There is **no public demo** and no
+production URL on this site. Screenshots, when added, must be redacted — no
+student names, IDs, grades, or faces.
+
 ## The problem
 
 A school needed more than spreadsheets for grades, records, and administration.
 Access had to be role-aware — admins, teachers, and others should never see the
 same rows — and Monday morning could not be when the system broke.
 
-## Approach
+TODO — name the five access levels exactly (currently described as five tiers;
+prose still says admins, teachers, and others).
+
+## Architecture
+
+```
+┌─────────────────────────────────────────┐
+│  React (Vite) — 5 access levels         │
+│  role-differentiated UI from one codebase│
+└──────────────────┬──────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────┐
+│  Edge Functions                         │
+│  authentication + privileged operations │
+└──────────────────┬──────────────────────┘
+                   │
+                   ▼
+┌─────────────────────────────────────────┐
+│  PostgreSQL · 30+ tables                │
+│  Row-Level Security at the row layer    │
+└─────────────────────────────────────────┘
+
+        GitHub Actions — 75+ tests gate every deploy
+```
 
 **Schema first.** A normalized PostgreSQL model of 30+ tables, with Row-Level
 Security enforcing who can read or write what at the database layer rather than
@@ -68,6 +98,6 @@ anything ships. A grading system that fails quietly is not an abstract risk.
 
 ## Outcome
 
-The platform is live in production. The interesting lesson is that scoping
-access and tests as seriously as features is what made it trustworthy enough
-for a real school to depend on.
+The platform is live in production for 70+ users. The interesting lesson is that
+scoping access and tests as seriously as features is what made it trustworthy
+enough for a real school to depend on.
