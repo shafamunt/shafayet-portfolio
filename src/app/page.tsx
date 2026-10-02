@@ -32,6 +32,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Projects"
           title="Selected builds."
+          titleId="work-heading"
           description="Firmware, platforms, and boards — the work I'd rather talk about in an interview."
           action={{ label: "All projects", href: "/projects" }}
         />
@@ -41,7 +42,7 @@ export default function HomePage() {
 
       {rest.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
-          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." />
+          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." titleId="more-heading" />
           <BentoGrid>
             {rest.map((project, i) => (
               <BentoItem key={project.slug} size={project.size} index={i}>
@@ -56,6 +57,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Experience"
           title="Roles & teams."
+          titleId="experience-heading"
           description="An internship, a help desk I help run, and MRacing FSAE with Level 2 High Voltage (600V) certification — full detail on the experience page."
           action={{ label: "Full experience", href: "/experience" }}
         />
@@ -64,7 +66,7 @@ export default function HomePage() {
 
       {tech.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="stack-heading">
-          <SectionHeading eyebrow="Stack" title="Tools I reach for." />
+          <SectionHeading eyebrow="Stack" title="Tools I reach for." titleId="stack-heading" />
           <Reveal>
             <ul className="flex flex-wrap gap-2.5">
               {tech.map((item) => (

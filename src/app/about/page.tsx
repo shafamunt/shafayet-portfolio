@@ -88,24 +88,25 @@ export default function AboutPage() {
 
       {/* ── Photos ── */}
       {(photos.length > 0 || process.env.NODE_ENV === "development") && (
-        <section className="mt-24 md:mt-32" aria-labelledby="photos">
-          <SectionHeading eyebrow="In the wild" title="Some photos." />
+        <section className="mt-24 md:mt-32" aria-labelledby="photos-heading">
+          <SectionHeading eyebrow="In the wild" title="Some photos." titleId="photos-heading" />
           <PhotoSlideshow photos={photos} />
         </section>
       )}
 
       {/* ── Beyond code ── */}
-      <section className="mt-24 md:mt-32" aria-labelledby="beyond">
+      <section className="mt-24 md:mt-32" aria-labelledby="beyond-heading">
         <SectionHeading
           eyebrow="Beyond code"
           title="The rest of it."
+          titleId="beyond-heading"
           description="Everything a resume has no room for."
         />
 
         <div className="grid gap-6 lg:grid-cols-12">
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:col-span-7 lg:content-start">
-            {interests.map((interest) => (
-              <StaggerItem key={interest.label}>
+            {interests.map((interest, i) => (
+              <StaggerItem key={interest.label} index={i}>
                 <div className="h-full rounded-card border border-border bg-surface/50 p-6 backdrop-blur-sm transition-colors hover:border-border-strong">
                   <span aria-hidden className="text-3xl">
                     {interest.emoji}
@@ -125,19 +126,25 @@ export default function AboutPage() {
 
       {/* ── Watches ── */}
       {watches.length > 0 && (
-        <section className="mt-24 md:mt-32" aria-labelledby="watches">
-          <SectionHeading eyebrow="On screen" title="Watches." description={watchesIntro} />
+        <section className="mt-24 md:mt-32" aria-labelledby="watches-heading">
+          <SectionHeading
+            eyebrow="On screen"
+            title="Watches."
+            titleId="watches-heading"
+            description={watchesIntro}
+          />
           <WatchesGrid watches={watches} />
         </section>
       )}
 
       {/* ── Contact ── */}
-      <section className="mt-24 md:mt-32" aria-labelledby="contact">
+      <section className="mt-24 md:mt-32" aria-labelledby="contact-heading">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="Contact"
               title="Say hello."
+              titleId="contact-heading"
               description="Open to internships, contract work, and interesting problems. Goes straight to my inbox."
               className="mb-8"
             />

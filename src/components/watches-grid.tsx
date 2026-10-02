@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "motion/react";
 
-import { useMotionEnabled, useMotionScale } from "@/components/motion/use-motion-scale";
+import { useMotionEnabled } from "@/components/motion/use-motion-scale";
 import type { Watch } from "@/lib/about";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +32,7 @@ function PosterCard({ watch, index }: { watch: Watch; index: number }) {
   // Only gates the hover tilt, which lives in an event handler — it never
   // affects rendered markup, so it is safe to read here.
   const animate = useMotionEnabled();
-  const scale = useMotionScale();
+  const delay = Math.min(index, 8) * 0.05;
 
   function handleMove(event: React.MouseEvent<HTMLLIElement>) {
     if (!animate) return;
@@ -52,18 +51,15 @@ function PosterCard({ watch, index }: { watch: Watch; index: number }) {
   }
 
   return (
-    <motion.li
+    <li
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: 0.6 * scale,
-        delay: Math.min(index, 8) * 0.05 * scale,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="group [perspective:900px]"
+      className="reveal-on-scroll group [perspective:900px]"
+      style={
+        delay > 0
+          ? ({ "--reveal-delay": `${delay}s` } as React.CSSProperties)
+          : undefined
+      }
     >
       <div
         className={cn(
@@ -100,6 +96,6 @@ function PosterCard({ watch, index }: { watch: Watch; index: number }) {
         {KIND_LABEL[watch.kind]}
         {watch.year ? ` · ${watch.year}` : ""}
       </p>
-    </motion.li>
+    </li>
   );
 }

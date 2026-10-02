@@ -1,32 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 import { Magnetic } from "@/components/motion/magnetic";
 import { BlurCycle } from "@/components/motion/blur-cycle";
-import { useMotionScale } from "@/components/motion/use-motion-scale";
 import { StructCard } from "@/components/struct-card";
 import { buttonVariants } from "@/components/ui/button";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
-  const scale = useMotionScale();
-
-  // `initial` stays constant so SSR and hydration agree; only the timing
-  // responds to reduced motion. See `useMotionScale`.
-  const fadeUp = (delay: number) => ({
-    initial: { opacity: 0, y: 16 },
-    animate: { opacity: 1, y: 0 },
-    transition: {
-      duration: 0.8 * scale,
-      delay: delay * scale,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  });
-
   return (
     <section className="relative overflow-hidden">
       {/* Ambient accent wash behind the headline. */}
@@ -49,31 +33,40 @@ export function Hero() {
               by default, which lets a long headline push the column wider than
               the page instead of wrapping inside it. */}
           <div className="min-w-0 lg:col-span-7">
-            <motion.p {...fadeUp(0)} className="eyebrow mb-7 flex items-center gap-2">
+            <p
+              className="hero-enter eyebrow mb-7 flex items-center gap-2"
+              style={{ "--enter-delay": "0s" } as React.CSSProperties}
+            >
               <span className="relative flex size-1.5">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
               </span>
               Embedded · Michigan CE · {site.location}
-            </motion.p>
+            </p>
 
-            <motion.h1
-              {...fadeUp(0.08)}
-              // `break-words` is a backstop: at the smallest widths the longest
-              // headline phrase has no slack, and a word breaking mid-way is a
-              // better failure than one running off the side of the screen.
-              className="font-display text-display-lg font-semibold text-foreground [overflow-wrap:break-word]"
+            <h1
+              className="hero-enter font-display text-display-lg font-semibold text-foreground [overflow-wrap:break-word]"
+              style={{ "--enter-delay": "0.08s" } as React.CSSProperties}
             >
+              {/* `break-words` is a backstop: at the smallest widths the longest
+                  headline phrase has no slack, and a word breaking mid-way is a
+                  better failure than one running off the side of the screen. */}
               <span className="text-accent">{site.firstName}</span>
               <br />
               <BlurCycle phrases={site.headlinePhrases} className="text-foreground" />
-            </motion.h1>
+            </h1>
 
-            <motion.p {...fadeUp(0.22)} className="mt-8 max-w-xl text-lead text-muted">
+            <p
+              className="hero-enter mt-8 max-w-xl text-lead text-muted"
+              style={{ "--enter-delay": "0.22s" } as React.CSSProperties}
+            >
               {site.intro}
-            </motion.p>
+            </p>
 
-            <motion.div {...fadeUp(0.32)} className="mt-9 flex flex-wrap items-center gap-3">
+            <div
+              className="hero-enter mt-9 flex flex-wrap items-center gap-3"
+              style={{ "--enter-delay": "0.32s" } as React.CSSProperties}
+            >
               <Magnetic>
                 <Link href="/projects" className={cn(buttonVariants({ size: "lg" }))}>
                   See projects
@@ -90,11 +83,11 @@ export function Hero() {
                   Resume
                 </a>
               </Magnetic>
-            </motion.div>
+            </div>
 
-            <motion.ul
-              {...fadeUp(0.42)}
-              className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3"
+            <ul
+              className="hero-enter mt-12 flex flex-wrap items-center gap-x-6 gap-y-3"
+              style={{ "--enter-delay": "0.42s" } as React.CSSProperties}
             >
               {site.socials.map((social) => (
                 <li key={social.label}>
@@ -109,33 +102,27 @@ export function Hero() {
                   </a>
                 </li>
               ))}
-            </motion.ul>
+            </ul>
           </div>
 
           {/* ── Right: the C++ struct ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24, rotate: -1 }}
-            animate={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{
-              duration: 0.9 * scale,
-              delay: 0.25 * scale,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="lg:col-span-5"
+          <div
+            className="hero-enter-struct lg:col-span-5"
+            style={{ "--enter-delay": "0.25s" } as React.CSSProperties}
           >
             <StructCard />
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      <motion.div
-        {...fadeUp(0.6)}
+      <div
         aria-hidden
-        className="container-page hidden items-center gap-2 pb-10 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
+        className="hero-enter container-page hidden items-center gap-2 pb-10 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
+        style={{ "--enter-delay": "0.6s" } as React.CSSProperties}
       >
         <ArrowDown className="size-3.5 animate-bounce" />
         Scroll
-      </motion.div>
+      </div>
     </section>
   );
 }

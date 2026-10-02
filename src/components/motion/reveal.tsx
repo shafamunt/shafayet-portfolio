@@ -1,8 +1,3 @@
-"use client";
-
-import { motion, type Variants } from "motion/react";
-
-import { useMotionScale } from "@/components/motion/use-motion-scale";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
@@ -15,100 +10,78 @@ type RevealProps = {
   as?: "div" | "section" | "li" | "span" | "article";
 };
 
-const OFFSET = 28;
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 /**
- * Fade-and-rise on first scroll into view. Fires once.
+ * Fade-and-rise on first scroll into view.
  *
- * Reduced motion is handled by scaling the duration to zero rather than by
- * rendering different markup — see `useMotionScale`.
+ * Resting styles are fully visible. The motion is a CSS view-timeline
+ * progressive enhancement (see `.reveal-on-scroll` in globals.css) — no
+ * inline `opacity: 0`, so no-JS, link previews, and full-page captures
+ * always see the content.
  */
 export function Reveal({
   children,
   className,
   delay = 0,
   from = "bottom",
-  as = "div",
+  as: Tag = "div",
 }: RevealProps) {
-  const scale = useMotionScale();
-  const Component = motion[as];
-
-  const offset =
-    from === "bottom"
-      ? { y: OFFSET }
-      : from === "left"
-        ? { x: -OFFSET }
-        : from === "right"
-          ? { x: OFFSET }
-          : {};
-
   return (
-    <Component
-      className={className}
-      initial={{ opacity: 0, ...offset }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7 * scale, delay: delay * scale, ease: EASE }}
+    <Tag
+      className={cn(
+        "reveal-on-scroll",
+        from === "left" && "reveal-from-left",
+        from === "right" && "reveal-from-right",
+        from === "none" && "reveal-from-none",
+        className,
+      )}
+      style={
+        delay > 0
+          ? ({ "--reveal-delay": `${delay}s` } as React.CSSProperties)
+          : undefined
+      }
     >
       {children}
-    </Component>
+    </Tag>
   );
 }
-
-const staggerParent = (scale: number): Variants => ({
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08 * scale, delayChildren: 0.05 * scale },
-  },
-});
-
-const staggerChild = (scale: number): Variants => ({
-  hidden: { opacity: 0, y: OFFSET },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7 * scale, ease: EASE } },
-});
 
 /** Wrap a list; each `<StaggerItem>` inside animates in sequence. */
 export function Stagger({
   children,
   className,
-  as = "div",
+  as: Tag = "div",
 }: {
   children: React.ReactNode;
   className?: string;
   as?: "div" | "ul" | "section";
 }) {
-  const scale = useMotionScale();
-  const Component = motion[as];
-
-  return (
-    <Component
-      className={className}
-      variants={staggerParent(scale)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
-    >
-      {children}
-    </Component>
-  );
+  return <Tag className={cn("reveal-stagger", className)}>{children}</Tag>;
 }
 
 export function StaggerItem({
   children,
   className,
-  as = "div",
+  as: Tag = "div",
+  index = 0,
 }: {
   children: React.ReactNode;
   className?: string;
   as?: "div" | "li" | "article";
+  /** Caps at 5 so deep list items do not sit blank waiting on a long chain. */
+  index?: number;
 }) {
-  const scale = useMotionScale();
-  const Component = motion[as];
+  const delay = Math.min(index, 5) * 0.08;
 
   return (
-    <Component className={cn(className)} variants={staggerChild(scale)}>
+    <Tag
+      className={cn("reveal-on-scroll", className)}
+      style={
+        delay > 0
+          ? ({ "--reveal-delay": `${delay}s` } as React.CSSProperties)
+          : undefined
+      }
+    >
       {children}
-    </Component>
+    </Tag>
   );
 }

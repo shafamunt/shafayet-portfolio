@@ -33,6 +33,7 @@ export function ExperienceTimeline({
         return (
           <StaggerItem
             as="li"
+            index={i}
             key={`${job.company}-${job.start}`}
             className={cn("relative pl-8 md:pl-[calc(11rem+2rem)]", i > 0 && "mt-10 md:mt-12")}
           >
