@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, Globe } from "lucide-react";
 
 import { GithubIcon } from "@/components/icons";
 import { useMotionScale } from "@/components/motion/use-motion-scale";
+import { ProjectMedia } from "@/components/project-media";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import type { Project } from "@/lib/content";
@@ -37,6 +37,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
   if (projects.length === 0) return null;
 
   const project = projects[active];
+  const href = `/projects/${project.slug}`;
 
   function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
@@ -109,24 +110,26 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
             transition={{ duration: 0.35 * scale, ease: [0.16, 1, 0.3, 1] }}
             className="grid lg:grid-cols-2"
           >
-            <div className="relative aspect-[16/10] overflow-hidden bg-surface lg:aspect-auto lg:min-h-[26rem]">
+            <Link
+              href={href}
+              className="relative block aspect-[16/10] overflow-hidden bg-surface lg:aspect-auto lg:min-h-[26rem]"
+              aria-label={`${project.title} — case study`}
+            >
               {project.cover ? (
-                <Image
-                  src={project.cover.src}
-                  alt={project.cover.alt}
-                  fill
+                <ProjectMedia
+                  image={project.cover}
                   priority
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover object-top"
                 />
               ) : (
-                <div className="grid h-full place-items-center">
-                  <span className="font-display text-6xl text-subtle/50">
-                    {project.title.slice(0, 2)}
-                  </span>
+                <div className="flex h-full flex-col items-center justify-center gap-2 border border-dashed border-border-strong px-4 text-center">
+                  <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-accent">
+                    Media TODO
+                  </p>
+                  <p className="text-xs text-muted">Add a cover in frontmatter.</p>
                 </div>
               )}
-            </div>
+            </Link>
 
             <div className="flex flex-col justify-center gap-5 p-6 md:p-10">
               <div className="flex flex-wrap items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle">
@@ -144,7 +147,11 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                 )}
               </div>
 
-              <h3 className="font-display text-display-sm text-foreground">{project.title}</h3>
+              <h3 className="font-display text-display-sm text-foreground">
+                <Link href={href} className="transition-colors hover:text-accent">
+                  {project.title}
+                </Link>
+              </h3>
 
               <p className="text-[0.9375rem] leading-relaxed text-muted">{project.summary}</p>
 
@@ -170,10 +177,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
               )}
 
               <div className="flex flex-wrap gap-3 pt-1">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className={cn(buttonVariants({ variant: "accent" }))}
-                >
+                <Link href={href} className={cn(buttonVariants({ variant: "accent" }))}>
                   View project
                   <ArrowUpRight className="size-4" />
                 </Link>

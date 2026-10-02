@@ -13,7 +13,17 @@ export const imageSchema = z.object({
   src: z.string().min(1),
   alt: z.string().min(1, "alt text is required — it is read by screen readers"),
   caption: z.string().optional(),
+  /**
+   * Shown in the UI when the file at `src` is missing. Drop the real image
+   * at that path and the slot becomes the photo with no code change.
+   */
+  todo: z.string().optional(),
 });
+
+export type Image = z.infer<typeof imageSchema> & {
+  /** True when `public${src}` is not on disk yet — render a framed TODO slot. */
+  pending: boolean;
+};
 
 export const linkSchema = z.object({
   label: z.string(),
@@ -76,7 +86,13 @@ export const projectFrontmatterSchema = z.object({
   draft: z.boolean().default(false),
 });
 
-export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
+export type ProjectFrontmatter = Omit<
+  z.infer<typeof projectFrontmatterSchema>,
+  "cover" | "gallery"
+> & {
+  cover?: Image;
+  gallery: Image[];
+};
 
 export type Project = ProjectFrontmatter & {
   slug: string;
@@ -84,6 +100,5 @@ export type Project = ProjectFrontmatter & {
   body: string;
 };
 
-export type Image = z.infer<typeof imageSchema>;
 export type Metric = z.infer<typeof metricSchema>;
 export type CardSize = z.infer<typeof cardSizeSchema>;

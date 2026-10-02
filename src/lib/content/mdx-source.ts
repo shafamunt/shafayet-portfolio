@@ -4,7 +4,11 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-import { projectFrontmatterSchema, type Project } from "./schema";
+import {
+  projectFrontmatterSchema,
+  type Image,
+  type Project,
+} from "./schema";
 
 /**
  * Local MDX content source.
@@ -14,6 +18,31 @@ import { projectFrontmatterSchema, type Project } from "./schema";
  */
 
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
+const PUBLIC_DIR = path.join(process.cwd(), "public");
+
+/**
+ * Mark cover/gallery images pending when the file under `public/` is missing.
+ * Declaring a path + todo in frontmatter is enough to render a framed slot;
+ * adding the bytes later turns the slot into a photo with no code change.
+ */
+function resolveImage(image: {
+  src: string;
+  alt: string;
+  caption?: string;
+  todo?: string;
+}): Image {
+  const onDisk =
+    image.src.startsWith("/") &&
+    fs.existsSync(path.join(PUBLIC_DIR, image.src.replace(/^\//, "")));
+
+  return {
+    src: image.src,
+    alt: image.alt,
+    caption: image.caption,
+    todo: image.todo,
+    pending: !onDisk,
+  };
+}
 
 function readProjectFile(filename: string): Project {
   const slug = filename.replace(/\.mdx?$/, "");
@@ -29,7 +58,15 @@ function readProjectFile(filename: string): Project {
     throw new Error(`Invalid frontmatter in content/projects/${filename}:\n${issues}`);
   }
 
-  return { ...parsed.data, slug, body: content.trim() };
+  const { cover, gallery, ...rest } = parsed.data;
+
+  return {
+    ...rest,
+    cover: cover ? resolveImage(cover) : undefined,
+    gallery: gallery.map(resolveImage),
+    slug,
+    body: content.trim(),
+  };
 }
 
 export function loadProjects(): Project[] {
