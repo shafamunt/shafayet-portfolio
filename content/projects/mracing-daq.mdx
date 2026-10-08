@@ -50,14 +50,14 @@ Lap times only matter if the car can capture them reliably at the line and fold
 them into the rest of the telemetry stack — not as a stopwatch on the wall. A
 beam break has to become a timestamp the team can trust later.
 
-## Signal path (what exists vs what is still open)
+## Signal path
 
 ```
-photosensor  →  [conditioning — TODO]  →  [MCU — TODO]
-     beam break at start/finish              edge → timestamp — TODO how
-                                                    │
-                                                    ▼
-                                         telemetry chain — TODO how published
+photosensor  →  conditioning  →  MCU
+ beam break                         edge → timestamp
+ at start/finish                          │
+                                          ▼
+                                   telemetry chain
 ```
 
 **What is real today.** A breadboard prototype with photosensors detects the
@@ -66,20 +66,10 @@ against the car's harness under weekly CAN bus and embedded control design
 reviews. I hold Level 2 High Voltage (600V) certification for safe maintenance
 around the car's 600V system.
 
-**What is not claimed here.** This page does not invent part numbers, message
-IDs, or a finished CAN node. Weekly reviews on CAN and embedded control are
-exactly that — reviews — until firmware and a capture say otherwise.
-
-- TODO — signal conditioning between the photosensor and the digital input
-- TODO — MCU / board that owns the edge and the timestamp
-- TODO — how the timestamp is published onto the team's telemetry chain
-- TODO — private repo or team-IP note if/when source can be linked
-
-## What broke (debugging)
-
-TODO — the failure that actually bit me (false triggers, missed edges, harness
-noise, timing skew, …) and how I found it. Leave blank until I write the real
-story; do not invent a debounce anecdote.
+**Still open.** Conditioning between the photosensor and the digital input, the
+board that owns the edge and the timestamp, and how that timestamp is published
+onto the team's telemetry chain. This page does not list part numbers, message
+IDs, or a finished CAN node. Source stays off the site while it is team IP.
 
 ## Status
 
