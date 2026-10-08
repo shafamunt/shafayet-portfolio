@@ -12,6 +12,7 @@
     "spotify:auth": "node scripts/spotify-auth.ts",
     "photos:optimize": "node scripts/optimize-photos.ts",
     "icons:build": "node scripts/make-icons.ts",
+    "covers:build": "node scripts/generate-covers.mjs",
     "deploy:pages": "node scripts/deploy-pages.mjs"
   },
   "dependencies": {
