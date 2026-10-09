@@ -48,9 +48,14 @@ still need to drop in** — replace the file at the path; no code change.
 
 - MRacing cover + gallery team cars / pit / group from the public team site
 - MRacing signal-path diagram (`signal-path.png`)
+- Homepage full-bleed hero video from the MRacing site (`public/videos/mracing-hero.mp4`)
 - Deep MDX for MRacing, ENGR 100, FPGA, LED matrix, heatmap, MESH, card engine
 - Hero role stack + “open to” line
 - Project pages: gallery above the write-up for visual-first reading
+
+| Done? | Optional upgrade |
+| --- | --- |
+| ☐ | Replace `public/videos/mracing-hero.mp4` with your own track/shop clip (keep muted, ~10 MB) |
 
 ## How to add a photo
 

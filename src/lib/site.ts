@@ -52,6 +52,17 @@ export const site = {
   openTo: "Embedded & systems internships · nationwide",
 
   /**
+   * Full-bleed homepage hero video (muted, looped) — same idea as the
+   * MRacing team site. Swap the files under `public/videos/` to update.
+   */
+  heroVideo: {
+    src: "/videos/mracing-hero.mp4",
+    poster: "/videos/mracing-hero-poster.jpg",
+    credit: "Footage via MRacing FSAE",
+    creditHref: "https://www.mracing.engin.umich.edu/",
+  },
+
+  /**
    * Cycled through by the decode effect under the hero heading.
    * Each one has to read correctly after "I'm Shafayet,".
    */
