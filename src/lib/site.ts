@@ -40,6 +40,28 @@ export const site = {
   intro:
     "I'm Shafayet — building firmware on a Formula SAE car, platforms schools actually use, and boards I route and solder myself. Looking for embedded and systems roles.",
 
+  /** Compact role stack under the hero intro — recruiter scan in one line. */
+  roleStack: [
+    "SE Intern",
+    "MRacing DAQ",
+    "ITS Shift Lead",
+    "MESH",
+  ],
+
+  /** Hiring target shown near CTAs. Update when the season changes. */
+  openTo: "Embedded & systems internships · nationwide",
+
+  /**
+   * Full-bleed homepage hero video (muted, looped) — same idea as the
+   * MRacing team site. Swap the files under `public/videos/` to update.
+   */
+  heroVideo: {
+    src: "/videos/mracing-hero.mp4",
+    poster: "/videos/mracing-hero-poster.jpg",
+    credit: "Footage via MRacing FSAE",
+    creditHref: "https://www.mracing.engin.umich.edu/",
+  },
+
   /**
    * Cycled through by the decode effect under the hero heading.
    * Each one has to read correctly after "I'm Shafayet,".
@@ -75,7 +97,7 @@ export const site = {
   bio: [
     "I'm a Computer Engineering student at the University of Michigan. I like work that sits where software meets silicon — firmware on a Formula SAE car, a grading platform 70+ people log into every week, and boards I route and solder myself.",
     "Right now I'm a Software Engineering Intern at Darul Uloom Michigan, shipping a role-based educational platform in production; a Computer Consultant II and shift lead at Michigan ITS; and on MRacing FSAE building lap-timing DAQ with a Level 2 High Voltage (600V) certification. Out of MESH I'm sharpening PCB layout and SMT assembly skills that feed the racing work.",
-    "Based in Ann Arbor, open to embedded and systems internships nationally. Reach me at shafam@umich.edu.",
+    "Based in Ann Arbor, open to embedded and systems internships nationally. Reach me at shafam@umich.edu — or skim the MRacing and course case studies for the long version of how I build.",
   ],
 
   // ── URLs ────────────────────────────────────────────────────────────────

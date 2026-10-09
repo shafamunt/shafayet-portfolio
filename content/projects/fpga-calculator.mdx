@@ -1,0 +1,82 @@
+---
+title: Sequential Four-Function Calculator
+summary: EECS 270-style digital logic — a four-function sequential calculator on FPGA in Verilog with RTL datapath/control split.
+description: >-
+  Course digital-logic build: a sequential calculator on an FPGA development
+  board using Verilog, a controller FSM, and an RTL datapath that handles
+  signed arithmetic through switches, pushbuttons, and seven-segment displays.
+year: 2026
+role: Course project — digital logic (EECS 270)
+status: in-progress
+featured: true
+order: 35
+size: wide
+tech:
+  - Verilog
+  - FPGA
+  - ModelSim
+  - FSM
+  - RTL
+metrics:
+  - label: Ops
+    value: "+ − × ÷"
+  - label: Style
+    value: RTL / FSM
+highlights:
+  - Strict RTL datapath / control decomposition in Verilog
+  - Controller FSM sequencing load, operate, and display states
+  - Signed integer path with overflow handling on board I/O
+cover:
+  src: /images/projects/fpga-calculator/cover.png
+  alt: FPGA development board running a four-function calculator on seven-segment displays
+  caption: TODO — photo or GIF of the board computing an example (e.g. 3 + (−4) = −1).
+  todo: TODO — FPGA board photo/GIF showing a live calculation
+gallery:
+  - src: /images/projects/fpga-calculator/datapath.png
+    alt: Block diagram of the calculator datapath with adder, multiplier, and divider paths
+    caption: TODO — datapath figure (export from notes or draw cleanly).
+    todo: TODO — four-function calculator datapath diagram
+  - src: /images/projects/fpga-calculator/io-map.png
+    alt: Mapping of board switches and keys to calculator operations and clear
+    caption: TODO — switch / key I/O map figure.
+    todo: TODO — KEY/SW I/O map figure
+draft: false
+---
+
+## Skills
+
+`Verilog` · `FPGA` · `ModelSim` · `FSM` · `RTL`
+
+## The problem
+
+A calculator on an FPGA is not a software `switch` statement — it is a
+synchronous machine. Operands load from physical switches, operations fire from
+pushbuttons, and results have to survive signed arithmetic, sequencing, and
+overflow without glitching the seven-segment displays.
+
+## Approach
+
+**RTL split.** Datapath owns registers, muxes, and the arithmetic units.
+Control owns a finite-state machine that sequences load → operate → display
+(and clear). Keeping those boundaries strict made ModelSim waves readable.
+
+**Signed path.** Integers move as two's-complement values through
+adder/subtractor logic, with multiply and divide as sequenced datapath
+operations rather than one combinatorial blob.
+
+**Board I/O.** Switches feed operands and mode bits; keys map to
+`+ − × ÷`, `=`, and clear depending on a mode switch — the same physical
+buttons, two roles, so the FSM has to know which map is live.
+
+## Demo (when media lands)
+
+The cover slot is reserved for a board photo or GIF of a real operation
+(classic check: `3 + (−4) = −1` on the hex displays). Until that file exists,
+the case study stays text-first with TODO frames in the gallery.
+
+## Status
+
+Coursework track for digital logic / EECS 270. Swap in your real lab photos,
+datapath figure, and any ModelSim waveform you are allowed to share — then
+tighten the arithmetic details (bit width, Booth vs array multiply, etc.) to
+match what you actually submitted.

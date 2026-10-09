@@ -112,7 +112,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
           >
             <Link
               href={href}
-              className="relative block aspect-[16/10] overflow-hidden bg-surface lg:aspect-auto lg:min-h-[26rem]"
+              className="relative block aspect-[16/10] overflow-hidden bg-surface lg:aspect-auto lg:min-h-[32rem]"
               aria-label={`${project.title} — case study`}
             >
               {project.cover ? (

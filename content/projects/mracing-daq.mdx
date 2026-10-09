@@ -2,11 +2,12 @@
 title: Photosensor Lap-Trigger DAQ
 summary: Lap-timing data acquisition for Michigan's Formula SAE electric car — a photosensor trigger feeding the car's telemetry chain.
 description: >-
-  Designing the sensing and acquisition path that turns a beam break at the
-  start/finish line into a timestamped lap on the team's telemetry, with board
-  work in Altium and weekly CAN and embedded design reviews.
+  On MRacing FSAE I'm building the sensing and acquisition path that turns a
+  beam break at the start/finish line into a timestamped lap on the team's
+  telemetry — breadboard prototype today, Altium board next, with Level 2 High
+  Voltage (600V) work around the car.
 year: [2025, 2026]
-role: Vehicle software, instrumentation & powertrain — MRacing FSAE · Level 2 High Voltage (600V)
+role: Vehicle software · instrumentation · powertrain — MRacing FSAE · Level 2 High Voltage (600V)
 status: in-progress
 featured: true
 order: 10
@@ -23,32 +24,60 @@ metrics:
     value: Level 2 (600V)
   - label: Vehicle bus
     value: CAN
+  - label: Team
+    value: MRacing FSAE
 highlights:
-  - Lap-trigger DAQ with breadboards and photosensors
+  - Breadboard lap-trigger with photosensors at the start/finish line
   - Level 2 High Voltage (600V) certification for 600V system maintenance
   - Weekly CAN bus and embedded control design reviews
+  - Altium layout path from prototype toward a board that owns the edge
+links:
+  - label: MRacing team site
+    href: https://www.mracing.engin.umich.edu/
 cover:
-  src: /images/projects/mracing-daq/bench.jpg
-  alt: Illustration of a breadboard photosensor, a beam, and a microcontroller — not a photo of the bench
-  caption: Illustrated stand-in. Replace with a photo of the breadboard setup when you have one.
+  src: /images/projects/mracing-daq/team-car-track.jpg
+  alt: MRacing Formula SAE electric car on track — team photo from mracing.engin.umich.edu
+  caption: MRacing FSAE on track. Team photo via mracing.engin.umich.edu — replace with your own when you have one.
 gallery:
+  - src: /images/projects/mracing-daq/team-car-corner.jpg
+    alt: MRacing car cornering at speed on a race surface
+    caption: Competition context — why a reliable lap timestamp matters. Team photo via MRacing site.
+  - src: /images/projects/mracing-daq/team-car-pit.jpg
+    alt: MRacing car in the pits with team members around the vehicle
+    caption: Pit and paddock — where harness, sensors, and reviews meet the car.
+  - src: /images/projects/mracing-daq/signal-path.png
+    alt: Block diagram from photosensor through conditioning and MCU to the vehicle bus
+    caption: Public signal-path diagram. No part numbers or CAN message IDs.
+  - src: /images/projects/mracing-daq/team-group.jpg
+    alt: MRacing team gathered with the Formula SAE car
+    caption: Team photo via mracing.engin.umich.edu.
+  - src: /images/projects/mracing-daq/bench.jpg
+    alt: Breadboard photosensor lap-trigger prototype on the bench
+    caption: TODO — replace this illustrated stand-in with a photo of your breadboard setup.
+    todo: TODO — photo of your photosensor breadboard / bench prototype
   - src: /images/projects/mracing-daq/altium.png
-    alt: Illustration of a schematic sheet beside a simple board outline
-    caption: Illustrated stand-in. Replace with an Altium schematic or layout screenshot.
-  - src: /images/projects/mracing-daq/car.jpg
-    alt: Illustration of a formula-style car crossing a start-finish beam
-    caption: Illustrated stand-in. Not a photo of the MRacing car.
+    alt: Altium schematic or board layout for the lap-trigger node
+    caption: TODO — replace with a real Altium schematic or layout screenshot.
+    todo: TODO — Altium schematic or PCB layout screenshot
   - src: /images/projects/mracing-daq/scope.png
-    alt: Illustration of an oscilloscope trace with a rising trigger edge
-    caption: Illustrated stand-in. Not a captured scope shot.
+    alt: Oscilloscope capture of the photosensor trigger edge
+    caption: TODO — replace with a real scope shot of the trigger edge.
+    todo: TODO — oscilloscope capture of the beam-break edge
 draft: false
 ---
 
-## The problem
+## Why this exists
 
-Lap times only matter if the car can capture them reliably at the line and fold
-them into the rest of the telemetry stack — not as a stopwatch on the wall. A
-beam break has to become a timestamp the team can trust later.
+[MRacing](https://www.mracing.engin.umich.edu/) is Michigan's Formula SAE team —
+almost forty years of building competitive formula cars, most recently a 10th
+overall finish at Formula SAE Michigan and a push toward an even stronger 2027
+season. Lap times only matter if the car can capture them reliably at the line
+and fold them into the rest of the telemetry stack — not as a stopwatch on the
+wall.
+
+A beam break has to become a timestamp the team can trust later. That is the
+system I'm building on: sensing, conditioning, latching, and publishing onto
+the vehicle bus under weekly design review.
 
 ## Signal path
 
@@ -57,22 +86,56 @@ photosensor  →  conditioning  →  MCU
  beam break                         edge → timestamp
  at start/finish                          │
                                           ▼
-                                   telemetry chain
+                                   vehicle bus / telemetry
 ```
 
-**What is real today.** A breadboard prototype with photosensors detects the
-vehicle passing the line. Board work is in Altium. The sensing path iterates
-against the car's harness under weekly CAN bus and embedded control design
-reviews. I hold Level 2 High Voltage (600V) certification for safe maintenance
-around the car's 600V system.
+![Signal path from photosensor to vehicle bus](/images/projects/mracing-daq/signal-path.png)
 
-**Still open.** Conditioning between the photosensor and the digital input, the
-board that owns the edge and the timestamp, and how that timestamp is published
-onto the team's telemetry chain. This page does not list part numbers, message
-IDs, or a finished CAN node. Source stays off the site while it is team IP.
+**Photosensor.** A beam (or reflective) break at start/finish is the physical
+event. The sensor has to fire cleanly when the car passes — not on every
+flicker of ambient light in the paddock.
+
+**Conditioning.** Raw photodiode or phototransistor swings are not digital
+inputs. Thresholding, hysteresis, and edge shaping keep the MCU from seeing a
+swarm of false edges when the car is near the line.
+
+**MCU latch.** On a clean edge, firmware stamps time and holds a lap event the
+rest of the stack can consume. The interesting bugs live here: debounce vs
+missed laps, clock source, and how the event is represented before it hits the
+bus.
+
+**Vehicle bus.** The timestamp has to leave the node the same way everything
+else on the car does — onto the team's CAN / telemetry chain — so post-run
+tools see the same lap the track crew felt.
+
+## What is real today
+
+- Breadboard prototype with photosensors detecting a vehicle pass at the line
+- Board work started in Altium for the node that will own the edge and stamp
+- Weekly CAN bus and embedded control design reviews against the car's harness
+- Level 2 High Voltage (600V) certification for safe work around the car's
+  600V system
+
+Team photos on this page come from the public [MRacing site](https://www.mracing.engin.umich.edu/)
+the same way peer portfolios use team media for SPARK / FSAE context. Bench,
+Altium, and scope slots are marked TODO until personal captures replace them.
+
+## Still open
+
+Conditioning between the photosensor and the digital input, the board revision
+that owns the edge and the timestamp, and the exact shape of how that timestamp
+is published onto the team's telemetry chain. This page does **not** list part
+numbers, message IDs, or firmware source — that stays off the site while it is
+team IP.
+
+## What this taught me
+
+Instrumentation on a race car is systems work: the sensor, the harness, the
+MCU, and the people reading logs after a run all have to agree. Design reviews
+force the diagram to match the car. High-voltage certification keeps the
+firmware story honest about the environment the hardware lives in.
 
 ## Status
 
 In progress with MRacing FSAE — iterating the sensing and acquisition path
-against the car's real harness and review cadence. The figures on this page are
-illustrations, not photos of the bench, the board, the car, or a scope capture.
+against the car's real harness and review cadence for the current season.

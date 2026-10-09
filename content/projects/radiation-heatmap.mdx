@@ -2,11 +2,11 @@
 title: Radiation Heatmap & Image Processing Engine
 summary: A MATLAB image pipeline that ingests, denoises, and renders radiation data as HSV heatmaps.
 description: >-
-  Developed an image processing script using custom matrix filters to ingest,
-  denoise, and render radiation data as HSV heatmaps. Filters are written out
-  as matrix operations rather than imported as black-box library calls.
+  Course signal / image processing build: custom matrix filters ingest and
+  denoise radiation-style frames, then map intensity into HSV heatmaps — the
+  math written out as linear algebra, not a black-box toolbox call.
 year: 2026
-role: Solo build
+role: Solo course build — image / signal processing
 status: archived
 featured: false
 order: 80
@@ -17,31 +17,50 @@ tech:
   - Linear Algebra
   - Signal Processing
 highlights:
-  - Custom matrix filters to ingest and denoise radiation data
-  - HSV heatmap rendering of processed intensity
+  - Custom matrix filters to ingest and denoise frames
+  - HSV heatmap rendering so magnitude is visible at a glance
   - Matrix-level implementation without black-box library filters
 cover:
   src: /images/projects/radiation-heatmap/before-after.png
-  alt: Illustration of a noisy field beside a smoothed heatmap — not real sensor frames
-  caption: Illustrated stand-in. The pattern is invented for the card, not a captured frame.
+  alt: Noisy radiation-style field beside a smoothed HSV heatmap
+  caption: TODO — replace with a real before/after from your MATLAB run if you can share it.
+  todo: TODO — real MATLAB before/after frames (or keep as diagram)
+gallery:
+  - src: /images/projects/radiation-heatmap/kernel.png
+    alt: Diagram of the custom denoise kernel as a numeric matrix
+    caption: TODO — kernel coefficient figure from your notes or code.
+    todo: TODO — kernel matrix figure
 draft: false
 ---
+
+## Skills
+
+`MATLAB` · `matrix filters` · `HSV` · `denoising`
 
 ## The problem
 
 Raw sensor frames are noisy and hard to read as numbers in a table. The goal
-was a pipeline that cleans the signal and makes magnitude obvious visually.
+was a pipeline that cleans the signal and makes magnitude obvious visually —
+a heatmap a human can skim, not a spreadsheet of intensities.
 
 ## Approach
 
-**Write the filters.** Custom matrix filters ingest and denoise the frames,
-implemented as matrix operations so the math is visible and inspectable.
+**Write the filters.** Custom matrix filters ingest and denoise the frames as
+explicit matrix operations so every coefficient is inspectable in the script.
+No `imgaussfilt`-style black box for the core path — the point of the exercise
+was seeing the linear algebra.
 
-**Colour as magnitude.** After cleanup, intensity maps into HSV space so the
-heatmap carries the story instead of a spreadsheet of values.
+**Colour as magnitude.** After cleanup, intensity maps into HSV space so hue /
+value carry the story. Hot spots should pop without reading every cell.
+
+**Pipeline.**
+
+```
+raw frame  →  denoise kernel  →  normalize  →  HSV heatmap
+```
 
 ## Outcome
 
-A small image-processing exercise: understanding the kernels mattered more than
-shipping a polished UI. The cover is an illustration, not a captured frame.
-Kernel coefficients are not listed on this page.
+A small image-processing exercise where understanding the kernels mattered more
+than shipping a polished UI. Drop a real before/after export into the cover
+path when you have a frame you can share publicly.

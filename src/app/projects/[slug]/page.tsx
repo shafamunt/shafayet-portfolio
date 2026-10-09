@@ -203,7 +203,7 @@ export default async function ProjectPage({ params }: PageProps) {
       {project.cover && (
         <Reveal delay={0.1} className="mt-14 md:mt-20">
           <figure>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-border bg-surface">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-border bg-surface md:aspect-[2/1]">
               <ProjectMedia
                 image={project.cover}
                 priority
@@ -221,18 +221,9 @@ export default async function ProjectPage({ params }: PageProps) {
         </Reveal>
       )}
 
-      {/* ── Case study body ── */}
-      {project.body && (
-        <div className="mt-16 md:mt-24">
-          <div className="mx-auto max-w-[46rem]">
-            <MdxContent source={project.body} />
-          </div>
-        </div>
-      )}
-
-      {/* ── Gallery ── */}
+      {/* Gallery sits above the write-up so case studies read visual-first. */}
       {project.gallery.length > 0 && (
-        <section className="mt-20 md:mt-28" aria-label="Project media">
+        <section className="mt-10 md:mt-14" aria-label="Project media">
           <p className="eyebrow mb-6">Gallery</p>
           <div className="grid gap-5 md:grid-cols-2">
             {project.gallery.map((image, i) => (
@@ -263,6 +254,15 @@ export default async function ProjectPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+      )}
+
+      {/* ── Case study body ── */}
+      {project.body && (
+        <div className="mt-16 md:mt-24">
+          <div className="mx-auto max-w-[46rem]">
+            <MdxContent source={project.body} />
+          </div>
+        </div>
       )}
 
       {/* ── Prev / next ── */}
