@@ -18,9 +18,9 @@ import { cn } from "@/lib/utils";
  * name above or the intro below. Leading on the cycling line is looser than
  * the display-lg default (0.98) so motion stays inside the clip.
  *
- * First paint (and reduced motion) never starts from opacity 0: `hasCycled`
- * stays false until the first phrase change, so Motion does not serialize a
- * blank initial style into the HTML.
+ * First paint never starts from opacity 0: `hasCycled` stays false until the
+ * first phrase change, so Motion does not serialize a blank initial style
+ * into the HTML.
  */
 
 const ENTER = 0.8;
@@ -45,9 +45,6 @@ export function BlurCycle({
   const words = (phrases[index] ?? "").split(" ");
 
   useEffect(() => {
-    // Cycling text is itself motion — hold on the first phrase when the
-    // visitor has asked for less of it. This is behaviour, not markup, and
-    // the first render is identical either way, so hydration is unaffected.
     if (!animate || phrases.length < 2) return;
 
     const enterMs = (ENTER + words.length * STAGGER) * 1000;

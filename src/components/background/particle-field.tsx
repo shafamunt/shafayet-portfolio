@@ -10,9 +10,7 @@ import { useEffect, useRef } from "react";
  * back to zero — so the field parts around the pointer and settles again
  * rather than permanently deforming.
  *
- * Costs nothing when it should not run: disabled entirely under
- * `prefers-reduced-motion`, paused when the tab is hidden, and the particle
- * count scales with viewport area.
+ * Paused when the tab is hidden. Particle count scales with viewport area.
  */
 
 type Particle = {
@@ -41,12 +39,6 @@ export function ParticleField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    // `.force-motion` is the development-only preview switch — see
-    // `useMotionScale`. Absent in production, so a real reduced-motion
-    // preference always wins there.
-    const forced = document.documentElement.classList.contains("force-motion");
-    if (!forced && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;

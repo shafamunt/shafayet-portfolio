@@ -64,21 +64,12 @@ export const viewport: Viewport = {
   ],
 };
 
-const forceMotion =
-  process.env.NODE_ENV === "development" &&
-  process.env.NEXT_PUBLIC_FORCE_MOTION === "1";
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${syne.variable} ${jetbrains.variable}${
-        // Development-only escape hatch so animations can be previewed on a
-        // machine with OS reduced-motion switched on. Compiled out in
-        // production, so it can never override a real preference.
-        forceMotion ? " force-motion" : ""
-      }`}
+      className={`${outfit.variable} ${syne.variable} ${jetbrains.variable}`}
     >
       {/* Browser extensions (Grammarly, password managers, translators) inject
           attributes into <body> before React hydrates, which React reports as

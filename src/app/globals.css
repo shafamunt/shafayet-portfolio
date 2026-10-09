@@ -150,23 +150,6 @@
     outline-offset: 3px;
     border-radius: 4px;
   }
-
-  /* Respect the OS setting: kill transforms and transitions outright.
-     `html:not(.force-motion)` lets the development-only preview switch opt
-     out — see `useMotionScale`. The class is never emitted in production. */
-  @media (prefers-reduced-motion: reduce) {
-    html:not(.force-motion) {
-      scroll-behavior: auto;
-    }
-    html:not(.force-motion) *,
-    html:not(.force-motion) *::before,
-    html:not(.force-motion) *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
 }
 
 /* ── Animated background field ────────────────────────────────────────────
@@ -324,90 +307,32 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero-enter {
-    animation: hero-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: var(--enter-delay, 0s);
-  }
-
-  .hero-enter-struct {
-    animation: hero-enter-struct 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: var(--enter-delay, 0s);
-  }
-
-  .reveal-word {
-    animation: word-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(
-      var(--word-base-delay, 0s) + (var(--word-index, 0) * 0.06s)
-    );
-  }
-
-  .reveal-blur-word {
-    animation: word-blur-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(
-      var(--word-base-delay, 0s) + (var(--word-index, 0) * 0.09s)
-    );
-  }
-
-  @supports (animation-timeline: view()) {
-    .reveal-on-scroll {
-      animation-name: reveal-up;
-      animation-duration: 0.7s;
-      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-      animation-delay: var(--reveal-delay, 0s);
-      animation-fill-mode: none;
-      animation-timeline: view();
-      animation-range: entry 0% entry 45%;
-    }
-
-    .reveal-on-scroll.reveal-from-left {
-      animation-name: reveal-left;
-    }
-
-    .reveal-on-scroll.reveal-from-right {
-      animation-name: reveal-right;
-    }
-
-    .reveal-on-scroll.reveal-from-none {
-      animation-name: reveal-fade;
-    }
-
-    .reveal-word-scroll {
-      animation-name: word-up;
-      animation-duration: 0.8s;
-      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-      animation-delay: calc(var(--word-index, 0) * 0.05s);
-      animation-fill-mode: none;
-      animation-timeline: view();
-      animation-range: entry 0% entry 45%;
-    }
-  }
-}
-
-/* Dev-only: `html.force-motion` lets animations preview while OS reduced-motion
-   is on. Never emitted in production — see `useMotionScale`. */
-html.force-motion .hero-enter {
+.hero-enter {
   animation: hero-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--enter-delay, 0s);
 }
-html.force-motion .hero-enter-struct {
+
+.hero-enter-struct {
   animation: hero-enter-struct 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--enter-delay, 0s);
 }
-html.force-motion .reveal-word {
+
+.reveal-word {
   animation: word-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(
     var(--word-base-delay, 0s) + (var(--word-index, 0) * 0.06s)
   );
 }
-html.force-motion .reveal-blur-word {
+
+.reveal-blur-word {
   animation: word-blur-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: calc(
     var(--word-base-delay, 0s) + (var(--word-index, 0) * 0.09s)
   );
 }
+
 @supports (animation-timeline: view()) {
-  html.force-motion .reveal-on-scroll {
+  .reveal-on-scroll {
     animation-name: reveal-up;
     animation-duration: 0.7s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -416,16 +341,20 @@ html.force-motion .reveal-blur-word {
     animation-timeline: view();
     animation-range: entry 0% entry 45%;
   }
-  html.force-motion .reveal-on-scroll.reveal-from-left {
+
+  .reveal-on-scroll.reveal-from-left {
     animation-name: reveal-left;
   }
-  html.force-motion .reveal-on-scroll.reveal-from-right {
+
+  .reveal-on-scroll.reveal-from-right {
     animation-name: reveal-right;
   }
-  html.force-motion .reveal-on-scroll.reveal-from-none {
+
+  .reveal-on-scroll.reveal-from-none {
     animation-name: reveal-fade;
   }
-  html.force-motion .reveal-word-scroll {
+
+  .reveal-word-scroll {
     animation-name: word-up;
     animation-duration: 0.8s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
