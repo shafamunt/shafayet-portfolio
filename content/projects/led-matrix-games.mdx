@@ -1,0 +1,68 @@
+---
+title: LED Matrix Arcade Games
+summary: Embedded arcade demos on a microcontroller and LED matrix — timing loops, button input, and score on real hardware.
+description: >-
+  Course / personal embedded builds that put a game loop on an LED matrix:
+  button input, sprite-style drawing, collision, and a score that ticks with
+  time — the kind of bench project that proves firmware timing in public.
+year: 2026
+role: Course & personal embedded builds
+status: archived
+featured: false
+order: 55
+size: md
+tech:
+  - C / C++
+  - Microcontrollers
+  - LED Matrix
+  - Embedded Timing
+highlights:
+  - Game loop driving an LED matrix from a microcontroller
+  - Button input with debounce for jump / fire actions
+  - Score and difficulty ramps tied to elapsed time
+cover:
+  src: /images/projects/led-matrix-games/cover.png
+  alt: Microcontroller wired to an LED matrix displaying a simple arcade game
+  caption: TODO — table photo of the matrix running (dino, invaders, or your game).
+  todo: TODO — photo of LED matrix + MCU on the bench or at a showcase
+gallery:
+  - src: /images/projects/led-matrix-games/wiring.png
+    alt: Close-up of jumper wiring between the microcontroller and LED matrix
+    caption: TODO — wiring / breadboard detail shot.
+    todo: TODO — wiring detail photo
+draft: false
+---
+
+## Skills
+
+`C/C++` · `MCU` · `LED matrix` · `timing` · `debounce`
+
+## The problem
+
+A game on an LED matrix is a firmware timing problem wearing a fun costume.
+The display has to refresh fast enough to look alive, input has to debounce
+without eating jumps, and score / difficulty need a clock the player can feel.
+
+## Approach
+
+**Frame the loop.** Each tick: read buttons → update world → draw sprites →
+show score. Keep draw cheap so the matrix does not flicker when the "cactus"
+or invader count climbs.
+
+**Input.** Edge-detect a held button for jump / fire so a noisy contact does
+not look like three presses.
+
+**Difficulty.** Speed or spawn rate climbs with time-alive — same idea as the
+Chrome dino ramp, implemented as counters in the loop rather than a desktop
+framework.
+
+## Media
+
+This page is ready for the same visual treatment peer portfolios use for
+Arduino arcade demos: one strong table photo of the lit matrix, plus a wiring
+close-up. Drop files at the paths above; captions update themselves.
+
+## Outcome
+
+A portable proof of embedded timing and I/O — useful in interviews even when
+the "product" is a dinosaur that jumps over cacti.

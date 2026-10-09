@@ -36,7 +36,7 @@ export default function HomePage() {
           eyebrow="Projects"
           title="Selected builds."
           titleId="work-heading"
-          description="Firmware, platforms, and boards — the work I'd rather talk about in an interview."
+          description="Visual-first case studies — MRacing DAQ, the school platform in production, and course hardware with the diagrams behind them."
           action={{ label: "All projects", href: "/projects" }}
         />
 

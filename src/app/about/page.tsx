@@ -87,12 +87,31 @@ export default function AboutPage() {
       </header>
 
       {/* ── Photos ── */}
-      {(photos.length > 0 || process.env.NODE_ENV === "development") && (
-        <section className="mt-24 md:mt-32" aria-labelledby="photos-heading">
-          <SectionHeading eyebrow="In the wild" title="Some photos." titleId="photos-heading" />
+      <section className="mt-24 md:mt-32" aria-labelledby="photos-heading">
+        <SectionHeading
+          eyebrow="In the wild"
+          title="Some photos."
+          titleId="photos-heading"
+          description={
+            photos.length === 0
+              ? "Drop files into public/images/me/ — see MEDIA_TODO.md."
+              : undefined
+          }
+        />
+        {photos.length > 0 ? (
           <PhotoSlideshow photos={photos} />
-        </section>
-      )}
+        ) : (
+          <div className="rounded-card border border-dashed border-border-strong bg-surface/30 px-6 py-16 text-center">
+            <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-accent">
+              Media TODO
+            </p>
+            <p className="mt-3 text-sm text-muted">
+              Add 4–8 photos to <code className="text-foreground">public/images/me/</code>{" "}
+              (headshot, lab, MRacing, campus).
+            </p>
+          </div>
+        )}
+      </section>
 
       {/* ── Beyond code ── */}
       <section className="mt-24 md:mt-32" aria-labelledby="beyond-heading">

@@ -2,14 +2,13 @@
 title: Solar Vehicle & Automated Irrigation
 summary: Two semester-long hardware builds — a 3D-printed solar vehicle chassis and a moisture-sensing irrigation system that waters only when the soil asks for it.
 description: >-
-  Hardware/prototyping lead. Designed and 3D printed a custom chassis to
-  optimize weight and aerodynamics for a solar-powered vehicle, and
-  prototyped a moisture-sensing irrigation system integrating sensors with
-  microcontrollers for automated fluid control.
+  ENGR 100 hardware lead: designed and 3D-printed a solar-vehicle chassis for
+  weight and packaging, and prototyped a moisture-sensing irrigation loop where
+  a microcontroller opens fluid control only when the soil is actually dry.
 year: 2026
 role: Hardware & prototyping lead — ENGR 100
 status: archived
-featured: false
+featured: true
 order: 40
 size: md
 tech:
@@ -18,32 +17,73 @@ tech:
   - 3D Printing
   - PrusaSlicer
   - TinkerCAD
+metrics:
+  - label: Builds
+    value: "2"
+  - label: Role
+    value: HW lead
 highlights:
-  - Custom 3D-printed chassis for weight and aerodynamics
-  - Moisture-sensing irrigation with microcontroller fluid control
-  - Hardware and prototyping lead for the team
+  - Custom 3D-printed chassis iterated as drivetrain packaging changed
+  - Moisture probe → MCU → valve — water on demand, not on a blind timer
+  - Hardware lead for a student team through two working prototypes
 cover:
   src: /images/projects/solar-irrigation/cover.png
-  alt: Illustration of a solar-panel chassis beside a moisture probe that opens a valve when soil is dry
-  caption: Illustrated stand-in. Not a photo of the ENGR 100 prototypes.
+  alt: Solar-panel chassis beside a moisture probe that opens a valve when soil is dry
+  caption: TODO — replace illustrated cover with photos of the chassis and irrigation rig.
+  todo: TODO — photo of 3D-printed solar chassis and/or irrigation prototype
+gallery:
+  - src: /images/projects/solar-irrigation/chassis.png
+    alt: 3D-printed solar vehicle chassis on the print bed or assembled
+    caption: TODO — chassis photo (print or assembled).
+    todo: TODO — solar chassis photo
+  - src: /images/projects/solar-irrigation/irrigation.png
+    alt: Moisture sensor, microcontroller, and valve on the irrigation prototype
+    caption: TODO — irrigation electronics / plumbing photo.
+    todo: TODO — irrigation bench photo
 draft: false
 ---
+
+## Skills
+
+`microcontrollers` · `sensors` · `3D print` · `PrusaSlicer` · `packaging`
 
 ## The problem
 
 ENGR 100 asked for real hardware that moved and sensed — not a slide deck
-about what we might build.
+about what we might build. Two threads: a solar-powered vehicle that had to
+roll under a real panel mass, and an irrigation system that should not flood
+dry soil on a timer.
 
-## Approach
+## Solar vehicle
 
-**Solar vehicle.** Designed and 3D printed a custom chassis to optimize weight
-and aerodynamics as the drivetrain packaging changed.
+**Chassis as a packaging problem.** Drivetrain and panel placement moved every
+few weeks. I owned the 3D-printed chassis — CAD in TinkerCAD / slicer stack in
+PrusaSlicer — iterating wall thickness, mount points, and aero-ish shaping so
+weight stayed honest while parts still fit.
 
-**Irrigation.** Prototyped a moisture-sensing system that integrates soil
-sensors with a microcontroller for automated fluid control — water only when
-the soil asks for it, not on a blind timer.
+**What mattered.** Print orientation, fastener access, and not cracking a
+bracket the night before a demo. The "aerodynamics" line in the brief was
+secondary to keeping the panel and wheels in one rigid story.
+
+## Automated irrigation
+
+**Sense before you water.** A soil moisture sensor feeds a microcontroller;
+firmware decides when a valve or pump should run. The loop is simple on paper
+and annoying in soil: thresholds drift, probes oxidize, and "wet" is not a
+boolean until you calibrate it.
+
+```
+moisture probe  →  MCU threshold  →  valve / pump
+     soil %            hysteresis         fluid only if dry
+```
+
+**Control.** Hysteresis keeps the actuator from chattering at the threshold.
+The win condition is plants that get watered when they need it — not a
+schedule that ignores rain week.
 
 ## Outcome
 
 Two working prototypes and a lot of lessons about packaging, iteration, and
-leading the physical side of a student team.
+leading the physical side of a student team. Swap the illustrated cover for
+real photos and this page carries the same visual weight as the racing case
+study.

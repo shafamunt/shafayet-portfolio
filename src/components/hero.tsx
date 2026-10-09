@@ -63,6 +63,19 @@ export function Hero() {
               {site.intro}
             </p>
 
+            <p
+              className="hero-enter mt-5 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle"
+              style={{ "--enter-delay": "0.26s" } as React.CSSProperties}
+            >
+              {site.roleStack.join(" · ")}
+            </p>
+            <p
+              className="hero-enter mt-2 text-sm text-muted"
+              style={{ "--enter-delay": "0.28s" } as React.CSSProperties}
+            >
+              {site.openTo}
+            </p>
+
             <div
               className="hero-enter mt-9 flex flex-wrap items-center gap-3"
               style={{ "--enter-delay": "0.32s" } as React.CSSProperties}
