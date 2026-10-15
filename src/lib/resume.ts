@@ -116,11 +116,11 @@ export const experience: Experience[] = [
     end: "Present",
     location: "Ann Arbor, MI",
     points: [
-      "Prototype a lap-trigger DAQ: photosensor beam break → conditioning → MCU timestamp → vehicle telemetry / CAN path for Formula SAE lap timing.",
-      "Hold Level 2 High Voltage (600V) certification for 600V system maintenance; drive the Altium board path from breadboard toward a node that owns the edge.",
-      "Contribute to weekly technical design reviews on CAN bus communication and embedded control strategies against the car's harness.",
+      "Prototype photosensor-based lap detection on a breadboard for Formula SAE lap timing; conditioning, board bring-up, and bus integration still in progress.",
+      "Hold Level 2 High Voltage (600V) certification for safe maintenance around the car's 600V system; practice Altium layout toward a future sensing node.",
+      "Contribute to weekly CAN bus and embedded control design reviews (team process — not sole ownership of the vehicle bus).",
     ],
-    tech: ["C++", "CAN Bus", "Embedded Systems", "Altium", "PCB Design"],
+    tech: ["C++", "Embedded Systems", "Sensors", "Altium", "PCB Design", "CAN Bus"],
   },
   {
     company: "Michigan Embedded Systems Hub (MESH)",

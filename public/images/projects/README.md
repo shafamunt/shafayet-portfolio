@@ -6,8 +6,8 @@ Generated covers and “MEDIA TODO” frames fill paths so cards are never empty
 Replace any file with a real photo or screenshot at the **same path** — the
 site picks up whatever is on disk.
 
-See the root [`MEDIA_TODO.md`](../../../MEDIA_TODO.md) checklist for what still
-needs your camera / exports.
+See [`EVIDENCE_CHECKLIST.md`](../../../EVIDENCE_CHECKLIST.md) for assets still
+worth capturing (internal checklist — not shown on the live site).
 
 ## MRacing team photos
 

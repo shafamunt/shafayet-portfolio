@@ -1,15 +1,15 @@
 ---
 title: Solar Vehicle & Automated Irrigation
-summary: Two semester-long hardware builds — a 3D-printed solar vehicle chassis and a moisture-sensing irrigation system that waters only when the soil asks for it.
+summary: ENGR 100 hardware lead — 3D-printed solar chassis packaging and a moisture-sensing irrigation loop on a microcontroller.
 description: >-
-  ENGR 100 hardware lead: designed and 3D-printed a solar-vehicle chassis for
-  weight and packaging, and prototyped a moisture-sensing irrigation loop where
-  a microcontroller opens fluid control only when the soil is actually dry.
+  Two completed course prototypes: I led hardware for a solar vehicle chassis
+  (CAD + 3D print as packaging changed) and a soil-moisture irrigation system
+  that only actuates when the probe reads dry. Finished builds, course context.
 year: 2026
 role: Hardware & prototyping lead — ENGR 100
 status: archived
 featured: true
-order: 40
+order: 30
 size: md
 tech:
   - Microcontrollers
@@ -17,73 +17,74 @@ tech:
   - 3D Printing
   - PrusaSlicer
   - TinkerCAD
+metricsLabel: Outcomes
 metrics:
-  - label: Builds
+  - label: Working prototypes
     value: "2"
-  - label: Role
-    value: HW lead
+  - label: Context
+    value: ENGR 100
 highlights:
-  - Custom 3D-printed chassis iterated as drivetrain packaging changed
-  - Moisture probe → MCU → valve — water on demand, not on a blind timer
-  - Hardware lead for a student team through two working prototypes
+  - Owned chassis packaging through drivetrain and panel changes
+  - Moisture probe → MCU → valve with hysteresis (water on demand)
+  - Hardware lead for a student team through demo day
 cover:
   src: /images/projects/solar-irrigation/cover.png
-  alt: Solar-panel chassis beside a moisture probe that opens a valve when soil is dry
-  caption: TODO — replace illustrated cover with photos of the chassis and irrigation rig.
-  todo: TODO — photo of 3D-printed solar chassis and/or irrigation prototype
-gallery:
-  - src: /images/projects/solar-irrigation/chassis.png
-    alt: 3D-printed solar vehicle chassis on the print bed or assembled
-    caption: TODO — chassis photo (print or assembled).
-    todo: TODO — solar chassis photo
-  - src: /images/projects/solar-irrigation/irrigation.png
-    alt: Moisture sensor, microcontroller, and valve on the irrigation prototype
-    caption: TODO — irrigation electronics / plumbing photo.
-    todo: TODO — irrigation bench photo
+  alt: Conceptual diagram of a solar chassis beside a moisture-sensing irrigation loop
+  caption: Conceptual diagram of the two ENGR 100 builds — not a photograph of the prototypes.
 draft: false
 ---
 
-## Skills
+## Problem and outcome
 
-`microcontrollers` · `sensors` · `3D print` · `PrusaSlicer` · `packaging`
+ENGR 100 required hardware that moved and sensed. I led two prototypes to
+working demos: a **3D-printed solar vehicle chassis** that kept panel and
+drivetrain packaging coherent, and a **moisture-sensing irrigation** loop that
+waters when the soil asks — not on a blind timer.
 
-## The problem
+## Role and context
 
-ENGR 100 asked for real hardware that moved and sensed — not a slide deck
-about what we might build. Two threads: a solar-powered vehicle that had to
-roll under a real panel mass, and an irrigation system that should not flood
-dry soil on a timer.
+- **Course:** ENGR 100, University of Michigan  
+- **Role:** Hardware and prototyping lead on a student team  
+- **What I personally owned:** chassis CAD / print iteration; irrigation sensor
+  → MCU → actuator path and threshold behavior  
+- **Team context:** classmates shared mechanical, electrical, and presentation
+  work; I am describing the hardware thread I led  
 
-## Solar vehicle
-
-**Chassis as a packaging problem.** Drivetrain and panel placement moved every
-few weeks. I owned the 3D-printed chassis — CAD in TinkerCAD / slicer stack in
-PrusaSlicer — iterating wall thickness, mount points, and aero-ish shaping so
-weight stayed honest while parts still fit.
-
-**What mattered.** Print orientation, fastener access, and not cracking a
-bracket the night before a demo. The "aerodynamics" line in the brief was
-secondary to keeping the panel and wheels in one rigid story.
-
-## Automated irrigation
-
-**Sense before you water.** A soil moisture sensor feeds a microcontroller;
-firmware decides when a valve or pump should run. The loop is simple on paper
-and annoying in soil: thresholds drift, probes oxidize, and "wet" is not a
-boolean until you calibrate it.
+## System / signal flow (irrigation)
 
 ```
-moisture probe  →  MCU threshold  →  valve / pump
-     soil %            hysteresis         fluid only if dry
+moisture probe  →  MCU threshold (+ hysteresis)  →  valve / pump
+     soil reading         decide wet vs dry              fluid only if dry
 ```
 
-**Control.** Hysteresis keeps the actuator from chattering at the threshold.
-The win condition is plants that get watered when they need it — not a
-schedule that ignores rain week.
+Solar vehicle work was primarily mechanical packaging: mounts, wall thickness,
+print orientation, and fastener access as the drivetrain layout changed.
 
-## Outcome
+## Technical decisions and tradeoffs
 
-Two working prototypes and a lot of lessons about packaging, iteration, and
-leading the physical side of a student team. Swap the illustrated cover for
-real photos and this page carries the same visual weight as the racing case
-study.
+**1. Treat the chassis as packaging, not sculpture.** Panel mass and motor
+placement moved often. I prioritized mount points and print reliability over
+cosmetic aero. Tradeoff: less "pretty" CAD; fewer cracked brackets at demo.
+
+**2. Hysteresis on the moisture threshold.** Without it, the actuator chatters
+at the wet/dry boundary. Tradeoff: slightly slower response; much less
+mechanical wear and noise.
+
+**3. Calibrate "wet" in real soil, not only in slides.** Probe readings drift;
+oxide and placement matter. Tradeoff: more bench time; fewer false waterings
+in the demo.
+
+## Validation
+
+- Both prototypes ran for course demo / evaluation  
+- Irrigation: exercised threshold behavior with the probe (qualitative — I am
+  not publishing numeric soil-% cutoffs without a logged dataset)  
+- Chassis: survived assembly and demo handling after multiple print revisions  
+
+## Limitations and next steps
+
+- This page uses a **conceptual diagram** until I add real photos of the
+  chassis and irrigation rig  
+- Course scope stopped at working prototypes — not a field-deployed product  
+- Skills transfer into later PCB / embedded work (MESH, MRacing), not into a
+  continued product line under this title  

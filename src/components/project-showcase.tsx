@@ -170,7 +170,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                   {project.metrics.slice(0, 3).map((metric) => (
                     <div key={metric.label}>
                       <dd className="font-display text-2xl text-foreground">{metric.value}</dd>
-                      <dt className="mt-0.5 text-xs text-subtle">{metric.label}</dt>
+                      <dt className="mt-0.5 text-xs text-muted">{metric.label}</dt>
                     </div>
                   ))}
                 </dl>

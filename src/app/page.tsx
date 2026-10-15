@@ -36,7 +36,7 @@ export default function HomePage() {
           eyebrow="Projects"
           title="Selected builds."
           titleId="work-heading"
-          description="Visual-first case studies — MRacing DAQ, the school platform in production, and course hardware with the diagrams behind them."
+          description="Three to start with: MRacing lap-trigger sensing, the school platform in production, and ENGR 100 hardware."
           action={{ label: "All projects", href: "/projects" }}
         />
 
@@ -61,7 +61,7 @@ export default function HomePage() {
           eyebrow="Experience"
           title="Roles & teams."
           titleId="experience-heading"
-          description="An internship, a help desk I help run, and MRacing FSAE with Level 2 High Voltage (600V) certification — full detail on the experience page."
+          description="Darul Uloom internship, Michigan ITS shift lead, MRacing FSAE, and MESH — full detail on the experience page."
           action={{ label: "Full experience", href: "/experience" }}
         />
         <ExperienceTimeline experience={getExperience()} compact />
@@ -92,20 +92,19 @@ export default function HomePage() {
               aria-hidden
               className="pointer-events-none absolute inset-x-0 -bottom-32 h-64 opacity-50 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_70%)]"
             />
-            <p className="eyebrow relative mb-5">{site.headline}</p>
+            <p className="eyebrow relative mb-5">{site.openTo}</p>
             <h2 className="relative mx-auto max-w-3xl font-display text-display-md font-semibold text-foreground">
-              Open to the next role.
+              Summer 2027 — let&apos;s talk.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Based in Ann Arbor, open to embedded and systems internships
-              nationally — email{" "}
+              Embedded, firmware, and automotive internships. Email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"
               >
                 {site.email}
               </a>{" "}
-              or use the form.
+              or use the form — resume, GitHub, and LinkedIn are in the header.
             </p>
             <div className="relative mt-9 flex flex-wrap justify-center gap-3">
               <Link href="/contact" className={cn(buttonVariants({ size: "lg" }))}>

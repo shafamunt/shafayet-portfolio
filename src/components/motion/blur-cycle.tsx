@@ -95,10 +95,8 @@ export function BlurCycle({
       ))}
 
       <span className="min-w-0 [grid-area:1/1]">
-        {/* Announce only the settled phrase, not each word as it lands. */}
-        <span className="sr-only" aria-live="polite" aria-atomic="true">
-          {phrases[index]}
-        </span>
+        {/* Stable SR text — do not live-announce every cycling phrase. */}
+        <span className="sr-only">{phrases[0]}</span>
 
         <AnimatePresence mode="wait">
           <motion.span

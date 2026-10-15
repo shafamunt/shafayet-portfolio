@@ -1,10 +1,10 @@
 ---
 title: Radiation Heatmap & Image Processing Engine
-summary: A MATLAB image pipeline that ingests, denoises, and renders radiation data as HSV heatmaps.
+summary: MATLAB pipeline — custom matrix filters denoise frames and render intensity as HSV heatmaps.
 description: >-
-  Course signal / image processing build: custom matrix filters ingest and
-  denoise radiation-style frames, then map intensity into HSV heatmaps — the
-  math written out as linear algebra, not a black-box toolbox call.
+  Course image-processing exercise: I wrote denoise filters as explicit matrix
+  operations, then mapped intensity into HSV so magnitude is visible. Learning
+  project, not a deployed sensor product.
 year: 2026
 role: Solo course build — image / signal processing
 status: archived
@@ -17,50 +17,34 @@ tech:
   - Linear Algebra
   - Signal Processing
 highlights:
-  - Custom matrix filters to ingest and denoise frames
-  - HSV heatmap rendering so magnitude is visible at a glance
-  - Matrix-level implementation without black-box library filters
+  - Custom matrix filters (not black-box library calls for the core path)
+  - HSV heatmap rendering of intensity
+  - Inspectable kernels in the script
 cover:
   src: /images/projects/radiation-heatmap/before-after.png
-  alt: Noisy radiation-style field beside a smoothed HSV heatmap
-  caption: TODO — replace with a real before/after from your MATLAB run if you can share it.
-  todo: TODO — real MATLAB before/after frames (or keep as diagram)
-gallery:
-  - src: /images/projects/radiation-heatmap/kernel.png
-    alt: Diagram of the custom denoise kernel as a numeric matrix
-    caption: TODO — kernel coefficient figure from your notes or code.
-    todo: TODO — kernel matrix figure
+  alt: Conceptual before/after of a noisy field and a smoothed heatmap
+  caption: Conceptual before/after diagram — not a captured sensor frame.
 draft: false
 ---
 
-## Skills
+## Problem and outcome
 
-`MATLAB` · `matrix filters` · `HSV` · `denoising`
+Raw frames are hard to read as tables. I built a small MATLAB pipeline that
+denoises with custom kernels and renders magnitude as an HSV heatmap.
 
-## The problem
+## Role
 
-Raw sensor frames are noisy and hard to read as numbers in a table. The goal
-was a pipeline that cleans the signal and makes magnitude obvious visually —
-a heatmap a human can skim, not a spreadsheet of intensities.
+Solo course exercise.
 
 ## Approach
-
-**Write the filters.** Custom matrix filters ingest and denoise the frames as
-explicit matrix operations so every coefficient is inspectable in the script.
-No `imgaussfilt`-style black box for the core path — the point of the exercise
-was seeing the linear algebra.
-
-**Colour as magnitude.** After cleanup, intensity maps into HSV space so hue /
-value carry the story. Hot spots should pop without reading every cell.
-
-**Pipeline.**
 
 ```
 raw frame  →  denoise kernel  →  normalize  →  HSV heatmap
 ```
 
-## Outcome
+Filters are written as matrix operations so coefficients stay inspectable.
 
-A small image-processing exercise where understanding the kernels mattered more
-than shipping a polished UI. Drop a real before/after export into the cover
-path when you have a frame you can share publicly.
+## Limitations
+
+Cover art is a conceptual diagram. A real MATLAB export can replace it if the
+dataset is shareable. This is not a fielded radiation instrument.

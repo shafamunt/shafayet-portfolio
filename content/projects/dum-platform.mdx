@@ -1,10 +1,11 @@
 ---
 title: Darul Uloom Michigan Platform
-summary: A role-based educational platform in production for a Michigan school — grading, records, and administration behind five tiers of access.
+summary: Production role-based school platform — I built schema, RLS, Edge Functions, and CI that gate deploys for 70+ weekly users.
 description: >-
-  Built and shipped end to end: PostgreSQL with Row-Level Security, serverless
-  Edge Functions for auth, and a React front end that five user roles each see
-  differently. Live for 70+ users with CI gating every deploy.
+  As software engineering intern I shipped a React + Supabase platform the
+  school uses for grading and administration: PostgreSQL with Row-Level
+  Security, Edge Functions for auth and privileged ops, and GitHub Actions
+  tests before every deploy. No public demo — student data stays private.
 year: 2026
 role: Software engineering intern — full-stack
 status: live
@@ -18,81 +19,91 @@ tech:
   - PostgreSQL
   - Vite
   - GitHub Actions
+metricsLabel: Outcomes
 metrics:
   - label: Active users
     value: 70+
   - label: Access levels
     value: "5"
-  - label: DB tables
-    value: 30+
+  - label: Automated tests
+    value: 75+
 highlights:
-  - Production platform with 70+ users across five access levels
-  - 30+ table Postgres schema with Row-Level Security
-  - 75+ automated tests gating GitHub Actions deploys
+  - Live in production for a Michigan school (70+ users)
+  - Designed 30+ table Postgres schema with Row-Level Security
+  - CI with 75+ tests gating GitHub Actions deploys
 cover:
-  src: /images/projects/dum-platform/cover.png
-  alt: Redacted dashboard with five access levels and no student records
-  caption: TODO — replace with a redacted production screenshot (no student data).
-  todo: TODO — redacted DUM dashboard screenshot
+  src: /images/projects/dum-platform/rls.png
+  alt: Conceptual diagram of React UI, Edge Functions, and Postgres row-level security
+  caption: Conceptual architecture diagram — not a screenshot of student data.
 gallery:
   - src: /images/projects/dum-platform/roles.png
-    alt: Comparison of five access levels in the same app, with no student records
-    caption: TODO — redacted role-view comparison (no names, grades, or faces).
-    todo: TODO — redacted multi-role UI screenshot
-  - src: /images/projects/dum-platform/rls.png
-    alt: Stack from the React UI through Edge Functions to Postgres row-level security
-    caption: Architecture diagram — upgrade with a redacted schema figure if useful.
+    alt: Conceptual diagram of five access levels sharing one application
+    caption: Conceptual role model — redacted; no student records shown.
 draft: false
 ---
 
-## Privacy
+## Problem and outcome
 
-This platform holds real student data. There is **no public demo** and no
-production URL on this site. Screenshots, when added, must be redacted — no
-student names, IDs, grades, or faces.
+The school needed grades, records, and administration offline from spreadsheets,
+with **five access levels** that must not see the same rows. The platform is
+**live in production** for **70+ users**. There is no public demo URL — the
+system holds real student data.
 
-## The problem
+## Role and context
 
-A school needed more than spreadsheets for grades, records, and administration.
-Access had to be role-aware — five tiers, including admins and teachers, that
-never see the same rows — and Monday morning could not be when the system broke.
+- **Employer:** Darul Uloom Michigan (Warren, MI)
+- **Role:** Software engineering intern  
+- **Dates:** May 2026 – present  
+- **What I personally built / owned:** end-to-end implementation work on the
+  role-based app — PostgreSQL schema and RLS, Supabase Edge Functions for
+  authentication and privileged operations, React (Vite) UI differentiated by
+  role, and GitHub Actions CI with automated tests gating deploys  
+- **What stays private:** production URL, student PII, and unredacted
+  screenshots
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────┐
-│  React (Vite) — 5 access levels         │
-│  role-differentiated UI from one codebase│
-└──────────────────┬──────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│  Edge Functions                         │
-│  authentication + privileged operations │
-└──────────────────┬──────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│  PostgreSQL · 30+ tables                │
-│  Row-Level Security at the row layer    │
-└─────────────────────────────────────────┘
+React (Vite) — one codebase, five role-differentiated UIs
+        │
+        ▼
+Edge Functions — authentication + privileged operations
+        │
+        ▼
+PostgreSQL (30+ tables) — Row-Level Security at the row layer
 
-        GitHub Actions — 75+ tests gate every deploy
+GitHub Actions — 75+ tests gate every deploy
 ```
 
-**Schema first.** A normalized PostgreSQL model of 30+ tables, with Row-Level
-Security enforcing who can read or write what at the database layer rather than
-only in the UI.
+![Conceptual stack from UI through Edge Functions to Postgres RLS](/images/projects/dum-platform/rls.png)
 
-**Serverless auth and privileged ops.** Edge Functions handle authentication and
-operations that should not live in the client. The React front end renders five
-distinct experiences from the same codebase.
+## Technical decisions and tradeoffs
 
-**CI that blocks bad deploys.** GitHub Actions runs 75+ automated tests before
-anything ships. A grading system that fails quietly is not an abstract risk.
+**1. Enforce access in the database, not only in the UI.** Row-Level Security
+means a bug or missing check in React cannot casually leak another role's rows.
+Tradeoff: harder migrations and more careful policy testing; safer default for
+school data.
 
-## Outcome
+**2. Put privileged operations in Edge Functions.** Auth and sensitive writes
+stay off the client. Tradeoff: more moving parts than a pure client-to-Postgres
+app; clearer security boundary.
 
-The platform is live in production for 70+ users. The interesting lesson is that
-scoping access and tests as seriously as features is what made it trustworthy
-enough for a real school to depend on.
+**3. Block deploys with automated tests.** A grading system that fails quietly
+on Monday is unacceptable. **75+** tests run in GitHub Actions before ship.
+Tradeoff: slower merge cadence; fewer production surprises.
+
+## Validation
+
+- Production use by **70+** people across **five** access levels  
+- CI required green before deploy  
+- Manual role checks during development (each tier sees a different slice of
+  data) — detailed test plans stay internal  
+
+I am not publishing unredacted UI captures or student-facing URLs.
+
+## Limitations and next steps
+
+- Screenshots on this page are **conceptual diagrams**, not live product
+  photography — sanitized captures can replace them when available  
+- Further hardening and feature work continues while the school depends on the
+  system daily  
