@@ -7,7 +7,7 @@ import { GithubIcon } from "@/components/icons";
 import { MdxContent } from "@/components/mdx-content";
 import { Reveal } from "@/components/motion/reveal";
 import { BlurReveal } from "@/components/motion/blur-reveal";
-import { ProjectMedia } from "@/components/project-media";
+import { MediaLightbox } from "@/components/media-lightbox";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ import {
   getProject,
   getProjectSlugs,
 } from "@/lib/content";
+import { statusLabel } from "@/lib/content/status";
 import { site } from "@/lib/site";
 import { cn, formatYear, prettyUrl } from "@/lib/utils";
 
@@ -73,10 +74,8 @@ export default async function ProjectPage({ params }: PageProps) {
                 <span>{project.role}</span>
               </>
             )}
-            {project.status !== "live" && (
-              <Badge variant="outline">
-                {project.status === "in-progress" ? "In progress" : "Archived"}
-              </Badge>
+            {statusLabel(project.status) && (
+              <Badge variant="outline">{statusLabel(project.status)}</Badge>
             )}
           </div>
 
@@ -207,10 +206,12 @@ export default async function ProjectPage({ params }: PageProps) {
         <Reveal delay={0.1} className="mt-14 md:mt-20">
           <figure>
             <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-border bg-surface md:aspect-[2/1]">
-              <ProjectMedia
+              <MediaLightbox
                 image={project.cover}
                 priority
                 sizes="(min-width: 1280px) 1200px, 100vw"
+                frameClassName="absolute inset-0"
+                className="absolute inset-0"
               />
             </div>
             {project.cover.caption && (
@@ -234,18 +235,24 @@ export default async function ProjectPage({ params }: PageProps) {
               <Reveal
                 key={image.src}
                 delay={i * 0.06}
-                className={i % 3 === 0 ? "md:col-span-2" : undefined}
+                className={image.fit === "contain" || i % 3 === 0 ? "md:col-span-2" : undefined}
               >
                 <figure>
                   <div
                     className={cn(
                       "relative overflow-hidden rounded-card border border-border bg-surface",
-                      i % 3 === 0 ? "aspect-[16/9]" : "aspect-[4/3]",
+                      image.fit === "contain"
+                        ? "aspect-[16/10] bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)]"
+                        : i % 3 === 0
+                          ? "aspect-[16/9]"
+                          : "aspect-[4/3]",
                     )}
                   >
-                    <ProjectMedia
+                    <MediaLightbox
                       image={image}
                       sizes="(min-width: 768px) 50vw, 100vw"
+                      frameClassName="absolute inset-0"
+                      className="absolute inset-0"
                     />
                   </div>
                   {image.caption && (

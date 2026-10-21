@@ -3,13 +3,13 @@ title: Sequential Four-Function Calculator
 summary: EECS 270 — RTL datapath + FSM controller for + − × ÷ on an 11-bit DE2-115 calculator.
 description: >-
   EECS 270 Project 7: sequential four-function calculator in Verilog. Shared
-  AddSub datapath, Booth-style multiply, restoring-style divide, SM/TC
-  conversion, ModelSim tests, and DE2-115 switch/key/HEX bring-up.
+  AddSub datapath, Booth-style multiply, magnitude divide, SM/TC conversion,
+  ModelSim tests, and board I/O on switches, keys, and HEX displays.
 year: 2026
-role: Course project — EECS 270
+role: EECS 270 — digital logic
 status: archived
-featured: false
-order: 35
+featured: true
+order: 20
 size: md
 tech:
   - Verilog
@@ -28,88 +28,66 @@ metrics:
 highlights:
   - Datapath / controller split with one shared AddSub unit
   - Booth multiply and magnitude divide with overflow / divide-by-zero
-  - DE2-115 demo — SW entry, KEY ops, HEX result, LEDG overflow
+  - Board demo — SW entry, KEY ops, HEX result, LEDG overflow
 cover:
   src: /images/projects/fpga-calculator/cover.jpg
-  alt: DE2-115 FPGA board running the four-function calculator demo
-  caption: On-board demo — switches, keys, and seven-segment result.
+  alt: LabsLand remote-lab view of the FPGA board with HEX displays
+  caption: >-
+    LabsLand console capture during board bring-up — HEX digits partially
+    visible; source video is soft. A sharper personal board photo is still needed.
 gallery:
   - src: /images/projects/fpga-calculator/datapath.png
     alt: Four-function calculator datapath with shared AddSub
-    caption: Datapath — single 11-bit AddSub shared across all four ops.
-  - src: /images/projects/fpga-calculator/io-map.png
-    alt: Switch and key interface for the sequential calculator
-    caption: I/O map — SW entry, KEY ops / equals / clear, HEX displays.
+    caption: Course datapath figure — single 11-bit AddSub shared across ops.
+    fit: contain
   - src: /images/projects/fpga-calculator/stg.png
     alt: Abstract state transition graph for calculator control
-    caption: Abstract STG — refine LOAD → ADD/SUB → MUL → DIV + overflow.
+    caption: Course abstract STG — LOAD → ADD/SUB → MUL → DIV + overflow.
+    fit: contain
 draft: false
 ---
 
 ## Problem and outcome
 
-Build a sequential calculator on the DE2-115 — not a one-cycle ALU. An FSM
-walks operands through add, subtract, multiply, and divide and shows a stable
-result on the HEX displays.
+Build a sequential calculator — not a one-cycle ALU. An FSM walks operands
+through add, subtract, multiply, and divide and shows a stable result on HEX.
 
 **Outcome:** `FourFuncCalc` datapath + controller for 11-bit two’s-complement
-arithmetic, with ModelSim coverage and a board demo from switches and keys.
+arithmetic, with ModelSim coverage and a board demo.
 
-## Role and context
+## Role
 
-- **Course:** EECS 270 (digital logic), University of Michigan  
+- **Course:** EECS 270, University of Michigan  
 - **Spec:** [Project 7 — Sequential Calculator](https://www.eecs270.org/p7_sequential_calculator.html)  
-- **My work:** complete `FourFuncCalc.v`, write `TestBench7.v`, wire `Project7.v`
-  to board I/O  
-- Helpers provided by staff (`AddSub`, `SM2TC` / `TC2SM`, `Binary_to_7SEG`, …)  
+- **My work:** `FourFuncCalc.v`, `TestBench7.v`, `Project7.v` board wiring  
 
 ## Architecture
 
 ```
-SW[10:0] / KEY[*] / SW[17]
-        │
-        ▼
-   FourFuncCalc ── controller (FSM) ── datapath (regs · mux · AddSub)
-        │
-        ├─ HEX7..4  operand (signed-magnitude entry)
-        ├─ HEX3..0  result
-        └─ LEDG[8]  overflow / divide-by-zero
+SW / KEY / SW[17]  →  FourFuncCalc (FSM + datapath)
+                         ├─ HEX operand / result
+                         └─ LEDG[8] overflow / ÷0
 ```
-
-![Datapath with shared AddSub](/images/projects/fpga-calculator/datapath.png)
 
 ## Technical decisions
 
-**1. One shared AddSub for all four ops.** Matches the required Figure-4
-datapath — multiply and divide reuse the same adder/subtractor through
-multiplexing instead of extra arithmetic units. Tradeoff: longer sequences;
-cleaner RTL review.
-
-**2. Booth multiply embedded in the datapath.** Course sequential multiplication
-algorithm, not a direct instantiate of the reference `BoothMul` module.
-Overflow when the product will not fit in `W` bits.
-
-**3. Divide on magnitudes; sign via XOR.** Repeated subtract until the
-remainder goes negative (round toward zero); `sign(Q) = sign(dividend) XOR
-sign(divisor)`. Divisor zero asserts overflow and holds until clear.
-
-**4. External signed-magnitude, internal two’s complement.** Entry and display
-stay SM via staff converters; arithmetic runs in TC.
+**1. One shared AddSub** for all four ops (required datapath).  
+**2. Booth multiply** embedded in the datapath (not a direct `BoothMul` instance).  
+**3. Divide on magnitudes; sign via XOR;** divisor zero → overflow until clear.  
+**4. External signed-magnitude, internal two’s complement** via staff converters.
 
 ## Validation
 
-- ModelSim with state labels; parameterize `W` small first, then `W = 11`  
-- Autograder checkpoint (ADD/SUB) and final (all four ops + overflow cases)  
-- Board checks on DE2-115 — example sequence from the spec: enter, multiply,
-  subtract, divide, clear  
+ModelSim with state labels; autograder checkpoint (ADD/SUB) and final (all ops);
+board checks on DE2-115 / LabsLand.
 
 <VideoEmbed
   src="/videos/fpga-board-demo.mp4"
   poster="/images/projects/fpga-calculator/cover.jpg"
-  caption="DE2-115 board demo of the sequential calculator."
+  caption="Board demo clip — LabsLand remote session; still frames are soft."
 />
 
 ## Limitations
 
-Course RTL lab — not productized IP. Division uses the project’s subtractive
-algorithm, not a high-performance divider.
+Cover is a frame from a soft LabsLand recording, not a sharp bench photo with a
+clearly readable result. Diagrams in the gallery are course-provided figures.

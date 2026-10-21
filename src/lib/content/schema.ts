@@ -18,6 +18,11 @@ export const imageSchema = z.object({
    * at that path and the slot becomes the photo with no code change.
    */
   todo: z.string().optional(),
+  /**
+   * How the image fills its frame. Use `contain` for diagrams and terminal
+   * captures so labels stay readable; `cover` for photos.
+   */
+  fit: z.enum(["cover", "contain"]).optional(),
 });
 
 export type Image = z.infer<typeof imageSchema> & {

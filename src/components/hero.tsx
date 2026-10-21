@@ -12,14 +12,14 @@ import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[min(100svh,56rem)] overflow-hidden">
-      {/* Soft accent wash — video lives in a dedicated embed below the hero. */}
+    <section className="relative min-h-[min(88svh,44rem)] overflow-hidden md:min-h-[min(82svh,40rem)]">
+      {/* Soft accent wash — film lives below selected projects, not in the hero. */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"
       />
 
-      <div className="container-page relative z-10 flex min-h-[min(100svh,56rem)] flex-col justify-center pb-20 pt-14 md:pb-24 md:pt-20">
+      <div className="container-page relative z-10 flex min-h-[min(88svh,44rem)] flex-col justify-center pb-14 pt-12 md:min-h-[min(82svh,40rem)] md:pb-16 md:pt-16">
         {/* `grid-cols-1` is not cosmetic. Without it there is no
             grid-template-columns below lg, so the single implicit column is
             `auto` — content-sized — and inflates to the max-content of its

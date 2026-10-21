@@ -29,11 +29,11 @@
   --glow-1: #22d3ee;
   --glow-2: #0e7490;
   --glow-3: #38bdf8;
-  --glow-opacity: 0.18;
+  --glow-opacity: 0.14;
   --grid-line: #0e7490;
-  --grid-opacity: 0.055;
+  --grid-opacity: 0.03;
   --particle: #0e7490;
-  --particle-opacity: 0.35;
+  --particle-opacity: 0.2;
 
   --radius: 0.75rem;
   --shadow-card: 0 1px 2px rgb(5 12 23 / 0.04), 0 8px 24px -12px rgb(5 12 23 / 0.12);
@@ -58,11 +58,11 @@
   --glow-1: #22d3ee;
   --glow-2: #0e7490;
   --glow-3: #38bdf8;
-  --glow-opacity: 0.14;
+  --glow-opacity: 0.1;
   --grid-line: #38bdf8;
-  --grid-opacity: 0.08;
+  --grid-opacity: 0.04;
   --particle: #22d3ee;
-  --particle-opacity: 0.4;
+  --particle-opacity: 0.22;
 
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 8px 24px -12px rgb(0 0 0 / 0.55);
   --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 24px 48px -20px rgb(0 0 0 / 0.7);

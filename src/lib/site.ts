@@ -58,8 +58,8 @@ export const site = {
   showcaseVideo: {
     src: "/videos/mracing-hero.mp4",
     poster: "/videos/mracing-hero-poster.jpg",
-    caption: "MRacing FSAE — team film from the public team site.",
-    credit: "Via mracing.engin.umich.edu",
+    caption: "MRacing FSAE team film (public team site).",
+    credit: "mracing.engin.umich.edu",
     creditHref: "https://www.mracing.engin.umich.edu/",
   },
 

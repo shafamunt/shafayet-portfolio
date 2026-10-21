@@ -4,12 +4,12 @@ summary: ENGR 101 — MATLAB radiation pipeline — denoise scans, HSV heatmaps 
 description: >-
   ENGR 101 Project 1: process noisy radiation scan matrices into public safety
   imagery. removeNoise, heatmap, and zones with vectorized MATLAB; WatchDisplay
-  for GPS-cropped smartwatch views; detectTumor on MRI-style brain scans.
+  for GPS-cropped views; detectTumor on MRI-style brain scans.
 year: 2026
-role: Solo course project — ENGR 101
+role: ENGR 101 — MATLAB
 status: archived
 featured: false
-order: 80
+order: 70
 size: md
 tech:
   - MATLAB
@@ -18,79 +18,59 @@ tech:
   - Linear Algebra
 highlights:
   - Averaging-filter denoise on 2D radiation matrices (mSv/hr)
-  - HSV heatmaps and discrete safety-zone maps over satellite imagery
+  - HSV heatmaps and discrete safety-zone maps
   - GPS-cropped WatchDisplay plus a custom detectTumor algorithm
 cover:
   src: /images/projects/radiation-heatmap/cover.jpg
-  alt: Radiation intensity heatmap over the settlement area
-  caption: Heatmap rendering of radiation intensity (course project imagery).
+  alt: Labeled before and after denoise of a radiation scan with intensity legend
+  caption: >-
+    Before/after removeNoise with intensity legend — course-provided scan
+    imagery and reference outputs from ENGR 101 Project 1.
+  fit: contain
 gallery:
   - src: /images/projects/radiation-heatmap/noisy-scan.png
     alt: Noisy radiation scan before filtering
-    caption: Raw scan at a sample hour — sensor noise as isolated spikes.
+    caption: Course input — raw scan at a sample hour (noisy).
+    fit: contain
   - src: /images/projects/radiation-heatmap/denoised.png
     alt: Radiation field after averaging-filter denoise
-    caption: After removeNoise — neighborhood averaging cleans the field.
+    caption: Course reference after removeNoise averaging.
+    fit: contain
   - src: /images/projects/radiation-heatmap/heatmap.png
     alt: HSV heatmap of radiation intensity
-    caption: heatmap — intensity mapped into HSV for readability.
+    caption: Course reference — heatmap (HSV intensity).
+    fit: contain
   - src: /images/projects/radiation-heatmap/zones.jpg
     alt: Discrete safety zones around the dome
-    caption: zones — categorical safe / caution / danger regions.
+    caption: Course reference — zones (categorical regions).
+    fit: contain
 draft: false
 ---
 
 ## Problem and outcome
 
-Radiation readings around a settlement arrive as noisy 2D matrices (mSv/hr).
-People need maps they can trust — intensity heatmaps, discrete safety zones,
-and a local smartwatch crop — plus a check for potential tumors in routine
-brain scans.
+Radiation readings arrive as noisy 2D matrices (mSv/hr). People need heatmaps,
+safety zones, a smartwatch crop, and a tumor check on brain scans.
 
-**Outcome:** a MATLAB function set that denoises scans, builds HSV heatmaps and
-zone images, drives a `WatchDisplay` crop from GPS + display settings, and
-implements `detectTumor` on MRI-style frames.
+**Outcome:** MATLAB functions `removeNoise`, `heatmap`, `zones`, `WatchDisplay`,
+and `detectTumor`.
 
-## Role and context
+## Role
 
 - **Course:** ENGR 101, University of Michigan  
 - **Spec:** [Project 1 — Dealing with Radiation](http://engr101staff.github.io/engr101.org/projects/project1/specs.html)  
-- **My work:** `removeNoise`, `heatmap`, `zones`, `WatchDisplay`, `detectTumor`  
-- Solo submission; autograded for correctness and style  
 
 ## Pipeline
 
 ```
 scan_radiation(hour)  →  removeNoise  →  heatmap / zones
-GPS_data + display_settings  →  WatchDisplay (local crop)
+GPS + display_settings  →  WatchDisplay
 brain scan  →  detectTumor
 ```
 
-## Technical decisions
-
-**1. Vectorized denoise, not nested pixel loops.** `removeNoise` applies an
-averaging neighborhood so the field stays physically smooth without writing
-per-pixel MATLAB loops the course discourages. Tradeoff: edge handling needs
-care so border cells stay defined.
-
-**2. HSV for continuous intensity; categorical zones for action.** Heatmaps keep
-magnitude readable; zones collapse the same data into regions people can treat
-as go / caution / stop. Both share the cleaned radiation matrix.
-
-**3. Driver owns I/O; functions stay pure.** Scripts call `scan_radiation`,
-`GPS_data`, and `display_settings`; helpers take matrices and return matrices so
-unit tests and the autograder stay deterministic.
-
-## Validation
-
-- Course unit tests for `removeNoise`, `heatmap`, and related helpers  
-- Autograder public + hidden cases (numeric tolerance via `almostEqual` /
-  image compare)  
-- Visual checks with `imshow` during development (not inside submitted
-  functions)  
-
 ## Limitations
 
-Course project scope — synthetic Proxima-b scenario and staff-provided scan
-APIs, not a fielded radiation instrument. `detectTumor` is a student-designed
-algorithm evaluated against the course test suite.
+Cover and gallery use **course-provided** inputs and reference imagery from the
+Project 1 specs, composed into a labeled before/after for readability. They are
+not independently re-exported from my private MATLAB workspace. A personal
+`imshow` export can replace them when shareable.

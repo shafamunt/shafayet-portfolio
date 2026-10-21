@@ -25,6 +25,8 @@ export function ProjectMedia({
   }
 
   const animated = /\.gif$/i.test(image.src);
+  const fitClass =
+    image.fit === "contain" ? "object-contain object-center" : "object-cover object-top";
 
   if (fill) {
     return (
@@ -35,7 +37,7 @@ export function ProjectMedia({
         priority={priority}
         sizes={sizes}
         unoptimized={animated}
-        className={cn("object-cover object-top", className)}
+        className={cn(fitClass, className)}
       />
     );
   }

@@ -20,9 +20,6 @@ import { cn } from "@/lib/utils";
 export default function HomePage() {
   const all = getAllProjects();
   const featured = getFeaturedProjects();
-  // Anything not in the showcase falls through to the bento grid, so every
-  // project appears exactly once on this page. Lower `order` sorts first so
-  // stronger hardware work can sit above archived MATLAB exercises.
   const rest = all
     .filter((p) => !featured.some((f) => f.slug === p.slug))
     .sort((a, b) => a.order - b.order);
@@ -32,12 +29,37 @@ export default function HomePage() {
     <>
       <Hero />
 
+      <section className="container-page py-16 md:py-24" aria-labelledby="work-heading">
+        <SectionHeading
+          eyebrow="Projects"
+          title="Selected builds."
+          titleId="work-heading"
+          description="Production school platform, FPGA calculator, ENGR 100 hardware, and MRacing lap-trigger work in progress."
+          action={{ label: "All projects", href: "/projects" }}
+        />
+
+        {featured.length === 0 ? <EmptyState /> : <ProjectShowcase projects={featured} />}
+      </section>
+
+      {rest.length > 0 && (
+        <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
+          <SectionHeading eyebrow="More" title="Elsewhere in the lab." titleId="more-heading" />
+          <BentoGrid>
+            {rest.map((project, i) => (
+              <BentoItem key={project.slug} size={project.size} index={i}>
+                <ProjectCard project={project} />
+              </BentoItem>
+            ))}
+          </BentoGrid>
+        </section>
+      )}
+
       <section className="container-page py-10 md:py-14" aria-labelledby="track-film-heading">
         <SectionHeading
-          eyebrow="MRacing"
-          title="On the track."
+          eyebrow="Team context"
+          title="MRacing on track."
           titleId="track-film-heading"
-          description="Same film as the scroll-down clip on the MRacing team site — embedded here, not behind the hero."
+          description="Public team film for competition context — not a demo of my lap-trigger prototype."
         />
         <Reveal>
           <VideoEmbed
@@ -50,37 +72,12 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section className="container-page py-16 md:py-24" aria-labelledby="work-heading">
-        <SectionHeading
-          eyebrow="Projects"
-          title="Selected builds."
-          titleId="work-heading"
-          description="Three to start with: MRacing lap-trigger sensing, the school platform in production, and ENGR 100 hardware."
-          action={{ label: "All projects", href: "/projects" }}
-        />
-
-        {featured.length === 0 ? <EmptyState /> : <ProjectShowcase projects={featured} />}
-      </section>
-
-      {rest.length > 0 && (
-        <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
-          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." titleId="more-heading" />
-          <BentoGrid>
-            {rest.map((project, i) => (
-              <BentoItem key={project.slug} size={project.size} index={i}>
-                <ProjectCard project={project} />
-              </BentoItem>
-            ))}
-          </BentoGrid>
-        </section>
-      )}
-
       <section className="container-page py-16 md:py-24" aria-labelledby="experience-heading">
         <SectionHeading
           eyebrow="Experience"
           title="Roles & teams."
           titleId="experience-heading"
-          description="Darul Uloom internship, Michigan ITS shift lead, MRacing FSAE, and MESH — full detail on the experience page."
+          description="Darul Uloom internship, Michigan ITS shift lead, MRacing FSAE, and MESH lab training."
           action={{ label: "Full experience", href: "/experience" }}
         />
         <ExperienceTimeline experience={getExperience()} compact />

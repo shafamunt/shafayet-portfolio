@@ -5,6 +5,7 @@ import { GithubIcon } from "@/components/icons";
 import { ProjectMedia } from "@/components/project-media";
 import { Badge } from "@/components/ui/badge";
 import type { CardSize, Project } from "@/lib/content";
+import { statusLabel } from "@/lib/content/status";
 import { cn, formatYear } from "@/lib/utils";
 
 const aspectBySize: Record<CardSize, string> = {
@@ -53,9 +54,9 @@ export function ProjectCard({
           <EmptyMediaSlot />
         )}
 
-        {project.status !== "live" && (
+        {statusLabel(project.status) && (
           <Badge variant="outline" className="absolute right-3 top-3 bg-background/80 backdrop-blur">
-            {project.status === "in-progress" ? "In progress" : "Archived"}
+            {statusLabel(project.status)}
           </Badge>
         )}
       </div>
@@ -66,7 +67,7 @@ export function ProjectCard({
           {project.role && (
             <>
               <span aria-hidden>·</span>
-              <span className="truncate">{project.role}</span>
+              <span className="line-clamp-1 min-w-0">{project.role}</span>
             </>
           )}
         </div>

@@ -11,6 +11,7 @@ import { ProjectMedia } from "@/components/project-media";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import type { Project } from "@/lib/content";
+import { statusLabel } from "@/lib/content/status";
 import { cn, formatYear } from "@/lib/utils";
 
 /**
@@ -138,10 +139,8 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                     <span>{project.role}</span>
                   </>
                 )}
-                {project.status !== "live" && (
-                  <Badge variant="accent">
-                    {project.status === "in-progress" ? "In progress" : "Archived"}
-                  </Badge>
+                {statusLabel(project.status) && (
+                  <Badge variant="accent">{statusLabel(project.status)}</Badge>
                 )}
               </div>
 

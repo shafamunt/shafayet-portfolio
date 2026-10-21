@@ -2,12 +2,11 @@
 title: Euchre Simulator
 summary: EECS 280 — C++ Euchre engine with Card, Pack, and polymorphic Human / Simple AI players.
 description: >-
-  EECS 280 Project 3: simulate Michigan-style Euchre with abstract data types
-  and polymorphism. Card and Pack types, Player hierarchy (Human + Simple AI),
-  and a driver that runs hands from a pack file through trump selection, tricks,
-  and scoring.
+  EECS 280 Project 3: simulate Michigan-style Euchre with ADTs and polymorphism.
+  Card and Pack types, Player hierarchy (Human + Simple AI), and a driver that
+  runs hands from a pack file through trump, tricks, and scoring.
 year: 2026
-role: Solo course project — EECS 280
+role: EECS 280 — C++ / OOP
 status: archived
 featured: false
 order: 60
@@ -24,64 +23,49 @@ highlights:
   - Full hand loop — deal, make trump, tricks, score
 cover:
   src: /images/projects/card-engine/cover.jpg
-  alt: Four-player Euchre table seating with partner teams
-  caption: Table layout — partners sit across; seats 0–3.
+  alt: Console output from the Euchre simulator showing deal, turn-up, and human hand
+  caption: Representative console output format from the EECS 280 Euchre specification.
+  fit: contain
 gallery:
-  - src: /images/projects/card-engine/table.jpg
-    alt: Euchre player seating diagram
-    caption: Seat order and left/right neighbors for trump and play.
+  - src: /images/projects/card-engine/architecture.png
+    alt: Architecture diagram Card to Pack to Player with Human and Simple AI
+    caption: Implementation sketch — Card → Pack → Player (Human / Simple AI).
+    fit: contain
+  - src: /images/projects/card-engine/rankings-course.jpg
+    alt: Course reference chart of Euchre trump and led-suit card rankings
+    caption: Course-provided reference — trump / led-suit ranking chart (EECS 280 staff).
+    fit: contain
 draft: false
 ---
 
 ## Problem and outcome
 
-Euchre needs clear ownership of cards, the pack, and player decisions so a
-human seat and an AI seat can share one rules engine. The learning target is
-C++ ADTs, inheritance, and polymorphism — not a GUI.
+Euchre needs clear ownership of cards, the pack, and player decisions so a human
+seat and an AI seat can share one rules engine.
 
 **Outcome:** a command-line simulator that deals from a pack file, runs trump
 selection and trick-taking, and supports Human plus Simple AI players.
 
-## Role and context
+## Role
 
 - **Course:** EECS 280, University of Michigan  
 - **Spec:** [Project 3 — Euchre](https://eecs280staff.github.io/euchre/)  
-- **My work:** `Card`, `Pack`, `Player` implementations and the `euchre` driver  
-- Solo or partnership course rules; this write-up reflects my submission  
+- **My work:** `Card`, `Pack`, `Player`, and the `euchre` driver  
 
 ## Architecture
 
 ```
 pack.in  →  Pack  →  deal  →  Player[4] (Human | Simple)
-                              │
-                              ├─ make trump
-                              ├─ lead / play card
-                              └─ score hands to game points
+                              deal / trump / play / score
 ```
-
-Players sit 0–3; teams are (0, 2) and (1, 3). The deck is the 24-card Euchre
-pack (9–A in four suits).
-
-## Technical decisions
-
-**1. One Player interface for Human and Simple.** Virtual decisions for ordering
-up, trump, and card play keep the driver free of `if (human)` branches.
-Tradeoff: Simple AI strategy stays intentionally limited to course rules.
-
-**2. Deterministic pack I/O for debugging.** Fixed `pack.in` and shuffle modes
-make trump and play choices reproducible under the autograder system tests.
-
-**3. Unit tests beside public compile checks.** Card / Pack / Player tests catch
-ordering and left-bower edge cases before full-game runs.
 
 ## Validation
 
-- Course unit tests and public compile checks  
-- System tests against staff `.out.correct` traces (Simple-only and Human
-  interactive paths)  
-- Autograder checkpoint + full project submissions  
+Unit tests, public compile checks, and system tests against staff
+`.out.correct` traces.
 
 ## Limitations
 
-Console simulator for the EECS 280 rule set — not a networked multiplayer
-client. Strategy is the course Simple AI, not a ranked bot.
+Console simulator for the EECS 280 rule set. Cover text follows the public
+spec’s sample output format; a personal terminal capture can replace it when
+available.

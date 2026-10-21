@@ -2,17 +2,15 @@
 title: Darul Uloom Michigan Platform
 summary: Production role-based school platform — schema, RLS, Edge Functions, and CI gating deploys for 70+ weekly users.
 description: >-
-  As software engineering intern I shipped a React + Supabase platform the
-  school uses for grading and administration: PostgreSQL with Row-Level
-  Security, Edge Functions for auth and privileged ops, and GitHub Actions
-  tests before every deploy. Public product surfaces: safapp.org and the
-  Arshad community portal.
+  Software engineering intern: React + Supabase school platform with PostgreSQL
+  Row-Level Security, Edge Functions for auth and privileged ops, and GitHub
+  Actions tests before every deploy. Public surfaces: safapp.org and arshad.guide.
 year: 2026
-role: Software engineering intern — full-stack
+role: SE intern — full-stack
 status: live
 featured: true
-order: 20
-size: wide
+order: 10
+size: md
 tech:
   - TypeScript
   - React
@@ -39,24 +37,18 @@ links:
     href: https://arshad.guide
 cover:
   src: /images/projects/dum-platform/cover.jpg
-  alt: SAF product previews including Arshad Darul Uloom Michigan demo
-  caption: SAF product surfaces — Arshad DUM portal preview and donation kiosk.
+  alt: Arshad Darul Uloom Michigan portal chooser for madrasa and masjid
+  caption: Arshad community hub — madrasa and masjid portals (signed-out).
 gallery:
-  - src: /images/projects/dum-platform/ui-portal-home.jpg
-    alt: Arshad Darul Uloom Michigan portal chooser for madrasa and masjid
-    caption: Arshad community hub — madrasa and masjid portals.
   - src: /images/projects/dum-platform/ui-madrasa-login.jpg
     alt: Arshad madrasa sign-in for Darul Uloom Michigan
-    caption: Madrasa management sign-in on arshad.guide.
+    caption: Madrasa sign-in on arshad.guide (signed-out).
   - src: /images/projects/dum-platform/ui-community.jpg
     alt: Arshad community selector listing Darul Uloom Michigan
-    caption: Community select — Darul Uloom Michigan on Arshad.
+    caption: Community select — Darul Uloom Michigan.
   - src: /images/projects/dum-platform/ui-portals.jpg
-    alt: SAF marketing page with live Arshad and donation UI previews
+    alt: SAF marketing page with Arshad and donation UI previews
     caption: SAF marketing — production UI components in device frames.
-  - src: /images/projects/dum-platform/rls.png
-    alt: Stack from UI through Edge Functions to Postgres RLS
-    caption: Access path — React, Edge Functions, Postgres RLS.
 draft: false
 ---
 
@@ -64,62 +56,48 @@ draft: false
 
 The school needed grades, records, and administration offline from spreadsheets,
 with **five access levels** that must not see the same rows. The platform is
-**live in production** for **70+ users**. Authenticated admin rows stay
-private; public product surfaces are [safapp.org](https://safapp.org) and
+**live in production** for **70+ users**. Authenticated admin rows stay private;
+public surfaces are [safapp.org](https://safapp.org) and
 [arshad.guide](https://arshad.guide).
 
-## Role and context
+## Role
 
-- **Employer:** Darul Uloom Michigan (Warren, MI)
-- **Product:** Arshad — madrasa + masjid modules on the SAF platform
-- **Role:** Software engineering intern  
-- **Dates:** May 2026 – present  
-- **What I personally built / owned:** end-to-end implementation work on the
-  role-based app — PostgreSQL schema and RLS, Supabase Edge Functions for
-  authentication and privileged operations, React (Vite) UI differentiated by
-  role, and GitHub Actions CI with automated tests gating deploys  
-- **What stays private:** authenticated admin UI with student PII  
+- **Employer:** Darul Uloom Michigan (Warren, MI)  
+- **Product:** Arshad on the SAF platform  
+- **Role:** Software engineering intern (May 2026 – present)  
+- **Owned:** Postgres schema + RLS, Edge Functions, role-differentiated React UI,
+  GitHub Actions CI  
 
 ## Architecture
 
 ```
-React (Vite) — one codebase, five role-differentiated UIs
+React (Vite) — five role-differentiated UIs
         │
         ▼
 Edge Functions — authentication + privileged operations
         │
         ▼
-PostgreSQL (30+ tables) — Row-Level Security at the row layer
-
+PostgreSQL (30+ tables) — Row-Level Security
 GitHub Actions — 75+ tests gate every deploy
 ```
 
-![Stack from UI through Edge Functions to Postgres RLS](/images/projects/dum-platform/rls.png)
+## Technical decisions
 
-## Technical decisions and tradeoffs
+**1. Enforce access in the database.** RLS so a missing UI check cannot casually
+leak another role's rows.
 
-**1. Enforce access in the database, not only in the UI.** Row-Level Security
-means a bug or missing check in React cannot casually leak another role's rows.
-Tradeoff: harder migrations and more careful policy testing; safer default for
-school data.
+**2. Privileged ops in Edge Functions.** Auth and sensitive writes stay off the
+client.
 
-**2. Put privileged operations in Edge Functions.** Auth and sensitive writes
-stay off the client. Tradeoff: more moving parts than a pure client-to-Postgres
-app; clearer security boundary.
-
-**3. Block deploys with automated tests.** A grading system that fails quietly
-on Monday is unacceptable. **75+** tests run in GitHub Actions before ship.
-Tradeoff: slower merge cadence; fewer production surprises.
+**3. Block deploys with tests.** **75+** tests in GitHub Actions before ship.
 
 ## Validation
 
-- Production use by **70+** people across **five** access levels  
-- CI required green before deploy  
-- Manual role checks during development (each tier sees a different slice of
-  data)  
+Production use by **70+** people across **five** access levels; CI required
+green before deploy.
 
-## Limitations and next steps
+## Limitations
 
-Gallery shots are signed-out Arshad / SAF surfaces (community select, portal
-chooser, madrasa login). Authenticated screens with student records stay off
-this site. Feature work continues while the school depends on the system daily.
+Gallery shows signed-out Arshad / SAF surfaces. Authenticated grading and
+attendance with synthetic demo records are not published here yet — those need
+a controlled demo export.
