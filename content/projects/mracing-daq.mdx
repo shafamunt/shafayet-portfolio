@@ -37,17 +37,11 @@ links:
 cover:
   src: /images/projects/mracing-daq/team-car-track.jpg
   alt: MRacing Formula SAE electric car on track
-  caption: Team photo via mracing.engin.umich.edu — competition context for the lap-timing problem.
+  caption: MRacing FSAE electric car.
 gallery:
-  - src: /images/projects/mracing-daq/team-car-corner.jpg
-    alt: MRacing car cornering on a race surface
-    caption: Team photo via mracing.engin.umich.edu.
   - src: /images/projects/mracing-daq/signal-path.png
-    alt: Conceptual block diagram from photosensor through conditioning and MCU to the vehicle bus
-    caption: Conceptual signal path — planned architecture, not a photo of finished hardware.
-  - src: /images/projects/mracing-daq/team-car-pit.jpg
-    alt: MRacing car in the pits with team members
-    caption: Team photo via mracing.engin.umich.edu.
+    alt: Signal path from photosensor through conditioning and MCU to the vehicle bus
+    caption: Target signal path — photosensor to bus.
 draft: false
 ---
 
@@ -84,7 +78,7 @@ photosensor  →  conditioning  →  MCU
                                    vehicle bus / telemetry
 ```
 
-![Conceptual signal path from photosensor to vehicle bus](/images/projects/mracing-daq/signal-path.png)
+![Signal path from photosensor to vehicle bus](/images/projects/mracing-daq/signal-path.png)
 
 Only the left side exists as a bench prototype today. Conditioning, MCU
 latching, and bus publish are the planned next stages.

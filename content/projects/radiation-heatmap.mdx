@@ -1,12 +1,12 @@
 ---
-title: Radiation Heatmap & Image Processing Engine
-summary: MATLAB pipeline — custom matrix filters denoise frames and render intensity as HSV heatmaps.
+title: Radiation Heatmap & Image Processing
+summary: ENGR 101 — MATLAB radiation pipeline — denoise scans, HSV heatmaps and safety zones, smartwatch crop, tumor detect.
 description: >-
-  Course image-processing exercise: I wrote denoise filters as explicit matrix
-  operations, then mapped intensity into HSV so magnitude is visible. Learning
-  project, not a deployed sensor product.
+  ENGR 101 Project 1: process noisy radiation scan matrices into public safety
+  imagery. removeNoise, heatmap, and zones with vectorized MATLAB; WatchDisplay
+  for GPS-cropped smartwatch views; detectTumor on MRI-style brain scans.
 year: 2026
-role: Solo course build — image / signal processing
+role: Solo course project — ENGR 101
 status: archived
 featured: false
 order: 80
@@ -14,37 +14,83 @@ size: md
 tech:
   - MATLAB
   - Image Processing
+  - Vectorization
   - Linear Algebra
-  - Signal Processing
 highlights:
-  - Custom matrix filters (not black-box library calls for the core path)
-  - HSV heatmap rendering of intensity
-  - Inspectable kernels in the script
+  - Averaging-filter denoise on 2D radiation matrices (mSv/hr)
+  - HSV heatmaps and discrete safety-zone maps over satellite imagery
+  - GPS-cropped WatchDisplay plus a custom detectTumor algorithm
 cover:
-  src: /images/projects/radiation-heatmap/before-after.png
-  alt: Conceptual before/after of a noisy field and a smoothed heatmap
-  caption: Conceptual before/after diagram — not a captured sensor frame.
+  src: /images/projects/radiation-heatmap/cover.jpg
+  alt: Radiation intensity heatmap over the settlement area
+  caption: Heatmap rendering of radiation intensity (course project imagery).
+gallery:
+  - src: /images/projects/radiation-heatmap/noisy-scan.png
+    alt: Noisy radiation scan before filtering
+    caption: Raw scan at a sample hour — sensor noise as isolated spikes.
+  - src: /images/projects/radiation-heatmap/denoised.png
+    alt: Radiation field after averaging-filter denoise
+    caption: After removeNoise — neighborhood averaging cleans the field.
+  - src: /images/projects/radiation-heatmap/heatmap.png
+    alt: HSV heatmap of radiation intensity
+    caption: heatmap — intensity mapped into HSV for readability.
+  - src: /images/projects/radiation-heatmap/zones.jpg
+    alt: Discrete safety zones around the dome
+    caption: zones — categorical safe / caution / danger regions.
 draft: false
 ---
 
 ## Problem and outcome
 
-Raw frames are hard to read as tables. I built a small MATLAB pipeline that
-denoises with custom kernels and renders magnitude as an HSV heatmap.
+Radiation readings around a settlement arrive as noisy 2D matrices (mSv/hr).
+People need maps they can trust — intensity heatmaps, discrete safety zones,
+and a local smartwatch crop — plus a check for potential tumors in routine
+brain scans.
 
-## Role
+**Outcome:** a MATLAB function set that denoises scans, builds HSV heatmaps and
+zone images, drives a `WatchDisplay` crop from GPS + display settings, and
+implements `detectTumor` on MRI-style frames.
 
-Solo course exercise.
+## Role and context
 
-## Approach
+- **Course:** ENGR 101, University of Michigan  
+- **Spec:** [Project 1 — Dealing with Radiation](http://engr101staff.github.io/engr101.org/projects/project1/specs.html)  
+- **My work:** `removeNoise`, `heatmap`, `zones`, `WatchDisplay`, `detectTumor`  
+- Solo submission; autograded for correctness and style  
+
+## Pipeline
 
 ```
-raw frame  →  denoise kernel  →  normalize  →  HSV heatmap
+scan_radiation(hour)  →  removeNoise  →  heatmap / zones
+GPS_data + display_settings  →  WatchDisplay (local crop)
+brain scan  →  detectTumor
 ```
 
-Filters are written as matrix operations so coefficients stay inspectable.
+## Technical decisions
+
+**1. Vectorized denoise, not nested pixel loops.** `removeNoise` applies an
+averaging neighborhood so the field stays physically smooth without writing
+per-pixel MATLAB loops the course discourages. Tradeoff: edge handling needs
+care so border cells stay defined.
+
+**2. HSV for continuous intensity; categorical zones for action.** Heatmaps keep
+magnitude readable; zones collapse the same data into regions people can treat
+as go / caution / stop. Both share the cleaned radiation matrix.
+
+**3. Driver owns I/O; functions stay pure.** Scripts call `scan_radiation`,
+`GPS_data`, and `display_settings`; helpers take matrices and return matrices so
+unit tests and the autograder stay deterministic.
+
+## Validation
+
+- Course unit tests for `removeNoise`, `heatmap`, and related helpers  
+- Autograder public + hidden cases (numeric tolerance via `almostEqual` /
+  image compare)  
+- Visual checks with `imshow` during development (not inside submitted
+  functions)  
 
 ## Limitations
 
-Cover art is a conceptual diagram. A real MATLAB export can replace it if the
-dataset is shareable. This is not a fielded radiation instrument.
+Course project scope — synthetic Proxima-b scenario and staff-provided scan
+APIs, not a fielded radiation instrument. `detectTumor` is a student-designed
+algorithm evaluated against the course test suite.

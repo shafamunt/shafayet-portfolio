@@ -1,11 +1,12 @@
 ---
 title: Darul Uloom Michigan Platform
-summary: Production role-based school platform — I built schema, RLS, Edge Functions, and CI that gate deploys for 70+ weekly users.
+summary: Production role-based school platform — schema, RLS, Edge Functions, and CI gating deploys for 70+ weekly users.
 description: >-
   As software engineering intern I shipped a React + Supabase platform the
   school uses for grading and administration: PostgreSQL with Row-Level
   Security, Edge Functions for auth and privileged ops, and GitHub Actions
-  tests before every deploy. No public demo — student data stays private.
+  tests before every deploy. Public product surfaces: safapp.org and the
+  Arshad community portal.
 year: 2026
 role: Software engineering intern — full-stack
 status: live
@@ -31,20 +32,26 @@ highlights:
   - Live in production for a Michigan school (70+ users)
   - Designed 30+ table Postgres schema with Row-Level Security
   - CI with 75+ tests gating GitHub Actions deploys
+links:
+  - label: SAF product site
+    href: https://safapp.org
 cover:
-  src: /images/projects/dum-platform/ui-login.png
-  alt: Sanitized staff portal sign-in UI with no student data
-  caption: Sanitized product UI — synthetic layout matching the live staff portal; no PII.
+  src: /images/projects/dum-platform/cover.jpg
+  alt: SAF product suite highlighting Arshad madrasa and masjid management
+  caption: SAF product suite — Arshad is the madrasa / masjid portal.
 gallery:
-  - src: /images/projects/dum-platform/ui-roles.png
-    alt: Sanitized diagram of five role access levels
-    caption: Sanitized role model — five access levels; no student records.
-  - src: /images/projects/dum-platform/ui-attendance.png
-    alt: Sanitized attendance roster with redacted names
-    caption: Sanitized attendance view — names replaced with bars; statuses only.
+  - src: /images/projects/dum-platform/ui-login.png
+    alt: Arshad community select showing Darul Uloom Michigan
+    caption: Arshad sign-in entry — Darul Uloom Michigan community.
+  - src: /images/projects/dum-platform/ui-landing.png
+    alt: SAF marketing landing page
+    caption: SAF landing — community management platform.
+  - src: /images/projects/dum-platform/ui-products.png
+    alt: SAF products page with Arshad and companion modules
+    caption: Product suite — Arshad, prayer display, time clock, admissions.
   - src: /images/projects/dum-platform/rls.png
-    alt: Conceptual stack from UI through Edge Functions to Postgres RLS
-    caption: Conceptual architecture — React, Edge Functions, Postgres RLS.
+    alt: Stack from UI through Edge Functions to Postgres RLS
+    caption: Access path — React, Edge Functions, Postgres RLS.
 draft: false
 ---
 
@@ -52,21 +59,21 @@ draft: false
 
 The school needed grades, records, and administration offline from spreadsheets,
 with **five access levels** that must not see the same rows. The platform is
-**live in production** for **70+ users**. There is no public demo URL — the
-system holds real student data.
+**live in production** for **70+ users**. Staff portals stay private; public
+product surfaces are [safapp.org](https://safapp.org) and the Arshad community
+entry.
 
 ## Role and context
 
 - **Employer:** Darul Uloom Michigan (Warren, MI)
-- **Product (internal name):** Arshad — madrasa + masjid modules on one tenant
+- **Product:** Arshad — madrasa + masjid modules on the SAF platform
 - **Role:** Software engineering intern  
 - **Dates:** May 2026 – present  
 - **What I personally built / owned:** end-to-end implementation work on the
   role-based app — PostgreSQL schema and RLS, Supabase Edge Functions for
   authentication and privileged operations, React (Vite) UI differentiated by
   role, and GitHub Actions CI with automated tests gating deploys  
-- **What stays private:** production URL, student PII, and unredacted
-  screenshots
+- **What stays private:** authenticated admin UI with student PII  
 
 ## Architecture
 
@@ -82,7 +89,7 @@ PostgreSQL (30+ tables) — Row-Level Security at the row layer
 GitHub Actions — 75+ tests gate every deploy
 ```
 
-![Conceptual stack from UI through Edge Functions to Postgres RLS](/images/projects/dum-platform/rls.png)
+![Stack from UI through Edge Functions to Postgres RLS](/images/projects/dum-platform/rls.png)
 
 ## Technical decisions and tradeoffs
 
@@ -104,14 +111,10 @@ Tradeoff: slower merge cadence; fewer production surprises.
 - Production use by **70+** people across **five** access levels  
 - CI required green before deploy  
 - Manual role checks during development (each tier sees a different slice of
-  data) — detailed test plans stay internal  
-
-Gallery images above are **sanitized product UI** (no student names or emails).
-They mirror the live portal structure; they are not unredacted production
-captures.
+  data)  
 
 ## Limitations and next steps
 
-- Real production screenshots need a controlled redaction pass before publish  
-- Further hardening and feature work continues while the school depends on the
-  system daily  
+Authenticated screens with student records stay off this site. Public gallery
+shots are from the marketing and community-select surfaces. Feature work
+continues while the school depends on the system daily.

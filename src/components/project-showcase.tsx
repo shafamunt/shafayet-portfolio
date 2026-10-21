@@ -122,12 +122,10 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                   sizes="(min-width: 1024px) 50vw, 100vw"
                 />
               ) : (
-                <div className="flex h-full flex-col items-center justify-center gap-2 border border-dashed border-border-strong px-4 text-center">
-                  <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-accent">
-                    Media TODO
-                  </p>
-                  <p className="text-xs text-muted">Add a cover in frontmatter.</p>
-                </div>
+                <div
+                  className="flex h-full flex-col items-center justify-center border border-dashed border-border-strong bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)]"
+                  aria-hidden
+                />
               )}
             </Link>
 

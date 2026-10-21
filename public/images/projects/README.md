@@ -1,21 +1,13 @@
 # Project media
 
-## Illustrated / TODO placeholders
+Covers and gallery files under each project folder. Missing paths render as
+quiet framed placeholders (no TODO text on the site). Drop real bytes at the
+same path to replace them.
 
-Generated covers and “MEDIA TODO” frames fill paths so cards are never empty.
-Replace any file with a real photo or screenshot at the **same path** — the
-site picks up whatever is on disk.
-
-See [`EVIDENCE_CHECKLIST.md`](../../../EVIDENCE_CHECKLIST.md) for assets still
-worth capturing (internal checklist — not shown on the live site).
-
-## MRacing team photos
-
-Files named `team-*.jpg` under `mracing-daq/` are public promotional photos
-from [mracing.engin.umich.edu](https://www.mracing.engin.umich.edu/), used the
-same way peer portfolios use SPARK / FSAE team media for context. Prefer
-replacing them with your own shots when you can.
+See [`EVIDENCE_CHECKLIST.md`](../../../EVIDENCE_CHECKLIST.md) for the internal
+capture checklist.
 
 ## Privacy
 
-Keep student data out of Darul Uloom images — redacted UI only.
+Keep student data out of Darul Uloom images — signed-out marketing pages or
+redacted UI only.

@@ -151,11 +151,9 @@ function IconLink({
 /** Fallback when frontmatter has no cover at all. */
 function EmptyMediaSlot() {
   return (
-    <div className="flex h-full min-h-[10rem] flex-col items-center justify-center gap-2 border border-dashed border-border-strong bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)] px-4 text-center">
-      <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-accent">
-        Media TODO
-      </p>
-      <p className="text-xs text-muted">Add a cover image in project frontmatter.</p>
-    </div>
+    <div
+      className="flex h-full min-h-[10rem] flex-col items-center justify-center border border-dashed border-border-strong bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)]"
+      aria-hidden
+    />
   );
 }

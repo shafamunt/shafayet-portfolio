@@ -1,12 +1,13 @@
 ---
-title: Card Game Engine
-summary: C++ Euchre simulation with a swappable AI player — OOP boundaries, deterministic rules, testable state.
+title: Euchre Simulator
+summary: EECS 280 — C++ Euchre engine with Card, Pack, and polymorphic Human / Simple AI players.
 description: >-
-  Solo C++ project: a Euchre engine where players, deck, and game state are
-  separate objects so a human and an AI seat share one interface. Focused on
-  clear ownership and debuggable play decisions.
+  EECS 280 Project 3: simulate Michigan-style Euchre with abstract data types
+  and polymorphism. Card and Pack types, Player hierarchy (Human + Simple AI),
+  and a driver that runs hands from a pack file through trump selection, tricks,
+  and scoring.
 year: 2026
-role: Solo build — C++ systems / OOP
+role: Solo course project — EECS 280
 status: archived
 featured: false
 order: 60
@@ -14,38 +15,73 @@ size: md
 tech:
   - C++
   - OOP
-  - Data Structures
+  - Inheritance
+  - Polymorphism
   - Git
 highlights:
-  - Human and AI players behind one interface
-  - Deterministic engine for debugging trump and play choices
-  - Modular deck / state / player boundaries
+  - Card / Pack ADTs with unit tests
+  - Human and Simple AI behind one Player interface
+  - Full hand loop — deal, make trump, tricks, score
 cover:
-  src: /images/projects/card-engine/cover.png
-  alt: Conceptual diagram of a human player and an AI player sharing one card interface
-  caption: Conceptual diagram of the engine interface — not a product screenshot.
+  src: /images/projects/card-engine/cover.jpg
+  alt: Four-player Euchre table seating with partner teams
+  caption: Table layout — partners sit across; seats 0–3.
+gallery:
+  - src: /images/projects/card-engine/table.jpg
+    alt: Euchre player seating diagram
+    caption: Seat order and left/right neighbors for trump and play.
 draft: false
 ---
 
 ## Problem and outcome
 
-Card games stress object-oriented design: rules, state, and players change
-independently. I built a Euchre simulation where those pieces stay separable
-and an AI seat does not tangle the rules engine.
+Euchre needs clear ownership of cards, the pack, and player decisions so a
+human seat and an AI seat can share one rules engine. The learning target is
+C++ ADTs, inheritance, and polymorphism — not a GUI.
 
-## Role
+**Outcome:** a command-line simulator that deals from a pack file, runs trump
+selection and trick-taking, and supports Human plus Simple AI players.
 
-Solo project. No team attribution.
+## Role and context
 
-## Approach
+- **Course:** EECS 280, University of Michigan  
+- **Spec:** [Project 3 — Euchre](https://eecs280staff.github.io/euchre/)  
+- **My work:** `Card`, `Pack`, `Player` implementations and the `euchre` driver  
+- Solo or partnership course rules; this write-up reflects my submission  
 
-**Separate concerns.** Players, decks, and game state are their own types. A
-human and an AI implement the same player interface.
+## Architecture
 
-**Determinism first.** Play is testable so trump selection and card choices can
-be debugged without a mysterious RNG.
+```
+pack.in  →  Pack  →  deal  →  Player[4] (Human | Simple)
+                              │
+                              ├─ make trump
+                              ├─ lead / play card
+                              └─ score hands to game points
+```
+
+Players sit 0–3; teams are (0, 2) and (1, 3). The deck is the 24-card Euchre
+pack (9–A in four suits).
+
+## Technical decisions
+
+**1. One Player interface for Human and Simple.** Virtual decisions for ordering
+up, trump, and card play keep the driver free of `if (human)` branches.
+Tradeoff: Simple AI strategy stays intentionally limited to course rules.
+
+**2. Deterministic pack I/O for debugging.** Fixed `pack.in` and shuffle modes
+make trump and play choices reproducible under the autograder system tests.
+
+**3. Unit tests beside public compile checks.** Card / Pack / Player tests catch
+ordering and left-bower edge cases before full-game runs.
+
+## Validation
+
+- Course unit tests and public compile checks  
+- System tests against staff `.out.correct` traces (Simple-only and Human
+  interactive paths)  
+- Autograder checkpoint + full project submissions  
 
 ## Limitations
 
-No public repository link on this page yet. Optional: a short terminal capture
-of a hand when I am ready to share one.
+Console simulator for the EECS 280 rule set — not a networked multiplayer
+client. Strategy is the course Simple AI, not a ranked bot.
