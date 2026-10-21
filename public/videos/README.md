@@ -1,9 +1,9 @@
-# Hero video
+# Videos
 
-`mracing-hero.mp4` + `mracing-hero-poster.jpg` power the homepage full-bleed
-loop (muted, autoplay). Source: public footage from
-[mracing.engin.umich.edu](https://www.mracing.engin.umich.edu/).
+| File | Use |
+| --- | --- |
+| `mracing-hero.mp4` + `mracing-hero-poster.jpg` | Homepage **embed** (scroll-down film from [mracing.engin.umich.edu](https://www.mracing.engin.umich.edu/)) |
+| `fpga-board-demo.mp4` | EECS 270 DE2-115 calculator demo on the FPGA case study |
 
-Replace both files to swap the clip. Paths are configured in `src/lib/site.ts`
-→ `site.heroVideo`. Keep the MP4 under ~10 MB when possible (`faststart`, no
-audio track).
+Keep MP4s muted-friendly (`faststart`, under ~10 MB when possible). Paths are
+wired in `src/lib/site.ts` (`showcaseVideo`) and project MDX.

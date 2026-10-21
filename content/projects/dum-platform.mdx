@@ -32,13 +32,19 @@ highlights:
   - Designed 30+ table Postgres schema with Row-Level Security
   - CI with 75+ tests gating GitHub Actions deploys
 cover:
-  src: /images/projects/dum-platform/rls.png
-  alt: Conceptual diagram of React UI, Edge Functions, and Postgres row-level security
-  caption: Conceptual architecture diagram — not a screenshot of student data.
+  src: /images/projects/dum-platform/ui-login.png
+  alt: Sanitized staff portal sign-in UI with no student data
+  caption: Sanitized product UI — synthetic layout matching the live staff portal; no PII.
 gallery:
-  - src: /images/projects/dum-platform/roles.png
-    alt: Conceptual diagram of five access levels sharing one application
-    caption: Conceptual role model — redacted; no student records shown.
+  - src: /images/projects/dum-platform/ui-roles.png
+    alt: Sanitized diagram of five role access levels
+    caption: Sanitized role model — five access levels; no student records.
+  - src: /images/projects/dum-platform/ui-attendance.png
+    alt: Sanitized attendance roster with redacted names
+    caption: Sanitized attendance view — names replaced with bars; statuses only.
+  - src: /images/projects/dum-platform/rls.png
+    alt: Conceptual stack from UI through Edge Functions to Postgres RLS
+    caption: Conceptual architecture — React, Edge Functions, Postgres RLS.
 draft: false
 ---
 
@@ -52,6 +58,7 @@ system holds real student data.
 ## Role and context
 
 - **Employer:** Darul Uloom Michigan (Warren, MI)
+- **Product (internal name):** Arshad — madrasa + masjid modules on one tenant
 - **Role:** Software engineering intern  
 - **Dates:** May 2026 – present  
 - **What I personally built / owned:** end-to-end implementation work on the
@@ -99,11 +106,12 @@ Tradeoff: slower merge cadence; fewer production surprises.
 - Manual role checks during development (each tier sees a different slice of
   data) — detailed test plans stay internal  
 
-I am not publishing unredacted UI captures or student-facing URLs.
+Gallery images above are **sanitized product UI** (no student names or emails).
+They mirror the live portal structure; they are not unredacted production
+captures.
 
 ## Limitations and next steps
 
-- Screenshots on this page are **conceptual diagrams**, not live product
-  photography — sanitized captures can replace them when available  
+- Real production screenshots need a controlled redaction pass before publish  
 - Further hardening and feature work continues while the school depends on the
   system daily  

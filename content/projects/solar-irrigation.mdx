@@ -1,10 +1,10 @@
 ---
-title: Solar Vehicle & Automated Irrigation
-summary: ENGR 100 hardware lead — 3D-printed solar chassis packaging and a moisture-sensing irrigation loop on a microcontroller.
+title: Solar-Powered Irrigation Prototype
+summary: ENGR 100 — solar + battery powered moisture-sensing irrigation loop on an Uno-class MCU, with 3D-printed mounts and a solenoid valve.
 description: >-
-  Two completed course prototypes: I led hardware for a solar vehicle chassis
-  (CAD + 3D print as packaging changed) and a soil-moisture irrigation system
-  that only actuates when the probe reads dry. Finished builds, course context.
+  Course prototype: a capacitive soil-moisture probe drives an MCU that opens a
+  solenoid valve only when the soil reads dry. Solar panel and battery feed the
+  rail through a buck converter; 3D-printed parts hold the reservoir and boards.
 year: 2026
 role: Hardware & prototyping lead — ENGR 100
 status: archived
@@ -14,77 +14,101 @@ size: md
 tech:
   - Microcontrollers
   - Sensors
+  - Solar
   - 3D Printing
-  - PrusaSlicer
-  - TinkerCAD
+  - Arduino
 metricsLabel: Outcomes
 metrics:
-  - label: Working prototypes
-    value: "2"
+  - label: Working demo
+    value: Yes
   - label: Context
     value: ENGR 100
 highlights:
-  - Owned chassis packaging through drivetrain and panel changes
-  - Moisture probe → MCU → valve with hysteresis (water on demand)
-  - Hardware lead for a student team through demo day
+  - Moisture probe → MCU → solenoid valve with threshold / hysteresis behavior
+  - Solar panel + battery + buck converter on the same bench rail
+  - 3D-printed reservoir stand and board mounts through demo day
 cover:
-  src: /images/projects/solar-irrigation/cover.png
-  alt: Conceptual diagram of a solar chassis beside a moisture-sensing irrigation loop
-  caption: Conceptual diagram of the two ENGR 100 builds — not a photograph of the prototypes.
+  src: /images/projects/solar-irrigation/cover.jpg
+  alt: Full solar-powered irrigation prototype on a plywood base with panel, MCU, soil cup, and water bottle
+  caption: ENGR 100 lab — full sense → decide → water loop on the bench.
+gallery:
+  - src: /images/projects/solar-irrigation/sensor-mcu.jpg
+    alt: Elegoo Uno, capacitive soil moisture sensor, breadboards, and buck converter
+    caption: Sensor and MCU detail — capacitive probe into the control path.
+  - src: /images/projects/solar-irrigation/electronics.jpg
+    alt: Solar panel, battery, converter, MCU, and solenoid valve wired on the bench
+    caption: Power and actuation path laid out for bring-up.
+  - src: /images/projects/solar-irrigation/printed-enclosure.jpg
+    alt: MCU in a printed mount beside a custom board in a 3D-printed frame
+    caption: 3D-printed packaging for the controller and course board.
+  - src: /images/projects/solar-irrigation/panel-characterization.jpg
+    alt: Solar panel characterization with dual multimeters on the lab bench
+    caption: Panel characterization before trusting the rail for the valve.
+  - src: /images/projects/solar-irrigation/demo-bench.jpg
+    alt: Demo bench with soil cup, tubing, valve, solar panel, and multimeter
+    caption: Live demo setup — soil cup, tubing, valve, and instrumentation.
+  - src: /images/projects/solar-irrigation/valve-integration.jpg
+    alt: Compact MCU, solar panel, and metal solenoid valve integration
+    caption: Valve integration next to the controller and panel.
 draft: false
 ---
 
 ## Problem and outcome
 
-ENGR 100 required hardware that moved and sensed. I led two prototypes to
-working demos: a **3D-printed solar vehicle chassis** that kept panel and
-drivetrain packaging coherent, and a **moisture-sensing irrigation** loop that
-waters when the soil asks — not on a blind timer.
+ENGR 100 asked for hardware that sensed and acted. I led a **solar-powered
+irrigation prototype**: read soil moisture, decide wet vs dry on an Uno-class
+MCU, and open a solenoid valve only when the probe said dry — on a rail fed by
+a small panel and battery.
+
+**Outcome:** a working lab demo with photos of the full loop (panel → power →
+MCU → valve → soil cup).
 
 ## Role and context
 
 - **Course:** ENGR 100, University of Michigan  
 - **Role:** Hardware and prototyping lead on a student team  
-- **What I personally owned:** chassis CAD / print iteration; irrigation sensor
-  → MCU → actuator path and threshold behavior  
+- **What I personally owned:** sensor → MCU → valve path and thresholds;
+  power bring-up (panel / battery / buck); 3D-printed mounts for boards and
+  the reservoir  
 - **Team context:** classmates shared mechanical, electrical, and presentation
-  work; I am describing the hardware thread I led  
+  work; gallery photos are from our lab album  
 
-## System / signal flow (irrigation)
+## System / signal flow
 
 ```
-moisture probe  →  MCU threshold (+ hysteresis)  →  valve / pump
-     soil reading         decide wet vs dry              fluid only if dry
+solar panel + battery  →  buck converter  →  MCU rail
+                                              │
+moisture probe  ─────────────────────────────►│ threshold (+ hysteresis)
+                                              ▼
+                                         solenoid valve → tubing → soil
 ```
 
-Solar vehicle work was primarily mechanical packaging: mounts, wall thickness,
-print orientation, and fastener access as the drivetrain layout changed.
+![Full prototype on the bench](/images/projects/solar-irrigation/cover.jpg)
 
 ## Technical decisions and tradeoffs
 
-**1. Treat the chassis as packaging, not sculpture.** Panel mass and motor
-placement moved often. I prioritized mount points and print reliability over
-cosmetic aero. Tradeoff: less "pretty" CAD; fewer cracked brackets at demo.
+**1. Hysteresis on the moisture threshold.** Without it, the valve chatters at
+the wet/dry boundary. Tradeoff: slightly slower response; much less wear and
+noise in the demo.
 
-**2. Hysteresis on the moisture threshold.** Without it, the actuator chatters
-at the wet/dry boundary. Tradeoff: slightly slower response; much less
-mechanical wear and noise.
+**2. Characterize the panel before trusting the rail.** Dual-meter checks on
+the panel kept us from blaming firmware for a brown-out. Tradeoff: more bench
+time up front; fewer mystery resets later.
 
-**3. Calibrate "wet" in real soil, not only in slides.** Probe readings drift;
-oxide and placement matter. Tradeoff: more bench time; fewer false waterings
-in the demo.
+**3. 3D-printed mounts as packaging.** Custom stands for the bottle and boards
+beat tape for a repeatable demo. Tradeoff: print iteration time; cleaner
+handoffs on demo day.
 
 ## Validation
 
-- Both prototypes ran for course demo / evaluation  
-- Irrigation: exercised threshold behavior with the probe (qualitative — I am
-  not publishing numeric soil-% cutoffs without a logged dataset)  
-- Chassis: survived assembly and demo handling after multiple print revisions  
+- Full loop exercised on the lab bench (soil cup, tubing, valve, solar rail)  
+- Probe-driven on/off behavior checked qualitatively — I am not publishing
+  numeric soil-% cutoffs without a logged dataset  
+- Panel characterization with multimeters before demo  
 
 ## Limitations and next steps
 
-- This page uses a **conceptual diagram** until I add real photos of the
-  chassis and irrigation rig  
-- Course scope stopped at working prototypes — not a field-deployed product  
+- Course scope stopped at a working prototype — not a field-deployed product  
+- Photos are lab-bench evidence, not long-term outdoor reliability data  
 - Skills transfer into later PCB / embedded work (MESH, MRacing), not into a
   continued product line under this title  

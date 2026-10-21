@@ -11,6 +11,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { SectionHeading } from "@/components/section-heading";
 import { buttonVariants } from "@/components/ui/button";
+import { VideoEmbed } from "@/components/video-embed";
 import { getAllProjects, getAllTech, getFeaturedProjects } from "@/lib/content";
 import { getExperience } from "@/lib/resume";
 import { site } from "@/lib/site";
@@ -30,6 +31,24 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+
+      <section className="container-page py-10 md:py-14" aria-labelledby="track-film-heading">
+        <SectionHeading
+          eyebrow="MRacing"
+          title="On the track."
+          titleId="track-film-heading"
+          description="Same film as the scroll-down clip on the MRacing team site — embedded here, not behind the hero."
+        />
+        <Reveal>
+          <VideoEmbed
+            src={site.showcaseVideo.src}
+            poster={site.showcaseVideo.poster}
+            caption={site.showcaseVideo.caption}
+            credit={site.showcaseVideo.credit}
+            creditHref={site.showcaseVideo.creditHref}
+          />
+        </Reveal>
+      </section>
 
       <section className="container-page py-16 md:py-24" aria-labelledby="work-heading">
         <SectionHeading

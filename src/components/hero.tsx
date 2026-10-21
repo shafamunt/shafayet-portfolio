@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
-import { HeroVideo } from "@/components/hero-video";
 import { Magnetic } from "@/components/motion/magnetic";
 import { BlurCycle } from "@/components/motion/blur-cycle";
 import { StructCard } from "@/components/struct-card";
@@ -14,14 +13,7 @@ import { cn } from "@/lib/utils";
 export function Hero() {
   return (
     <section className="relative min-h-[min(100svh,56rem)] overflow-hidden">
-      <HeroVideo
-        src={site.heroVideo.src}
-        poster={site.heroVideo.poster}
-        credit={site.heroVideo.credit}
-        creditHref={site.heroVideo.creditHref}
-      />
-
-      {/* Soft accent wash on top of the video scrim. */}
+      {/* Soft accent wash — video lives in a dedicated embed below the hero. */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"

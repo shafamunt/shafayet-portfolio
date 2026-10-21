@@ -3,6 +3,8 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import type { MDXComponents } from "mdx/types";
 
+import { VideoEmbed } from "@/components/video-embed";
+
 /** Components available inside every case-study `.mdx` body. */
 const components: MDXComponents = {
   a: ({ href = "", children, ...props }) => {
@@ -29,8 +31,10 @@ const components: MDXComponents = {
       height={900}
       sizes="(min-width: 768px) 720px, 100vw"
       className="h-auto w-full rounded-card border border-border"
+      unoptimized={/\.gif$/i.test(String(src))}
     />
   ),
+  VideoEmbed,
 };
 
 export function MdxContent({ source }: { source: string }) {

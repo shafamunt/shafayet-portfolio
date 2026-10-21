@@ -52,13 +52,14 @@ export const site = {
   /** Hiring target shown near CTAs. Update when the season changes. */
   openTo: "Summer 2027 · Embedded, firmware & automotive internships · nationwide",
   /**
-   * Full-bleed homepage hero video (muted, looped) — same idea as the
-   * MRacing team site. Swap the files under `public/videos/` to update.
+   * Homepage embed (not a background) — the scroll-down track film from the
+   * MRacing team site. Swap files under `public/videos/` to update.
    */
-  heroVideo: {
+  showcaseVideo: {
     src: "/videos/mracing-hero.mp4",
     poster: "/videos/mracing-hero-poster.jpg",
-    credit: "Footage via MRacing FSAE",
+    caption: "MRacing FSAE — team film from the public team site.",
+    credit: "Via mracing.engin.umich.edu",
     creditHref: "https://www.mracing.engin.umich.edu/",
   },
 

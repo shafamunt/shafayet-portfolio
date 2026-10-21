@@ -7,35 +7,36 @@ into public captions or case studies.
 
 | Item | Why | Suggested path / note |
 | --- | --- | --- |
-| Personal photos (4–8) | Human credibility on About | `public/images/me/` |
+| Personal photos | About credibility | `public/images/me/` — seeded from your uploads |
 | MRacing breadboard photo | Proves prototype stage | `public/images/projects/mracing-daq/bench.jpg` |
-| MRacing Altium screenshot | Shows board path is real | `…/altium.png` |
-| MRacing scope / edge capture | Validation evidence | `…/scope.png` |
-| DUM redacted UI screenshots | Production proof without PII | `public/images/projects/dum-platform/` |
-| ENGR 100 chassis + irrigation photos | Replaces conceptual cover | `public/images/projects/solar-irrigation/` |
-| MESH board you assembled | Upgrades MESH from illustration | `public/images/projects/mesh/board.jpg` |
+| MRacing Altium / scope | Board path + validation | `…/altium.png`, `…/scope.png` |
+| DUM unredacted→redacted UI | Real product chrome | Need production URL or logged-in capture; sanitized SVGs are live for now |
+| ENGR 100 Google Photos | Real hardware gallery | Ingested from your album → `public/images/projects/solar-irrigation/` |
+| Own FPGA board clip | Replace shared lab demo if preferred | `public/videos/fpga-board-demo.mp4` |
 
-## Factual questions to confirm with you
+## Clarifications already applied
 
-1. Exact wording of your MRacing role title on the team roster?  
+- **“LED matrix bench”** was never a public label — that was the separate draft
+  `led-matrix-games.mdx` (Arduino/LED arcade, still draft). MRacing work is the
+  **photosensor breadboard**, not an LED matrix.
+- **MRacing video** is the scroll-down Squarespace film from the team site,
+  embedded below the hero (not a background).
+- **FPGA** undrafted with DE2-115 demo clip sourced from the same EECS 270 lab
+  demo classmates publish (credited as shared lab demonstration).
+- **ENGR 100** case study retitled to solar-powered irrigation to match the
+  album evidence (no separate solar-vehicle photos in that set).
+
+## Factual questions still open
+
+1. Exact MRacing roster title wording?  
 2. Which DUM workflows did you personally implement vs inherit?  
 3. Numeric claims (70+ users, 30+ tables, 75+ tests) — still accurate?  
-4. ENGR 100 term/year and whether “hardware lead” matches how the course graded roles?  
-5. Any public GitHub repos safe to link for card engine / MATLAB / other?  
-6. Summer 2027 target industries beyond embedded / firmware / automotive?  
-7. EECS 270 FPGA calculator — finished enough to undraft `fpga-calculator.mdx`?  
-8. LED matrix arcade project — real for you, or delete the draft file?
-
-## Optional polish
-
-| Item | Note |
-| --- | --- |
-| Own hero video clip | Replace `public/videos/mracing-hero.mp4` (keep ~10 MB, muted) |
-| Card engine terminal GIF | Optional cover upgrade |
-| Watches / Spotify | Only if you want About personality sections live |
-| LinkedIn sync | Match titles/dates with `/experience` |
+4. ENGR 100 term/year and “hardware lead” wording?  
+5. Public GitHub repos safe to link?  
+6. Production DUM frontend URL (or a redacted screen recording) for true UI photos?  
+7. Prefer your own FPGA phone video over the shared lab clip?  
+8. Keep or delete the LED matrix draft permanently?
 
 ## Intentionally unpublished drafts
 
-- `content/projects/fpga-calculator.mdx` (`draft: true`)
 - `content/projects/led-matrix-games.mdx` (`draft: true`)

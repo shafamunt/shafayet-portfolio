@@ -24,6 +24,8 @@ export function ProjectMedia({
     return <MediaSlot image={image} className={className} />;
   }
 
+  const animated = /\.gif$/i.test(image.src);
+
   if (fill) {
     return (
       <Image
@@ -32,6 +34,7 @@ export function ProjectMedia({
         fill
         priority={priority}
         sizes={sizes}
+        unoptimized={animated}
         className={cn("object-cover object-top", className)}
       />
     );
@@ -45,6 +48,7 @@ export function ProjectMedia({
       height={900}
       priority={priority}
       sizes={sizes}
+      unoptimized={animated}
       className={cn("h-auto w-full", className)}
     />
   );

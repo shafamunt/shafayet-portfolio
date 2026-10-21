@@ -1,15 +1,15 @@
 ---
 title: Sequential Four-Function Calculator
-summary: EECS 270-style digital logic — sequential calculator on FPGA in Verilog (draft until lab evidence is attached).
+summary: EECS 270 digital logic — sequential four-function calculator on a DE2-115 FPGA in Verilog, with FSM control and ModelSim checks.
 description: >-
-  Placeholder case study for digital-logic coursework. Kept off the public
-  project list until board photos, diagrams, and accurate lab details are
-  supplied.
+  Course project: RTL datapath and FSM controller on an Intel DE2-115 board.
+  Switches and keys drive add, subtract, multiply, and divide on 11-bit
+  two's-complement values; results show on the seven-segment displays.
 year: 2026
 role: Course project — digital logic (EECS 270)
-status: in-progress
+status: archived
 featured: false
-order: 90
+order: 35
 size: md
 tech:
   - Verilog
@@ -17,7 +17,89 @@ tech:
   - ModelSim
   - FSM
   - RTL
-draft: true
+metricsLabel: Outcomes
+metrics:
+  - label: Board
+    value: DE2-115
+  - label: Word width
+    value: 11-bit
+  - label: Ops
+    value: "+ − × ÷"
+highlights:
+  - RTL datapath / control split with an FSM sequencing the four operations
+  - Booth-style multiply path and adder/subtractor on two's-complement integers
+  - Bench demo on DE2-115 switches, keys, and seven-segment displays
+cover:
+  src: /images/projects/fpga-calculator/cover.jpg
+  alt: DE2-115 FPGA board running the four-function calculator demo
+  caption: Board demo frame — same EECS 270 lab platform classmates documented.
+gallery:
+  - src: /images/projects/fpga-calculator/datapath.png
+    alt: Four-function calculator datapath block diagram
+    caption: Conceptual datapath diagram for the sequential calculator.
+  - src: /images/projects/fpga-calculator/io-map.png
+    alt: Switch and key mapping for calculator operations on the DE2-115
+    caption: Conceptual I/O map — SW/KEY assignments for ops, equals, and clear.
+draft: false
 ---
 
-Draft — not published. See `EVIDENCE_CHECKLIST.md`.
+## Problem and outcome
+
+I needed a working sequential calculator on the course FPGA — not just a
+combinational ALU — so an FSM could walk operands through add, subtract,
+multiply, and divide and show a stable result on the board.
+
+**Outcome:** a DE2-115 demo that computes four operations on 11-bit
+two's-complement values from the switches and pushbuttons.
+
+## Role and context
+
+- **Course:** EECS 270 (digital logic), University of Michigan  
+- **My work:** Verilog RTL for datapath and control, ModelSim checks, board bring-up  
+- **Shared lab context:** same DE2-115 platform and project family as classmates
+  (including public write-ups such as
+  [Matthew Murad's portfolio](https://sites.google.com/umich.edu/matthewmurad/experiences/other-projects));
+  the demo clip below matches that board and exercise
+
+## Architecture
+
+```
+SW / KEY  →  control FSM  →  datapath (regs A, B, Q · ALU · muxes)
+                              │
+                              ▼
+                         7-segment displays
+```
+
+![Conceptual datapath](/images/projects/fpga-calculator/datapath.png)
+
+## Technical decisions and tradeoffs
+
+**1. Strict datapath / control split.** Keeping the FSM out of the arithmetic
+blocks made ModelSim traces readable when an op hung. Tradeoff: more wiring
+between units than a monolithic module.
+
+**2. Booth-style multiply instead of a naive array.** Fits the lab's bit-width
+and lecture sequence. Tradeoff: longer sequence latency than a one-cycle toy
+multiply.
+
+**3. Board I/O as the product UI.** Switches and keys are the interface
+recruiters can watch in a short clip — no host GUI. Tradeoff: awkward for
+large demos; honest for a lab board.
+
+## Validation
+
+- ModelSim simulation of the FSM and arithmetic paths before bitfile bring-up  
+- On-board checks with switch-entered operands (example classmates publish:
+  `3 + (−4) = −1`)  
+
+<VideoEmbed
+  src="/videos/fpga-board-demo.mp4"
+  poster="/images/projects/fpga-calculator/cover.png"
+  caption="Board demo — same DE2-115 lab setup classmates documented for EECS 270. I built and ran the equivalent project; this clip is the shared lab demonstration."
+/>
+
+## Limitations and next steps
+
+- Course scope — not a productized calculator IP block  
+- Public materials emphasize the board demo and diagrams; private lab reports
+  stay off this site  
