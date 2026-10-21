@@ -29,8 +29,8 @@ export default function ProjectsPage() {
         />
         <Reveal delay={0.2}>
           <p className="mt-6 max-w-xl text-lead text-muted">
-            Everything I&apos;ve built that&apos;s worth showing. Filter by stack, or open a
-            case study for the full write-up.
+            Strongest demonstrated work first. Filter by category, or open a case
+            study for the full write-up.
           </p>
         </Reveal>
       </header>

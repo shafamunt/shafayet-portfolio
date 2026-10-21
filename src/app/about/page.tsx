@@ -86,8 +86,8 @@ export default function AboutPage() {
         </Reveal>
       </header>
 
-      {/* ── Photos ── */}
-      {(photos.length > 0 || process.env.NODE_ENV === "development") && (
+      {/* ── Photos (only when files exist under public/images/me/) ── */}
+      {photos.length > 0 && (
         <section className="mt-24 md:mt-32" aria-labelledby="photos-heading">
           <SectionHeading eyebrow="In the wild" title="Some photos." titleId="photos-heading" />
           <PhotoSlideshow photos={photos} />

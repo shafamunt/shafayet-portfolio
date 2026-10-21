@@ -30,6 +30,7 @@ function resolveImage(image: {
   alt: string;
   caption?: string;
   todo?: string;
+  fit?: "cover" | "contain";
 }): Image {
   const onDisk =
     image.src.startsWith("/") &&
@@ -40,6 +41,7 @@ function resolveImage(image: {
     alt: image.alt,
     caption: image.caption,
     todo: image.todo,
+    fit: image.fit,
     pending: !onDisk,
   };
 }

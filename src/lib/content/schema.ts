@@ -18,6 +18,11 @@ export const imageSchema = z.object({
    * at that path and the slot becomes the photo with no code change.
    */
   todo: z.string().optional(),
+  /**
+   * How the image fills its frame. Use `contain` for diagrams and terminal
+   * captures so labels stay readable; `cover` for photos.
+   */
+  fit: z.enum(["cover", "contain"]).optional(),
 });
 
 export type Image = z.infer<typeof imageSchema> & {
@@ -79,6 +84,11 @@ export const projectFrontmatterSchema = z.object({
   cover: imageSchema.optional(),
   gallery: z.array(imageSchema).default([]),
   metrics: z.array(metricSchema).default([]),
+  /**
+   * Sidebar heading above metrics. Prefer "Outcomes" for demonstrated results
+   * and "Current status" for in-progress work — never dump certs/tech here.
+   */
+  metricsLabel: z.enum(["Outcomes", "Current status"]).optional(),
   /** Bullet points shown beside the hero on the case study page. */
   highlights: z.array(z.string()).default([]),
 

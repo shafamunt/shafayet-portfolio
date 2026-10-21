@@ -11,6 +11,7 @@ import { ProjectMedia } from "@/components/project-media";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import type { Project } from "@/lib/content";
+import { statusLabel } from "@/lib/content/status";
 import { cn, formatYear } from "@/lib/utils";
 
 /**
@@ -112,7 +113,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
           >
             <Link
               href={href}
-              className="relative block aspect-[16/10] overflow-hidden bg-surface lg:aspect-auto lg:min-h-[26rem]"
+              className="relative block aspect-[16/10] overflow-hidden bg-surface lg:aspect-auto lg:min-h-[32rem]"
               aria-label={`${project.title} — case study`}
             >
               {project.cover ? (
@@ -122,12 +123,10 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                   sizes="(min-width: 1024px) 50vw, 100vw"
                 />
               ) : (
-                <div className="flex h-full flex-col items-center justify-center gap-2 border border-dashed border-border-strong px-4 text-center">
-                  <p className="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-accent">
-                    Media TODO
-                  </p>
-                  <p className="text-xs text-muted">Add a cover in frontmatter.</p>
-                </div>
+                <div
+                  className="flex h-full flex-col items-center justify-center border border-dashed border-border-strong bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)]"
+                  aria-hidden
+                />
               )}
             </Link>
 
@@ -140,10 +139,8 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                     <span>{project.role}</span>
                   </>
                 )}
-                {project.status !== "live" && (
-                  <Badge variant="accent">
-                    {project.status === "in-progress" ? "In progress" : "Archived"}
-                  </Badge>
+                {statusLabel(project.status) && (
+                  <Badge variant="accent">{statusLabel(project.status)}</Badge>
                 )}
               </div>
 
@@ -170,7 +167,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                   {project.metrics.slice(0, 3).map((metric) => (
                     <div key={metric.label}>
                       <dd className="font-display text-2xl text-foreground">{metric.value}</dd>
-                      <dt className="mt-0.5 text-xs text-subtle">{metric.label}</dt>
+                      <dt className="mt-0.5 text-xs text-muted">{metric.label}</dt>
                     </div>
                   ))}
                 </dl>

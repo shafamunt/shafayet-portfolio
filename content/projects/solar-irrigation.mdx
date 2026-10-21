@@ -1,49 +1,73 @@
 ---
-title: Solar Vehicle & Automated Irrigation
-summary: Two semester-long hardware builds — a 3D-printed solar vehicle chassis and a moisture-sensing irrigation system that waters only when the soil asks for it.
+title: Solar-Powered Irrigation Prototype
+summary: ENGR 100 — solar + battery powered moisture-sensing irrigation loop on an Uno-class MCU, with 3D-printed mounts and a solenoid valve.
 description: >-
-  Hardware/prototyping lead. Designed and 3D printed a custom chassis to
-  optimize weight and aerodynamics for a solar-powered vehicle, and
-  prototyped a moisture-sensing irrigation system integrating sensors with
-  microcontrollers for automated fluid control.
+  Course prototype: a capacitive soil-moisture probe drives an MCU that opens a
+  solenoid valve only when the soil reads dry. Solar panel and battery feed the
+  rail through a buck converter; 3D-printed parts hold the reservoir and boards.
 year: 2026
-role: Hardware & prototyping lead — ENGR 100
+role: Hardware lead — ENGR 100
 status: archived
-featured: false
-order: 40
+featured: true
+order: 30
 size: md
 tech:
   - Microcontrollers
   - Sensors
+  - Solar
   - 3D Printing
-  - PrusaSlicer
-  - TinkerCAD
+  - Arduino
+metricsLabel: Outcomes
+metrics:
+  - label: Working demo
+    value: Yes
+  - label: Context
+    value: ENGR 100
 highlights:
-  - Custom 3D-printed chassis for weight and aerodynamics
-  - Moisture-sensing irrigation with microcontroller fluid control
-  - Hardware and prototyping lead for the team
+  - Moisture probe → MCU → solenoid valve with threshold / hysteresis behavior
+  - Solar panel + battery + buck converter on the same bench rail
+  - 3D-printed reservoir stand and board mounts through demo day
 cover:
-  src: /images/projects/solar-irrigation/cover.png
-  alt: Illustration of a solar-panel chassis beside a moisture probe that opens a valve when soil is dry
-  caption: Illustrated stand-in. Not a photo of the ENGR 100 prototypes.
+  src: /images/projects/solar-irrigation/cover.jpg
+  alt: Solar irrigation prototype on plywood — panel, MCU, soil cup, valve, and bottle reservoir
+  caption: ENGR 100 lab — full sense → decide → water loop on the bench.
+gallery:
+  - src: /images/projects/solar-irrigation/annotated.jpg
+    alt: Annotated full build identifying panel, controller, moisture sensor, valve, and water path
+    caption: Callouts — (1) panel (2) controller/MCU (3) moisture sensor (4) valve (5) water path.
+  - src: /images/projects/solar-irrigation/sensor-mcu.jpg
+    alt: Elegoo Uno, capacitive soil moisture sensor, breadboards, and buck converter
+    caption: Sensor and MCU detail.
+  - src: /images/projects/solar-irrigation/electronics.jpg
+    alt: Solar panel, battery, converter, MCU, and solenoid valve wired on the bench
+    caption: Power and actuation path.
+  - src: /images/projects/solar-irrigation/valve-integration.jpg
+    alt: Solenoid valve and tubing into the soil cup
+    caption: Valve and water path into the soil cup.
+  - src: /images/projects/solar-irrigation/panel-characterization.jpg
+    alt: Solar panel characterization with dual multimeters on the lab bench
+    caption: Panel characterization before trusting the rail.
 draft: false
 ---
 
-## The problem
+## Problem and outcome
 
-ENGR 100 asked for real hardware that moved and sensed — not a slide deck
-about what we might build.
+Water the soil only when it is dry — with a solar-fed rail and a valve the MCU
+can open. Team demo on an ENGR 100 bench.
 
-## Approach
+## Role
 
-**Solar vehicle.** Designed and 3D printed a custom chassis to optimize weight
-and aerodynamics as the drivetrain packaging changed.
+Hardware and prototyping lead: sensor → MCU → valve path, power bring-up, and
+3D-printed mounts. Mechanical and presentation work shared across the team.
 
-**Irrigation.** Prototyped a moisture-sensing system that integrates soil
-sensors with a microcontroller for automated fluid control — water only when
-the soil asks for it, not on a blind timer.
+## System
 
-## Outcome
+```
+solar panel + battery  →  buck  →  MCU rail
+moisture probe  →  threshold (+ hysteresis)  →  solenoid valve → soil
+```
 
-Two working prototypes and a lot of lessons about packaging, iteration, and
-leading the physical side of a student team.
+## Limitations
+
+Course prototype, not a field-deployed irrigator. Labels on the annotated image
+match the visible hardware in the lab photo.
