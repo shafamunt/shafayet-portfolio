@@ -31,18 +31,25 @@ highlights:
   - Board demo — SW entry, KEY ops, HEX result, LEDG overflow
 cover:
   src: /images/projects/fpga-calculator/cover.jpg
-  alt: LabsLand remote-lab view of the FPGA board with HEX displays
+  alt: Labeled course-example calculation path and verified ModelSim/autograder checks
   caption: >-
-    LabsLand console capture during board bring-up — HEX digits partially
-    visible; source video is soft. A sharper personal board photo is still needed.
+    Evidence summary — course-spec example path (5 → ×7 → −5 → ÷4 → C) and the
+    checks that were run. Not a soft LabsLand webcam still.
+  fit: contain
 gallery:
   - src: /images/projects/fpga-calculator/datapath.png
     alt: Four-function calculator datapath with shared AddSub
-    caption: Course datapath figure — single 11-bit AddSub shared across ops.
+    caption: Course datapath figure — single 11-bit AddSub shared across ops (required architecture).
     fit: contain
   - src: /images/projects/fpga-calculator/stg.png
-    alt: Abstract state transition graph for calculator control
-    caption: Course abstract STG — LOAD → ADD/SUB → MUL → DIV + overflow.
+    alt: Course abstract state graph with Init, Display Result, Get Next Number, Perform Operation
+    caption: >-
+      Course abstract STG — Init State → Display Result / Get Next Number →
+      Perform Operation (C clears back to Init).
+    fit: contain
+  - src: /images/projects/fpga-calculator/board-io.jpg
+    alt: Course module graph and annotated DE2-115 I/O for number entry, ops, HEX result, overflow
+    caption: Course I/O map — SW/KEY entry, HEX result, LEDG overflow (course figure).
     fit: contain
 draft: false
 ---
@@ -53,13 +60,16 @@ Build a sequential calculator — not a one-cycle ALU. An FSM walks operands
 through add, subtract, multiply, and divide and shows a stable result on HEX.
 
 **Outcome:** `FourFuncCalc` datapath + controller for 11-bit two’s-complement
-arithmetic, with ModelSim coverage and a board demo.
+arithmetic, with ModelSim and autograder checks plus a board demo.
 
 ## Role
 
 - **Course:** EECS 270, University of Michigan  
 - **Spec:** [Project 7 — Sequential Calculator](https://www.eecs270.org/p7_sequential_calculator.html)  
 - **My work:** `FourFuncCalc.v`, `TestBench7.v`, `Project7.v` board wiring  
+- **Required vs mine:** shared AddSub datapath and abstract STG are course
+  architecture; controller refinement, Booth embed, and testbench cases are
+  implementation decisions within that frame  
 
 ## Architecture
 
@@ -78,16 +88,21 @@ SW / KEY / SW[17]  →  FourFuncCalc (FSM + datapath)
 
 ## Validation
 
-ModelSim with state labels; autograder checkpoint (ADD/SUB) and final (all ops);
-board checks on DE2-115 / LabsLand.
+Specific checks run (not a measured coverage percentage):
+
+- ModelSim with state labels on LOAD / ADD / SUB / MUL / DIV paths  
+- Autograder checkpoint (ADD/SUB) and final (all four ops)  
+- Overflow and divide-by-zero cases in `TestBench7`  
+- Board bring-up on DE2-115 / LabsLand — SW entry, KEY ops, HEX result, LEDG[8]
 
 <VideoEmbed
   src="/videos/fpga-board-demo.mp4"
   poster="/images/projects/fpga-calculator/cover.jpg"
-  caption="Board demo clip — LabsLand remote session; still frames are soft."
+  caption="Board demo clip — LabsLand remote session (webcam soft; cover uses the labeled evidence summary)."
 />
 
 ## Limitations
 
-Cover is a frame from a soft LabsLand recording, not a sharp bench photo with a
-clearly readable result. Diagrams in the gallery are course-provided figures.
+LabsLand webcam frames are soft; the cover is a labeled evidence diagram of the
+course example path and verified checks. Gallery diagrams are course-provided
+figures.

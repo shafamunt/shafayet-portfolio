@@ -11,7 +11,6 @@ import { ProjectCard } from "@/components/project-card";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { SectionHeading } from "@/components/section-heading";
 import { buttonVariants } from "@/components/ui/button";
-import { VideoEmbed } from "@/components/video-embed";
 import { getAllProjects, getAllTech, getFeaturedProjects } from "@/lib/content";
 import { getExperience } from "@/lib/resume";
 import { site } from "@/lib/site";
@@ -34,7 +33,7 @@ export default function HomePage() {
           eyebrow="Projects"
           title="Selected builds."
           titleId="work-heading"
-          description="Production school platform, FPGA calculator, ENGR 100 hardware, and MRacing lap-trigger work in progress."
+          description="Production school platform, FPGA calculator, and ENGR 100 irrigation hardware — plus MRacing lap-trigger work in progress."
           action={{ label: "All projects", href: "/projects" }}
         />
 
@@ -53,24 +52,6 @@ export default function HomePage() {
           </BentoGrid>
         </section>
       )}
-
-      <section className="container-page py-10 md:py-14" aria-labelledby="track-film-heading">
-        <SectionHeading
-          eyebrow="Team context"
-          title="MRacing on track."
-          titleId="track-film-heading"
-          description="Public team film for competition context — not a demo of my lap-trigger prototype."
-        />
-        <Reveal>
-          <VideoEmbed
-            src={site.showcaseVideo.src}
-            poster={site.showcaseVideo.poster}
-            caption={site.showcaseVideo.caption}
-            credit={site.showcaseVideo.credit}
-            creditHref={site.showcaseVideo.creditHref}
-          />
-        </Reveal>
-      </section>
 
       <section className="container-page py-16 md:py-24" aria-labelledby="experience-heading">
         <SectionHeading

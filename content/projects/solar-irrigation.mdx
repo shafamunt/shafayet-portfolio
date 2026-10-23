@@ -3,8 +3,8 @@ title: Solar-Powered Irrigation Prototype
 summary: ENGR 100 — solar + battery powered moisture-sensing irrigation loop on an Uno-class MCU, with 3D-printed mounts and a solenoid valve.
 description: >-
   Course prototype: a capacitive soil-moisture probe drives an MCU that opens a
-  solenoid valve only when the soil reads dry. Solar panel and battery feed the
-  rail through a buck converter; 3D-printed parts hold the reservoir and boards.
+  solenoid valve when the soil reads dry. Solar panel and battery feed the rail
+  through a buck converter; 3D-printed parts hold the reservoir and boards.
 year: 2026
 role: Hardware lead — ENGR 100
 status: archived
@@ -19,34 +19,35 @@ tech:
   - Arduino
 metricsLabel: Outcomes
 metrics:
-  - label: Working demo
-    value: Yes
-  - label: Context
-    value: ENGR 100
+  - label: Sense → actuate
+    value: Moisture → valve
+  - label: Power rail
+    value: Solar + battery
+  - label: Fabrication
+    value: 3D-printed mounts
 highlights:
-  - Moisture probe → MCU → solenoid valve with threshold / hysteresis behavior
-  - Solar panel + battery + buck converter on the same bench rail
+  - Moisture probe → MCU → solenoid valve with threshold behavior on the bench
+  - Solar panel + battery + buck converter on the same rail
   - 3D-printed reservoir stand and board mounts through demo day
 cover:
   src: /images/projects/solar-irrigation/cover.jpg
   alt: Solar irrigation prototype on plywood — panel, MCU, soil cup, valve, and bottle reservoir
-  caption: ENGR 100 lab — full sense → decide → water loop on the bench.
+  caption: Full bench loop — panel, controller, moisture cup, valve, and reservoir.
 gallery:
   - src: /images/projects/solar-irrigation/annotated.jpg
     alt: Annotated full build identifying panel, controller, moisture sensor, valve, and water path
-    caption: Callouts — (1) panel (2) controller/MCU (3) moisture sensor (4) valve (5) water path.
+    caption: >-
+      Callouts — (1) panel (2) MCU/controller (3) capacitive moisture input
+      (4) solenoid valve path (5) reservoir → tubing → soil cup.
   - src: /images/projects/solar-irrigation/sensor-mcu.jpg
     alt: Elegoo Uno, capacitive soil moisture sensor, breadboards, and buck converter
-    caption: Sensor and MCU detail.
-  - src: /images/projects/solar-irrigation/electronics.jpg
-    alt: Solar panel, battery, converter, MCU, and solenoid valve wired on the bench
-    caption: Power and actuation path.
+    caption: Moisture input and MCU path — capacitive probe into the soil cup, Uno-class controller on the rail.
   - src: /images/projects/solar-irrigation/valve-integration.jpg
     alt: Solenoid valve and tubing into the soil cup
-    caption: Valve and water path into the soil cup.
+    caption: Valve path — solenoid between reservoir tubing and the soil cup.
   - src: /images/projects/solar-irrigation/panel-characterization.jpg
     alt: Solar panel characterization with dual multimeters on the lab bench
-    caption: Panel characterization before trusting the rail.
+    caption: Panel bring-up — dual-meter checks on the solar/charging rail before trusting the rail.
 draft: false
 ---
 
@@ -64,10 +65,14 @@ Hardware and prototyping lead: sensor → MCU → valve path, power bring-up, an
 
 ```
 solar panel + battery  →  buck  →  MCU rail
-moisture probe  →  threshold (+ hysteresis)  →  solenoid valve → soil
+moisture probe  →  threshold  →  solenoid valve → soil
 ```
+
+Visible on the build: capacitive moisture probe, Uno-class MCU, buck converter,
+battery pack, solar panel, and solenoid valve with tubing into the soil cup.
 
 ## Limitations
 
 Course prototype, not a field-deployed irrigator. Labels on the annotated image
-match the visible hardware in the lab photo.
+match the visible hardware in the lab photo. Threshold behavior was used to
+decide when to open the valve; hysteresis values are not published here.

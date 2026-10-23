@@ -35,13 +35,13 @@ links:
     href: https://www.mracing.engin.umich.edu/
 cover:
   src: /images/projects/mracing-daq/signal-path.png
-  alt: Proposed signal path from photosensor through conditioning and MCU to the vehicle bus
-  caption: Proposed architecture — implemented (left) vs planned (right).
+  alt: Signal path diagram with photosensor marked Implemented and later stages Planned
+  caption: Proposed architecture — Implemented vs Planned labeled inside each stage.
   fit: contain
 gallery:
   - src: /images/projects/mracing-daq/team-car-track.jpg
-    alt: MRacing Formula SAE electric car on track
-    caption: Team context — MRacing FSAE car (public team photo).
+    alt: MRacing team members gathered around the Formula SAE electric car in a paddock
+    caption: Team context — MRacing FSAE car with team members around it (public team photo).
 draft: false
 ---
 
@@ -57,19 +57,26 @@ publish onto the vehicle bus. I have not implemented the full system.
 
 ## Role
 
-Aug 2025 – present · vehicle software / instrumentation support · Level 2 HV
-(600V) credential for EV work. Harness strategy and bus conventions are shared
-team ownership.
+Aug 2025 – present · vehicle software / instrumentation support. Level 2 High
+Voltage (600V) credential is held separately for EV work. Harness strategy and
+bus conventions are shared team ownership.
 
 ## Target signal path
 
 ```
 photosensor  →  conditioning  →  MCU edge/timestamp  →  vehicle bus
-   [bench today]     [planned]         [planned]           [planned]
+   [Implemented]     [Planned]         [Planned]           [Planned]
 ```
+
+<VideoEmbed
+  src="/videos/mracing-hero.mp4"
+  poster="/videos/mracing-hero-poster.jpg"
+  caption="Public MRacing team film — competition context, not a DAQ demo."
+  credit="mracing.engin.umich.edu"
+  creditHref="https://www.mracing.engin.umich.edu/"
+/>
 
 ## Limitations
 
-No personal bench photo of the photosensor prototype is published yet — that
-asset still needs to be supplied. The car image is team context, not evidence of
-the DAQ hardware.
+No personal bench photo of the photosensor prototype is published yet. The car
+image and team film are team context, not evidence of the DAQ hardware.

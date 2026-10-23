@@ -36,10 +36,11 @@ export const site = {
   firstName: "Shafayet",
   title: "Computer Engineering Student & Embedded Builder",
   documentTitle,
-  headline: "Building where software meets silicon.",
+  headline:
+    "University of Michigan Computer Engineering student seeking Summer 2027 embedded/firmware internships.",
   /** Short hero line — details live in the struct and case studies, not repeated prose. */
   intro:
-    "Computer Engineering at Michigan. Firmware, hardware, and software that ships — open for Summer 2027 internships.",
+    "University of Michigan Computer Engineering student seeking Summer 2027 embedded, firmware, and automotive internships.",
 
   /** Compact role stack under the hero intro — recruiter scan in one line. */
   roleStack: [
@@ -52,8 +53,7 @@ export const site = {
   /** Hiring target shown near CTAs. Update when the season changes. */
   openTo: "Summer 2027 · Embedded, firmware & automotive internships · nationwide",
   /**
-   * Homepage embed (not a background) — the scroll-down track film from the
-   * MRacing team site. Swap files under `public/videos/` to update.
+   * MRacing team film — kept on the MRacing case study page, not the homepage.
    */
   showcaseVideo: {
     src: "/videos/mracing-hero.mp4",
@@ -68,11 +68,11 @@ export const site = {
    * Each one has to read correctly after "I'm Shafayet,".
    */
   headlinePhrases: [
-    "building where software meets silicon.",
-    "writing firmware for a Formula SAE car.",
-    "shipping platforms schools actually use.",
-    "open for Summer 2027 embedded roles.",
-    "a CE student at Michigan.",
+    "a Michigan CE student seeking Summer 2027 embedded roles.",
+    "building firmware and hardware for real systems.",
+    "writing sensing code for a Formula SAE car.",
+    "shipping a school platform people actually use.",
+    "open for embedded, firmware, and automotive internships.",
   ],
 
   location: "Ann Arbor, MI",
@@ -81,8 +81,9 @@ export const site = {
   // ── The C++ struct card on the home page ────────────────────────────────
   structName: "Shafayet",
   structFields: [
-    { type: "std::string", name: "major", value: "Computer Engineering" },
     { type: "std::string", name: "school", value: "University of Michigan" },
+    { type: "std::string", name: "major", value: "Computer Engineering" },
+    { type: "std::string", name: "graduation", value: expectedGraduation },
     { type: "std::string", name: "target", value: "Summer 2027 internship" },
     { type: "std::string", name: "focus", value: "Embedded · Firmware · Automotive" },
     {
@@ -94,8 +95,8 @@ export const site = {
 
   // ── About page bio ──────────────────────────────────────────────────────
   bio: [
-    "I'm a Computer Engineering student at the University of Michigan. I work where software meets silicon — lap-trigger sensing on MRacing FSAE, a school platform in production, and board skills at MESH.",
-    "Current roles: Software Engineering Intern at Darul Uloom Michigan; Computer Consultant II and shift lead at Michigan ITS; MRacing FSAE (Level 2 High Voltage / 600V certification). Seeking Summer 2027 embedded, firmware, and automotive internships.",
+    "I'm a Computer Engineering student at the University of Michigan (Expected May 2028). I work where software meets silicon — lap-trigger sensing on MRacing FSAE, a school platform in production, and board skills at MESH.",
+    "Current roles: Software Engineering Intern at Darul Uloom Michigan; Computer Consultant II and shift lead at Michigan ITS; MRacing FSAE. Seeking Summer 2027 embedded, firmware, and automotive internships.",
     "Ann Arbor, MI — shafam@umich.edu.",
   ],
   // ── URLs ────────────────────────────────────────────────────────────────
@@ -159,7 +160,7 @@ export function personJsonLd() {
       "@type": "CollegeOrUniversity",
       name: "University of Michigan",
     },
-    description: `${site.title}. ${expectedGraduation}.`,
+    description: `${site.title}. ${expectedGraduation}. Seeking Summer 2027 embedded/firmware internships.`,
     sameAs: [
       "https://github.com/shafamunt",
       "https://www.linkedin.com/in/shafayetmuntasir",

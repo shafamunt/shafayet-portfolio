@@ -111,26 +111,25 @@ export const experience: Experience[] = [
   },
   {
     company: "MRacing FSAE (Formula SAE Electric)",
-    role: "Vehicle Software · Instrumentation · Powertrain · Level 2 High Voltage (600V)",
+    role: "Vehicle Software & Instrumentation",
     start: "Aug 2025",
     end: "Present",
     location: "Ann Arbor, MI",
     points: [
       "Prototype photosensor-based lap detection on a breadboard for Formula SAE lap timing; conditioning, board bring-up, and bus integration still in progress.",
-      "Hold Level 2 High Voltage (600V) certification for safe maintenance around the car's 600V system; practice Altium layout toward a future sensing node.",
-      "Contribute to weekly CAN bus and embedded control design reviews (team process — not sole ownership of the vehicle bus).",
+      "Practice Altium layout toward a future sensing node; contribute to weekly CAN / embedded design reviews (team process — not sole ownership of the vehicle bus).",
     ],
     tech: ["C++", "Embedded Systems", "Sensors", "Altium", "PCB Design", "CAN Bus"],
   },
   {
     company: "Michigan Embedded Systems Hub (MESH)",
-    role: "Member and Authorized Laboratory User",
+    role: "Authorized Laboratory User — PCB / SMT training",
     start: "Jan 2026",
     end: "Present",
     location: "Ann Arbor, MI",
     points: [
       "Complete workshops on PCB design covering schematic capture, component footprint selection, and board layout.",
-      "Build hardware fabrication skills through hands-on SMT and Through-Hole soldering training.",
+      "Practice SMT and through-hole assembly on lab boards — training context that supports MRacing instrumentation work.",
     ],
     tech: ["PCB Design", "Altium", "SMT", "Soldering"],
   },
@@ -183,11 +182,11 @@ export const skills: SkillGroup[] = [
     items: ["CAN Bus", "Git", "CI/CD", "PostgreSQL", "React", "Supabase", "Vite"],
   },
   {
-    label: "Certifications",
+    label: "Credentials",
     items: [
-      "Level 2 High Voltage (600V)",
-      "CompTIA IT Fundamentals Pro",
-      "CompTIA Security Pro",
+      "Level 2 High Voltage (600V) — MRacing FSAE",
+      "CompTIA IT Fundamentals Pro (training certificate)",
+      "CompTIA Security Pro (training certificate)",
     ],
   },
 ];

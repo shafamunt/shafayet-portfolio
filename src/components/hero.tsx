@@ -41,7 +41,8 @@ export function Hero() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
               </span>
-              Embedded · Michigan CE · {site.location}
+              Michigan CE · {site.structFields.find((f) => f.name === "graduation")?.value} ·{" "}
+              {site.location}
             </p>
 
             <h1

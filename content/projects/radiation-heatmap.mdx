@@ -22,27 +22,27 @@ highlights:
   - GPS-cropped WatchDisplay plus a custom detectTumor algorithm
 cover:
   src: /images/projects/radiation-heatmap/cover.jpg
-  alt: Labeled before and after denoise of a radiation scan with intensity legend
+  alt: Course reference panels for noisy scan, removeNoise output, and HSV heatmap
   caption: >-
-    Before/after removeNoise with intensity legend — course-provided scan
-    imagery and reference outputs from ENGR 101 Project 1.
+    Course-provided reference outputs from the ENGR 101 Project 1 specs —
+    not exports from my private MATLAB workspace.
   fit: contain
 gallery:
   - src: /images/projects/radiation-heatmap/noisy-scan.png
-    alt: Noisy radiation scan before filtering
-    caption: Course input — raw scan at a sample hour (noisy).
+    alt: Noisy grayscale radiation scan matrix from the course sample
+    caption: Course input — noisy radiation scan (mSv/hr field).
     fit: contain
   - src: /images/projects/radiation-heatmap/denoised.png
-    alt: Radiation field after averaging-filter denoise
-    caption: Course reference after removeNoise averaging.
+    alt: Smoothed radiation field after averaging-filter removeNoise
+    caption: Course reference — removeNoise averaging-filter output.
     fit: contain
   - src: /images/projects/radiation-heatmap/heatmap.png
-    alt: HSV heatmap of radiation intensity
-    caption: Course reference — heatmap (HSV intensity).
+    alt: HSV color heatmap of radiation intensity over the dome-area image
+    caption: Course reference — heatmap (HSV intensity over dome_area).
     fit: contain
   - src: /images/projects/radiation-heatmap/zones.jpg
-    alt: Discrete safety zones around the dome
-    caption: Course reference — zones (categorical regions).
+    alt: Categorical radiation threat zones overlaid on the dome-area image
+    caption: Course reference — zones (categorical threat regions).
     fit: contain
 draft: false
 ---
@@ -59,6 +59,8 @@ and `detectTumor`.
 
 - **Course:** ENGR 101, University of Michigan  
 - **Spec:** [Project 1 — Dealing with Radiation](http://engr101staff.github.io/engr101.org/projects/project1/specs.html)  
+- **My work:** implementing the required MATLAB functions against the course
+  autograder and unit tests  
 
 ## Pipeline
 
@@ -70,7 +72,7 @@ brain scan  →  detectTumor
 
 ## Limitations
 
-Cover and gallery use **course-provided** inputs and reference imagery from the
-Project 1 specs, composed into a labeled before/after for readability. They are
-not independently re-exported from my private MATLAB workspace. A personal
-`imshow` export can replace them when shareable.
+Cover and gallery use **course-provided reference imagery** from the Project 1
+specs so each stage shows the correct artifact type (noisy input, denoised
+field, HSV heatmap, categorical zones). They are not personal `imshow` exports.
+Reference outputs are not claimed as independent measurements.

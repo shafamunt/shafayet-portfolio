@@ -1,6 +1,6 @@
 ---
 title: Darul Uloom Michigan Platform
-summary: Production role-based school platform — schema, RLS, Edge Functions, and CI gating deploys for 70+ weekly users.
+summary: Production role-based school platform — schema, RLS, Edge Functions, and CI gating deploys for 70+ users.
 description: >-
   Software engineering intern: React + Supabase school platform with PostgreSQL
   Row-Level Security, Edge Functions for auth and privileged ops, and GitHub
@@ -20,7 +20,7 @@ tech:
   - GitHub Actions
 metricsLabel: Outcomes
 metrics:
-  - label: Active users
+  - label: Users
     value: 70+
   - label: Access levels
     value: "5"
@@ -38,27 +38,27 @@ links:
 cover:
   src: /images/projects/dum-platform/cover.jpg
   alt: Arshad Darul Uloom Michigan portal chooser for madrasa and masjid
-  caption: Arshad community hub — madrasa and masjid portals (signed-out).
+  caption: Arshad community hub — madrasa and masjid portals (signed-out public surface).
 gallery:
   - src: /images/projects/dum-platform/ui-madrasa-login.jpg
     alt: Arshad madrasa sign-in for Darul Uloom Michigan
     caption: Madrasa sign-in on arshad.guide (signed-out).
-  - src: /images/projects/dum-platform/ui-community.jpg
-    alt: Arshad community selector listing Darul Uloom Michigan
-    caption: Community select — Darul Uloom Michigan.
-  - src: /images/projects/dum-platform/ui-portals.jpg
-    alt: SAF marketing page with Arshad and donation UI previews
-    caption: SAF marketing — production UI components in device frames.
+  - src: /images/projects/dum-platform/rls.png
+    alt: Architecture diagram React to Edge Functions to PostgreSQL row-level security
+    caption: >-
+      Permission path — React role UIs to Edge Functions (auth + privileged ops)
+      to Postgres RLS. Diagram only; no live student rows.
+    fit: contain
 draft: false
 ---
 
 ## Problem and outcome
 
-The school needed grades, records, and administration offline from spreadsheets,
-with **five access levels** that must not see the same rows. The platform is
-**live in production** for **70+ users**. Authenticated admin rows stay private;
-public surfaces are [safapp.org](https://safapp.org) and
-[arshad.guide](https://arshad.guide).
+The school needed grades, attendance, and admin workflows that used to live in
+spreadsheets, with **five access levels** that must not see the same rows. The
+platform is **live in production** for **70+ users**. Authenticated grading and
+attendance screens stay private; public surfaces are
+[safapp.org](https://safapp.org) and [arshad.guide](https://arshad.guide).
 
 ## Role
 
@@ -86,18 +86,20 @@ GitHub Actions — 75+ tests gate every deploy
 **1. Enforce access in the database.** RLS so a missing UI check cannot casually
 leak another role's rows.
 
-**2. Privileged ops in Edge Functions.** Auth and sensitive writes stay off the
-client.
+**2. Privileged ops in Edge Functions.** Authentication and privileged writes
+run in Edge Functions rather than as unrestricted client-side mutations.
 
 **3. Block deploys with tests.** **75+** tests in GitHub Actions before ship.
 
 ## Validation
 
-Production use by **70+** people across **five** access levels; CI required
-green before deploy.
+Production use by **70+ users** across **five** access levels; CI required
+green before deploy. The **70+** figure is the supported user-count metric used
+everywhere on this site (not weekly-active or interchangeable “active users”
+wording).
 
 ## Limitations
 
-Gallery shows signed-out Arshad / SAF surfaces. Authenticated grading and
-attendance with synthetic demo records are not published here yet — those need
-a controlled demo export.
+Gallery shows a signed-out Arshad surface plus an architecture diagram.
+Authenticated grading / attendance screens with synthetic demo records are not
+published here yet.
