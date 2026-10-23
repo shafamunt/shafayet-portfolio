@@ -29,6 +29,8 @@ npm run dev          # http://localhost:3000
 
 Copy [`content/projects/_TEMPLATE.mdx`](content/projects/_TEMPLATE.mdx) to add a project. `featured: true` puts it on the home page. Cover images (optional) go in `public/images/projects/<slug>/`.
 
+Internal evidence / asset checklist (not published on the site): [`EVIDENCE_CHECKLIST.md`](EVIDENCE_CHECKLIST.md).
+
 ## Deploy
 
 ### Vercel (production — `shafam.dev`)

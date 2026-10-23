@@ -12,14 +12,14 @@ import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Ambient accent wash behind the headline. */}
+    <section className="relative min-h-[min(88svh,44rem)] overflow-hidden md:min-h-[min(82svh,40rem)]">
+      {/* Soft accent wash — film lives below selected projects, not in the hero. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-40 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"
       />
 
-      <div className="container-page relative pb-16 pt-14 md:pb-24 md:pt-20">
+      <div className="container-page relative z-10 flex min-h-[min(88svh,44rem)] flex-col justify-center pb-14 pt-12 md:min-h-[min(82svh,40rem)] md:pb-16 md:pt-16">
         {/* `grid-cols-1` is not cosmetic. Without it there is no
             grid-template-columns below lg, so the single implicit column is
             `auto` — content-sized — and inflates to the max-content of its
@@ -41,7 +41,8 @@ export function Hero() {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
               </span>
-              Embedded · Michigan CE · {site.location}
+              Michigan CE · {site.structFields.find((f) => f.name === "graduation")?.value} ·{" "}
+              {site.location}
             </p>
 
             <h1
@@ -61,6 +62,19 @@ export function Hero() {
               style={{ "--enter-delay": "0.22s" } as React.CSSProperties}
             >
               {site.intro}
+            </p>
+
+            <p
+              className="hero-enter mt-5 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle"
+              style={{ "--enter-delay": "0.26s" } as React.CSSProperties}
+            >
+              {site.roleStack.join(" · ")}
+            </p>
+            <p
+              className="hero-enter mt-2 text-sm text-muted"
+              style={{ "--enter-delay": "0.28s" } as React.CSSProperties}
+            >
+              {site.openTo}
             </p>
 
             <div
@@ -117,7 +131,7 @@ export function Hero() {
 
       <div
         aria-hidden
-        className="hero-enter container-page hidden items-center gap-2 pb-10 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
+        className="hero-enter absolute bottom-6 left-0 right-0 z-10 container-page hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
         style={{ "--enter-delay": "0.6s" } as React.CSSProperties}
       >
         <ArrowDown className="size-3.5 animate-bounce" />

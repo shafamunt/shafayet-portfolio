@@ -1,78 +1,82 @@
 ---
 title: Photosensor Lap-Trigger DAQ
-summary: Lap-timing data acquisition for Michigan's Formula SAE electric car — a photosensor trigger feeding the car's telemetry chain.
+summary: Breadboard lap-trigger sensing for MRacing FSAE — path from a start/finish beam break toward a timestamp the car can use.
 description: >-
-  Designing the sensing and acquisition path that turns a beam break at the
-  start/finish line into a timestamped lap on the team's telemetry, with board
-  work in Altium and weekly CAN and embedded design reviews.
+  Prototyping photosensor-based lap detection on the bench for Michigan Formula
+  SAE Electric, learning harness and review process, Level 2 High Voltage (600V)
+  certified. Conditioning, board bring-up, and bus integration are still ahead.
 year: [2025, 2026]
-role: Vehicle software, instrumentation & powertrain — MRacing FSAE · Level 2 High Voltage (600V)
+role: MRacing — instrumentation
 status: in-progress
 featured: true
-order: 10
-size: lg
+order: 40
+size: md
 tech:
   - C++
   - Embedded Systems
-  - CAN Bus
+  - Sensors
   - Altium
   - PCB Design
-  - Sensors
+  - CAN Bus
+metricsLabel: Current status
 metrics:
-  - label: HV system cert
-    value: Level 2 (600V)
-  - label: Vehicle bus
-    value: CAN
+  - label: Prototype stage
+    value: Breadboard
+  - label: Sensing path
+    value: In progress
+  - label: Bus integration
+    value: Not yet
 highlights:
-  - Lap-trigger DAQ with breadboards and photosensors
-  - Level 2 High Voltage (600V) certification for 600V system maintenance
-  - Weekly CAN bus and embedded control design reviews
+  - Breadboard photosensor setup aimed at detecting a vehicle pass at the line
+  - Level 2 High Voltage (600V) certification for safe work on the EV
+  - Weekly CAN / embedded design reviews (contributor, not sole owner)
+links:
+  - label: MRacing team site
+    href: https://www.mracing.engin.umich.edu/
 cover:
-  src: /images/projects/mracing-daq/bench.jpg
-  alt: Illustration of a breadboard photosensor, a beam, and a microcontroller — not a photo of the bench
-  caption: Illustrated stand-in. Replace with a photo of the breadboard setup when you have one.
+  src: /images/projects/mracing-daq/signal-path.png
+  alt: Signal path diagram with photosensor marked Implemented and later stages Planned
+  caption: Proposed architecture — Implemented vs Planned labeled inside each stage.
+  fit: contain
 gallery:
-  - src: /images/projects/mracing-daq/altium.png
-    alt: Illustration of a schematic sheet beside a simple board outline
-    caption: Illustrated stand-in. Replace with an Altium schematic or layout screenshot.
-  - src: /images/projects/mracing-daq/car.jpg
-    alt: Illustration of a formula-style car crossing a start-finish beam
-    caption: Illustrated stand-in. Not a photo of the MRacing car.
-  - src: /images/projects/mracing-daq/scope.png
-    alt: Illustration of an oscilloscope trace with a rising trigger edge
-    caption: Illustrated stand-in. Not a captured scope shot.
+  - src: /images/projects/mracing-daq/team-car-track.jpg
+    alt: MRacing team members gathered around the Formula SAE electric car in a paddock
+    caption: Team context — MRacing FSAE car with team members around it (public team photo).
 draft: false
 ---
 
-## The problem
+## Problem and current status
 
-Lap times only matter if the car can capture them reliably at the line and fold
-them into the rest of the telemetry stack — not as a stopwatch on the wall. A
-beam break has to become a timestamp the team can trust later.
+Lap times help only if the car can capture a pass at the start/finish line and
+fold that event into telemetry. I am working on the sensing end on
+[MRacing FSAE](https://www.mracing.engin.umich.edu/).
 
-## Signal path
+**Implemented so far:** breadboard photosensor experimentation and design-review
+participation. **Planned:** signal conditioning, a board that latches time, and
+publish onto the vehicle bus. I have not implemented the full system.
+
+## Role
+
+Aug 2025 – present · vehicle software / instrumentation support. Level 2 High
+Voltage (600V) credential is held separately for EV work. Harness strategy and
+bus conventions are shared team ownership.
+
+## Target signal path
 
 ```
-photosensor  →  conditioning  →  MCU
- beam break                         edge → timestamp
- at start/finish                          │
-                                          ▼
-                                   telemetry chain
+photosensor  →  conditioning  →  MCU edge/timestamp  →  vehicle bus
+   [Implemented]     [Planned]         [Planned]           [Planned]
 ```
 
-**What is real today.** A breadboard prototype with photosensors detects the
-vehicle passing the line. Board work is in Altium. The sensing path iterates
-against the car's harness under weekly CAN bus and embedded control design
-reviews. I hold Level 2 High Voltage (600V) certification for safe maintenance
-around the car's 600V system.
+<VideoEmbed
+  src="/videos/mracing-hero.mp4"
+  poster="/videos/mracing-hero-poster.jpg"
+  caption="Public MRacing team film — competition context, not a DAQ demo."
+  credit="mracing.engin.umich.edu"
+  creditHref="https://www.mracing.engin.umich.edu/"
+/>
 
-**Still open.** Conditioning between the photosensor and the digital input, the
-board that owns the edge and the timestamp, and how that timestamp is published
-onto the team's telemetry chain. This page does not list part numbers, message
-IDs, or a finished CAN node. Source stays off the site while it is team IP.
+## Limitations
 
-## Status
-
-In progress with MRacing FSAE — iterating the sensing and acquisition path
-against the car's real harness and review cadence. The figures on this page are
-illustrations, not photos of the bench, the board, the car, or a scope capture.
+No personal bench photo of the photosensor prototype is published yet. The car
+image and team film are team context, not evidence of the DAQ hardware.

@@ -4,6 +4,7 @@ import { loadProjects } from "./mdx-source";
 import type { Project } from "./schema";
 
 export type { Project, Image, Metric, CardSize } from "./schema";
+export { statusLabel } from "./status";
 
 /**
  * The content API. Every page imports from here and nowhere else.
@@ -37,7 +38,10 @@ function byYearDesc(a: Project, b: Project) {
 }
 
 export function getAllProjects(): Project[] {
-  return [...all()].sort(byYearDesc);
+  // Prefer explicit `order` for recruiter scanning; year breaks remaining ties.
+  return [...all()].sort(
+    (a, b) => a.order - b.order || byYearDesc(a, b),
+  );
 }
 
 export function getFeaturedProjects(): Project[] {

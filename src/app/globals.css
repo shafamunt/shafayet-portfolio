@@ -16,8 +16,8 @@
   --surface: #e2ebf2;
   --surface-raised: #ffffff;
   --foreground: #050c17;
-  --muted: #3d5166;
-  --subtle: #6b8299;
+  --muted: #2f445a;
+  --subtle: #4a6278;
   --border: #c5d4e0;
   --border-strong: #9bb0c2;
 
@@ -29,11 +29,11 @@
   --glow-1: #22d3ee;
   --glow-2: #0e7490;
   --glow-3: #38bdf8;
-  --glow-opacity: 0.18;
+  --glow-opacity: 0.14;
   --grid-line: #0e7490;
-  --grid-opacity: 0.08;
+  --grid-opacity: 0.03;
   --particle: #0e7490;
-  --particle-opacity: 0.35;
+  --particle-opacity: 0.2;
 
   --radius: 0.75rem;
   --shadow-card: 0 1px 2px rgb(5 12 23 / 0.04), 0 8px 24px -12px rgb(5 12 23 / 0.12);
@@ -45,8 +45,8 @@
   --surface: #0a1628;
   --surface-raised: #0e1e35;
   --foreground: #e8f1fa;
-  --muted: #a7bed4;
-  --subtle: #6b8299;
+  --muted: #b7cce0;
+  --subtle: #8aa3bb;
   --border: rgba(56, 189, 248, 0.14);
   --border-strong: rgba(56, 189, 248, 0.32);
 
@@ -58,11 +58,11 @@
   --glow-1: #22d3ee;
   --glow-2: #0e7490;
   --glow-3: #38bdf8;
-  --glow-opacity: 0.14;
+  --glow-opacity: 0.1;
   --grid-line: #38bdf8;
-  --grid-opacity: 0.12;
+  --grid-opacity: 0.04;
   --particle: #22d3ee;
-  --particle-opacity: 0.4;
+  --particle-opacity: 0.22;
 
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 8px 24px -12px rgb(0 0 0 / 0.55);
   --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 24px 48px -20px rgb(0 0 0 / 0.7);
@@ -421,6 +421,13 @@
     opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+}
+
+/* Opaque reading surface so the drafting grid does not fight body text. */
+.prose-panel {
+  background-color: color-mix(in oklab, var(--color-background) 92%, transparent);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(8px);
 }
 
 /* ── Case study prose ─────────────────────────────────────────────────────

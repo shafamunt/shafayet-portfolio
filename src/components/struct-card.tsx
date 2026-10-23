@@ -142,9 +142,9 @@ export function StructCard({ className }: { className?: string }) {
         </pre>
 
         <p className="sr-only">
-          {site.name} studies {site.structFields.find((f) => f.name === "major")?.value} at the
-          University of Michigan, graduating{" "}
-          {site.structFields.find((f) => f.name === "graduation")?.value}. Focus:{" "}
+          {site.name} is a University of Michigan Computer Engineering student,{" "}
+          {site.structFields.find((f) => f.name === "graduation")?.value}, seeking{" "}
+          {site.structFields.find((f) => f.name === "target")?.value}. Focus:{" "}
           {site.structFields.find((f) => f.name === "focus")?.value}. Based in {site.location}.
           Contact: {site.email}.
         </p>

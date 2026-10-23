@@ -25,7 +25,7 @@ export type StructField = {
 };
 
 /** Tab / OG title. Keep in sync with what recruiters should see first. */
-export const documentTitle = "Shafayet Muntasir — Embedded & Hardware";
+export const documentTitle = "Shafayet Muntasir — Embedded · Firmware · Summer 2027";
 
 /** Path under `public/`. Replace that one PDF to update every Resume link. */
 const resumePath = "/resume/shafayet-muntasir-resume.pdf";
@@ -36,20 +36,43 @@ export const site = {
   firstName: "Shafayet",
   title: "Computer Engineering Student & Embedded Builder",
   documentTitle,
-  headline: "Building where software meets silicon.",
+  headline:
+    "University of Michigan Computer Engineering student seeking Summer 2027 embedded/firmware internships.",
+  /** Short hero line — details live in the struct and case studies, not repeated prose. */
   intro:
-    "I'm Shafayet — building firmware on a Formula SAE car, platforms schools actually use, and boards I route and solder myself. Looking for embedded and systems roles.",
+    "University of Michigan Computer Engineering student seeking Summer 2027 embedded, firmware, and automotive internships.",
+
+  /** Compact role stack under the hero intro — recruiter scan in one line. */
+  roleStack: [
+    "SE Intern",
+    "MRacing DAQ",
+    "ITS Shift Lead",
+    "MESH",
+  ],
+
+  /** Hiring target shown near CTAs. Update when the season changes. */
+  openTo: "Summer 2027 · Embedded, firmware & automotive internships · nationwide",
+  /**
+   * MRacing team film — kept on the MRacing case study page, not the homepage.
+   */
+  showcaseVideo: {
+    src: "/videos/mracing-hero.mp4",
+    poster: "/videos/mracing-hero-poster.jpg",
+    caption: "MRacing FSAE team film (public team site).",
+    credit: "mracing.engin.umich.edu",
+    creditHref: "https://www.mracing.engin.umich.edu/",
+  },
 
   /**
    * Cycled through by the decode effect under the hero heading.
    * Each one has to read correctly after "I'm Shafayet,".
    */
   headlinePhrases: [
-    "building where software meets silicon.",
-    "writing firmware for a Formula SAE car.",
-    "routing boards and shipping platforms.",
-    "open to embedded roles nationwide.",
-    "a CE student at Michigan.",
+    "a Michigan CE student seeking Summer 2027 embedded roles.",
+    "building firmware and hardware for real systems.",
+    "writing sensing code for a Formula SAE car.",
+    "shipping a school platform people actually use.",
+    "open for embedded, firmware, and automotive internships.",
   ],
 
   location: "Ann Arbor, MI",
@@ -61,23 +84,21 @@ export const site = {
     { type: "std::string", name: "school", value: "University of Michigan" },
     { type: "std::string", name: "major", value: "Computer Engineering" },
     { type: "std::string", name: "graduation", value: expectedGraduation },
-    { type: "std::string", name: "focus", value: "Embedded Systems & Hardware" },
-    { type: "std::string", name: "location", value: "Ann Arbor, MI" },
-    { type: "std::string", name: "email", value: "shafam@umich.edu" },
+    { type: "std::string", name: "target", value: "Summer 2027 internship" },
+    { type: "std::string", name: "focus", value: "Embedded · Firmware · Automotive" },
     {
       type: "std::vector<std::string>",
-      name: "interests",
-      value: ["embedded", "PCB", "hardware", "FSAE"],
+      name: "now",
+      value: ["MRacing DAQ", "SE intern", "MESH"],
     },
   ] satisfies StructField[],
 
   // ── About page bio ──────────────────────────────────────────────────────
   bio: [
-    "I'm a Computer Engineering student at the University of Michigan. I like work that sits where software meets silicon — firmware on a Formula SAE car, a grading platform 70+ people log into every week, and boards I route and solder myself.",
-    "Right now I'm a Software Engineering Intern at Darul Uloom Michigan, shipping a role-based educational platform in production; a Computer Consultant II and shift lead at Michigan ITS; and on MRacing FSAE building lap-timing DAQ with a Level 2 High Voltage (600V) certification. Out of MESH I'm sharpening PCB layout and SMT assembly skills that feed the racing work.",
-    "Based in Ann Arbor, open to embedded and systems internships nationally. Reach me at shafam@umich.edu.",
+    "I'm a Computer Engineering student at the University of Michigan (Expected May 2028). I work where software meets silicon — lap-trigger sensing on MRacing FSAE, a school platform in production, and board skills at MESH.",
+    "Current roles: Software Engineering Intern at Darul Uloom Michigan; Computer Consultant II and shift lead at Michigan ITS; MRacing FSAE. Seeking Summer 2027 embedded, firmware, and automotive internships.",
+    "Ann Arbor, MI — shafam@umich.edu.",
   ],
-
   // ── URLs ────────────────────────────────────────────────────────────────
   /** No trailing slash. Overridden by NEXT_PUBLIC_SITE_URL in production. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://shafam.dev",
@@ -139,7 +160,7 @@ export function personJsonLd() {
       "@type": "CollegeOrUniversity",
       name: "University of Michigan",
     },
-    description: `${site.title}. ${expectedGraduation}.`,
+    description: `${site.title}. ${expectedGraduation}. Seeking Summer 2027 embedded/firmware internships.`,
     sameAs: [
       "https://github.com/shafamunt",
       "https://www.linkedin.com/in/shafayetmuntasir",

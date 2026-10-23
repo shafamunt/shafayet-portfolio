@@ -1,47 +1,78 @@
 ---
-title: Radiation Heatmap & Image Processing Engine
-summary: A MATLAB image pipeline that ingests, denoises, and renders radiation data as HSV heatmaps.
+title: Radiation Heatmap & Image Processing
+summary: ENGR 101 — MATLAB radiation pipeline — denoise scans, HSV heatmaps and safety zones, smartwatch crop, tumor detect.
 description: >-
-  Developed an image processing script using custom matrix filters to ingest,
-  denoise, and render radiation data as HSV heatmaps. Filters are written out
-  as matrix operations rather than imported as black-box library calls.
+  ENGR 101 Project 1: process noisy radiation scan matrices into public safety
+  imagery. removeNoise, heatmap, and zones with vectorized MATLAB; WatchDisplay
+  for GPS-cropped views; detectTumor on MRI-style brain scans.
 year: 2026
-role: Solo build
+role: ENGR 101 — MATLAB
 status: archived
 featured: false
-order: 80
+order: 70
 size: md
 tech:
   - MATLAB
   - Image Processing
+  - Vectorization
   - Linear Algebra
-  - Signal Processing
 highlights:
-  - Custom matrix filters to ingest and denoise radiation data
-  - HSV heatmap rendering of processed intensity
-  - Matrix-level implementation without black-box library filters
+  - Averaging-filter denoise on 2D radiation matrices (mSv/hr)
+  - HSV heatmaps and discrete safety-zone maps
+  - GPS-cropped WatchDisplay plus a custom detectTumor algorithm
 cover:
-  src: /images/projects/radiation-heatmap/before-after.png
-  alt: Illustration of a noisy field beside a smoothed heatmap — not real sensor frames
-  caption: Illustrated stand-in. The pattern is invented for the card, not a captured frame.
+  src: /images/projects/radiation-heatmap/cover.jpg
+  alt: Course reference panels for noisy scan, removeNoise output, and HSV heatmap
+  caption: >-
+    Course-provided reference outputs from the ENGR 101 Project 1 specs —
+    not exports from my private MATLAB workspace.
+  fit: contain
+gallery:
+  - src: /images/projects/radiation-heatmap/noisy-scan.png
+    alt: Noisy grayscale radiation scan matrix from the course sample
+    caption: Course input — noisy radiation scan (mSv/hr field).
+    fit: contain
+  - src: /images/projects/radiation-heatmap/denoised.png
+    alt: Smoothed radiation field after averaging-filter removeNoise
+    caption: Course reference — removeNoise averaging-filter output.
+    fit: contain
+  - src: /images/projects/radiation-heatmap/heatmap.png
+    alt: HSV color heatmap of radiation intensity over the dome-area image
+    caption: Course reference — heatmap (HSV intensity over dome_area).
+    fit: contain
+  - src: /images/projects/radiation-heatmap/zones.jpg
+    alt: Categorical radiation threat zones overlaid on the dome-area image
+    caption: Course reference — zones (categorical threat regions).
+    fit: contain
 draft: false
 ---
 
-## The problem
+## Problem and outcome
 
-Raw sensor frames are noisy and hard to read as numbers in a table. The goal
-was a pipeline that cleans the signal and makes magnitude obvious visually.
+Radiation readings arrive as noisy 2D matrices (mSv/hr). People need heatmaps,
+safety zones, a smartwatch crop, and a tumor check on brain scans.
 
-## Approach
+**Outcome:** MATLAB functions `removeNoise`, `heatmap`, `zones`, `WatchDisplay`,
+and `detectTumor`.
 
-**Write the filters.** Custom matrix filters ingest and denoise the frames,
-implemented as matrix operations so the math is visible and inspectable.
+## Role
 
-**Colour as magnitude.** After cleanup, intensity maps into HSV space so the
-heatmap carries the story instead of a spreadsheet of values.
+- **Course:** ENGR 101, University of Michigan  
+- **Spec:** [Project 1 — Dealing with Radiation](http://engr101staff.github.io/engr101.org/projects/project1/specs.html)  
+- **My work:** implementing the required MATLAB functions against the course
+  autograder and unit tests  
 
-## Outcome
+## Pipeline
 
-A small image-processing exercise: understanding the kernels mattered more than
-shipping a polished UI. The cover is an illustration, not a captured frame.
-Kernel coefficients are not listed on this page.
+```
+scan_radiation(hour)  →  removeNoise  →  heatmap / zones
+GPS + display_settings  →  WatchDisplay
+brain scan  →  detectTumor
+```
+
+## Limitations
+
+Cover and gallery use **course-provided reference imagery** from the Project 1
+specs so each stage shows the correct artifact type (noisy input, denoised
+field, HSV heatmap, categorical zones). They are not personal `imshow` exports.
+Reference outputs are not claimed as independent measurements.

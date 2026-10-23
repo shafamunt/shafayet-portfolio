@@ -7,7 +7,7 @@ import { GithubIcon } from "@/components/icons";
 import { MdxContent } from "@/components/mdx-content";
 import { Reveal } from "@/components/motion/reveal";
 import { BlurReveal } from "@/components/motion/blur-reveal";
-import { ProjectMedia } from "@/components/project-media";
+import { MediaLightbox } from "@/components/media-lightbox";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ import {
   getProject,
   getProjectSlugs,
 } from "@/lib/content";
+import { statusLabel } from "@/lib/content/status";
 import { site } from "@/lib/site";
 import { cn, formatYear, prettyUrl } from "@/lib/utils";
 
@@ -73,10 +74,8 @@ export default async function ProjectPage({ params }: PageProps) {
                 <span>{project.role}</span>
               </>
             )}
-            {project.status !== "live" && (
-              <Badge variant="outline">
-                {project.status === "in-progress" ? "In progress" : "Archived"}
-              </Badge>
+            {statusLabel(project.status) && (
+              <Badge variant="outline">{statusLabel(project.status)}</Badge>
             )}
           </div>
 
@@ -152,12 +151,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {project.metrics.length > 0 && (
               <div className="py-5">
-                <dt className="eyebrow mb-3">Impact</dt>
+                <dt className="eyebrow mb-3">
+                  {project.metricsLabel ??
+                    (project.status === "in-progress" ? "Current status" : "Outcomes")}
+                </dt>
                 <dd className="grid grid-cols-2 gap-4">
                   {project.metrics.map((m) => (
                     <div key={m.label}>
                       <p className="font-display text-3xl text-foreground">{m.value}</p>
-                      <p className="mt-0.5 text-xs text-subtle">{m.label}</p>
+                      <p className="mt-0.5 text-xs text-muted">{m.label}</p>
                     </div>
                   ))}
                 </dd>
@@ -199,63 +201,63 @@ export default async function ProjectPage({ params }: PageProps) {
         </Reveal>
       </header>
 
-      {/* ── Cover ── */}
-      {project.cover && (
+      {/* ── Cover (skip missing files — never show a public TODO slot) ── */}
+      {project.cover && !project.cover.pending && (
         <Reveal delay={0.1} className="mt-14 md:mt-20">
           <figure>
-            <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-border bg-surface">
-              <ProjectMedia
+            <div className="relative aspect-[16/9] overflow-hidden rounded-card border border-border bg-surface md:aspect-[2/1]">
+              <MediaLightbox
                 image={project.cover}
                 priority
                 sizes="(min-width: 1280px) 1200px, 100vw"
+                frameClassName="absolute inset-0"
+                className="absolute inset-0"
               />
             </div>
-            {(project.cover.caption || project.cover.pending) && (
-              <figcaption className="mt-3 text-center text-xs text-subtle">
-                {project.cover.pending
-                  ? (project.cover.todo ?? project.cover.caption)
-                  : project.cover.caption}
+            {project.cover.caption && (
+              <figcaption className="mt-3 text-center text-xs text-muted">
+                {project.cover.caption}
               </figcaption>
             )}
           </figure>
         </Reveal>
       )}
 
-      {/* ── Case study body ── */}
-      {project.body && (
-        <div className="mt-16 md:mt-24">
-          <div className="mx-auto max-w-[46rem]">
-            <MdxContent source={project.body} />
-          </div>
-        </div>
-      )}
-
-      {/* ── Gallery ── */}
-      {project.gallery.length > 0 && (
-        <section className="mt-20 md:mt-28" aria-label="Project media">
+      {/* Gallery sits above the write-up so case studies read visual-first.
+          Skip pending / missing slots — never publish TODO captions. */}
+      {project.gallery.filter((image) => !image.pending).length > 0 && (
+        <section className="mt-10 md:mt-14" aria-label="Project media">
           <p className="eyebrow mb-6">Gallery</p>
           <div className="grid gap-5 md:grid-cols-2">
-            {project.gallery.map((image, i) => (
+            {project.gallery
+              .filter((image) => !image.pending)
+              .map((image, i) => (
               <Reveal
                 key={image.src}
                 delay={i * 0.06}
-                className={i % 3 === 0 ? "md:col-span-2" : undefined}
+                className={image.fit === "contain" || i % 3 === 0 ? "md:col-span-2" : undefined}
               >
                 <figure>
                   <div
                     className={cn(
                       "relative overflow-hidden rounded-card border border-border bg-surface",
-                      i % 3 === 0 ? "aspect-[16/9]" : "aspect-[4/3]",
+                      image.fit === "contain"
+                        ? "aspect-[16/10] bg-[radial-gradient(circle_at_30%_20%,var(--color-accent-soft),transparent_70%)]"
+                        : i % 3 === 0
+                          ? "aspect-[16/9]"
+                          : "aspect-[4/3]",
                     )}
                   >
-                    <ProjectMedia
+                    <MediaLightbox
                       image={image}
                       sizes="(min-width: 768px) 50vw, 100vw"
+                      frameClassName="absolute inset-0"
+                      className="absolute inset-0"
                     />
                   </div>
-                  {(image.caption || image.pending) && (
-                    <figcaption className="mt-2.5 text-xs text-subtle">
-                      {image.pending ? (image.todo ?? image.caption) : image.caption}
+                  {image.caption && (
+                    <figcaption className="mt-2.5 text-xs text-muted">
+                      {image.caption}
                     </figcaption>
                   )}
                 </figure>
@@ -263,6 +265,15 @@ export default async function ProjectPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+      )}
+
+      {/* ── Case study body ── */}
+      {project.body && (
+        <div className="mt-16 md:mt-24">
+          <div className="prose-panel mx-auto max-w-[46rem] rounded-card px-5 py-8 sm:px-8 sm:py-10">
+            <MdxContent source={project.body} />
+          </div>
+        </div>
       )}
 
       {/* ── Prev / next ── */}
