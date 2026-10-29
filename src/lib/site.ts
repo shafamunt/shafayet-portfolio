@@ -49,8 +49,23 @@ export const site = {
     "MESH",
   ],
 
-  /** Hiring target shown near CTAs. Update when the season changes. */
-  openTo: "Summer 2027 · Embedded, firmware & automotive internships · nationwide",
+  /**
+   * Hiring target — when / what / where + a human signal.
+   * Used in the hero, /contact, home CTA, about, and footer.
+   */
+  openTo:
+    "Summer 2027 · embedded, firmware, and automotive internships · nationwide. I read everything.",
+
+  /**
+   * Proof strip under the hero grid. Numbers already claimed in case studies /
+   * experience — surfaced here so recruiters see them in two seconds.
+   */
+  heroStats: [
+    { value: "70+", label: "Users in production" },
+    { value: "Level 2", label: "High Voltage (600V)" },
+    { value: "75+", label: "CI tests gating deploys" },
+  ],
+
   /**
    * Homepage embed (not a background) — the scroll-down track film from the
    * MRacing team site. Swap files under `public/videos/` to update.

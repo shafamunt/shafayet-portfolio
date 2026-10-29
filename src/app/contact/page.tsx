@@ -25,8 +25,8 @@ export default function ContactPage() {
           />
           <Reveal delay={0.2}>
             <p className="mt-6 text-lead text-muted">
-              Looking for embedded and systems internships, plus interesting hardware/software
-              problems. The form goes straight to my inbox — or use whichever channel you prefer.
+              {site.openTo} The form goes straight to my inbox — or use whichever
+              channel you prefer.
             </p>
           </Reveal>
 

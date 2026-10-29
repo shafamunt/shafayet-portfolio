@@ -11,8 +11,9 @@ export function SiteFooter() {
           <div className="max-w-md">
             <p className="eyebrow mb-4">Contact</p>
             <p className="font-display text-display-sm font-semibold text-foreground">
-              Have a role or project in mind?
+              Summer 2027 — embedded roles.
             </p>
+            <p className="mt-3 max-w-sm text-sm text-muted">{site.openTo}</p>
             <Link
               href="/contact"
               className="mt-5 inline-flex items-center gap-1.5 text-[0.9375rem] text-muted underline decoration-accent decoration-[1.5px] underline-offset-4 transition-colors hover:text-foreground"

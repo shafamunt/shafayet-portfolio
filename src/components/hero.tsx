@@ -12,14 +12,14 @@ import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[min(88svh,44rem)] overflow-hidden md:min-h-[min(82svh,40rem)]">
+    <section className="relative overflow-hidden">
       {/* Soft accent wash — film lives below selected projects, not in the hero. */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"
       />
 
-      <div className="container-page relative z-10 flex min-h-[min(88svh,44rem)] flex-col justify-center pb-14 pt-12 md:min-h-[min(82svh,40rem)] md:pb-16 md:pt-16">
+      <div className="container-page relative z-10 pb-10 pt-12 md:pb-14 md:pt-16">
         {/* `grid-cols-1` is not cosmetic. Without it there is no
             grid-template-columns below lg, so the single implicit column is
             `auto` — content-sized — and inflates to the max-content of its
@@ -126,15 +126,32 @@ export function Hero() {
             <StructCard />
           </div>
         </div>
-      </div>
 
-      <div
-        aria-hidden
-        className="hero-enter absolute bottom-6 left-0 right-0 z-10 container-page hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
-        style={{ "--enter-delay": "0.6s" } as React.CSSProperties}
-      >
-        <ArrowDown className="size-3.5 animate-bounce" />
-        Scroll
+        {/* Proof strip — numbers already in case studies, surfaced for scan. */}
+        <ul
+          className="hero-enter mt-12 grid grid-cols-1 gap-6 border-t border-border pt-8 sm:grid-cols-3 sm:gap-8 md:mt-14"
+          style={{ "--enter-delay": "0.5s" } as React.CSSProperties}
+        >
+          {site.heroStats.map((stat) => (
+            <li key={stat.label}>
+              <p className="font-display text-3xl tracking-tight text-foreground md:text-4xl">
+                {stat.value}
+              </p>
+              <p className="mt-1.5 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle">
+                {stat.label}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <div
+          aria-hidden
+          className="hero-enter mt-10 hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
+          style={{ "--enter-delay": "0.6s" } as React.CSSProperties}
+        >
+          <ArrowDown className="size-3.5 animate-bounce" />
+          Scroll
+        </div>
       </div>
     </section>
   );

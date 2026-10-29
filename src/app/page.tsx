@@ -108,19 +108,19 @@ export default function HomePage() {
               aria-hidden
               className="pointer-events-none absolute inset-x-0 -bottom-32 h-64 opacity-50 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_70%)]"
             />
-            <p className="eyebrow relative mb-5">{site.openTo}</p>
+            <p className="eyebrow relative mb-5">Contact</p>
             <h2 className="relative mx-auto max-w-3xl font-display text-display-md font-semibold text-foreground">
               Summer 2027 — let&apos;s talk.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Embedded, firmware, and automotive internships. Email{" "}
+              {site.openTo} Email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"
               >
                 {site.email}
               </a>{" "}
-              or use the form — resume, GitHub, and LinkedIn are in the header.
+              or use the form.
             </p>
             <div className="relative mt-9 flex flex-wrap justify-center gap-3">
               <Link href="/contact" className={cn(buttonVariants({ size: "lg" }))}>
