@@ -1,0 +1,93 @@
+---
+title: Sequential Four-Function Calculator
+summary: EECS 270 — RTL datapath + FSM controller for + − × ÷ on an 11-bit DE2-115 calculator.
+description: >-
+  EECS 270 Project 7: sequential four-function calculator in Verilog. Shared
+  AddSub datapath, Booth-style multiply, magnitude divide, SM/TC conversion,
+  ModelSim tests, and board I/O on switches, keys, and HEX displays.
+year: 2026
+role: EECS 270 — digital logic
+status: archived
+featured: true
+order: 20
+size: md
+tech:
+  - Verilog
+  - FPGA
+  - ModelSim
+  - FSM
+  - RTL
+metricsLabel: Outcomes
+metrics:
+  - label: Board
+    value: DE2-115
+  - label: Word width
+    value: 11-bit
+  - label: Ops
+    value: "+ − × ÷"
+highlights:
+  - Datapath / controller split with one shared AddSub unit
+  - Booth multiply and magnitude divide with overflow / divide-by-zero
+  - Board demo — SW entry, KEY ops, HEX result, LEDG overflow
+cover:
+  src: /images/projects/fpga-calculator/cover.jpg
+  alt: LabsLand remote-lab view of the FPGA board with HEX displays
+  caption: >-
+    LabsLand console capture during board bring-up — HEX digits partially
+    visible; source video is soft. A sharper personal board photo is still needed.
+gallery:
+  - src: /images/projects/fpga-calculator/datapath.png
+    alt: Four-function calculator datapath with shared AddSub
+    caption: Course datapath figure — single 11-bit AddSub shared across ops.
+    fit: contain
+  - src: /images/projects/fpga-calculator/stg.png
+    alt: Abstract state transition graph for calculator control
+    caption: Course abstract STG — LOAD → ADD/SUB → MUL → DIV + overflow.
+    fit: contain
+draft: false
+---
+
+## Problem and outcome
+
+Build a sequential calculator — not a one-cycle ALU. An FSM walks operands
+through add, subtract, multiply, and divide and shows a stable result on HEX.
+
+**Outcome:** `FourFuncCalc` datapath + controller for 11-bit two’s-complement
+arithmetic, with ModelSim coverage and a board demo.
+
+## Role
+
+- **Course:** EECS 270, University of Michigan  
+- **Spec:** [Project 7 — Sequential Calculator](https://www.eecs270.org/p7_sequential_calculator.html)  
+- **My work:** `FourFuncCalc.v`, `TestBench7.v`, `Project7.v` board wiring  
+
+## Architecture
+
+```
+SW / KEY / SW[17]  →  FourFuncCalc (FSM + datapath)
+                         ├─ HEX operand / result
+                         └─ LEDG[8] overflow / ÷0
+```
+
+## Technical decisions
+
+**1. One shared AddSub** for all four ops (required datapath).  
+**2. Booth multiply** embedded in the datapath (not a direct `BoothMul` instance).  
+**3. Divide on magnitudes; sign via XOR;** divisor zero → overflow until clear.  
+**4. External signed-magnitude, internal two’s complement** via staff converters.
+
+## Validation
+
+ModelSim with state labels; autograder checkpoint (ADD/SUB) and final (all ops);
+board checks on DE2-115 / LabsLand.
+
+<VideoEmbed
+  src="/videos/fpga-board-demo.mp4"
+  poster="/images/projects/fpga-calculator/cover.jpg"
+  caption="Board demo clip — LabsLand remote session; still frames are soft."
+/>
+
+## Limitations
+
+Cover is a frame from a soft LabsLand recording, not a sharp bench photo with a
+clearly readable result. Diagrams in the gallery are course-provided figures.

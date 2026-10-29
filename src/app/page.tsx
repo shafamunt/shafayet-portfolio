@@ -11,6 +11,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { SectionHeading } from "@/components/section-heading";
 import { buttonVariants } from "@/components/ui/button";
+import { VideoEmbed } from "@/components/video-embed";
 import { getAllProjects, getAllTech, getFeaturedProjects } from "@/lib/content";
 import { getExperience } from "@/lib/resume";
 import { site } from "@/lib/site";
@@ -19,9 +20,6 @@ import { cn } from "@/lib/utils";
 export default function HomePage() {
   const all = getAllProjects();
   const featured = getFeaturedProjects();
-  // Anything not in the showcase falls through to the bento grid, so every
-  // project appears exactly once on this page. Lower `order` sorts first so
-  // stronger hardware work can sit above archived MATLAB exercises.
   const rest = all
     .filter((p) => !featured.some((f) => f.slug === p.slug))
     .sort((a, b) => a.order - b.order);
@@ -36,7 +34,7 @@ export default function HomePage() {
           eyebrow="Projects"
           title="Selected builds."
           titleId="work-heading"
-          description="Firmware, platforms, and boards — the work I'd rather talk about in an interview."
+          description="Production school platform, FPGA calculator, ENGR 100 hardware, and MRacing lap-trigger work in progress."
           action={{ label: "All projects", href: "/projects" }}
         />
 
@@ -45,7 +43,7 @@ export default function HomePage() {
 
       {rest.length > 0 && (
         <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
-          <SectionHeading eyebrow="Archive" title="Elsewhere in the lab." titleId="more-heading" />
+          <SectionHeading eyebrow="More" title="Elsewhere in the lab." titleId="more-heading" />
           <BentoGrid>
             {rest.map((project, i) => (
               <BentoItem key={project.slug} size={project.size} index={i}>
@@ -56,12 +54,30 @@ export default function HomePage() {
         </section>
       )}
 
+      <section className="container-page py-10 md:py-14" aria-labelledby="track-film-heading">
+        <SectionHeading
+          eyebrow="Team context"
+          title="MRacing on track."
+          titleId="track-film-heading"
+          description="Public team film for competition context — not a demo of my lap-trigger prototype."
+        />
+        <Reveal>
+          <VideoEmbed
+            src={site.showcaseVideo.src}
+            poster={site.showcaseVideo.poster}
+            caption={site.showcaseVideo.caption}
+            credit={site.showcaseVideo.credit}
+            creditHref={site.showcaseVideo.creditHref}
+          />
+        </Reveal>
+      </section>
+
       <section className="container-page py-16 md:py-24" aria-labelledby="experience-heading">
         <SectionHeading
           eyebrow="Experience"
           title="Roles & teams."
           titleId="experience-heading"
-          description="An internship, a help desk I help run, and MRacing FSAE with Level 2 High Voltage (600V) certification — full detail on the experience page."
+          description="Darul Uloom internship, Michigan ITS shift lead, MRacing FSAE, and MESH lab training."
           action={{ label: "Full experience", href: "/experience" }}
         />
         <ExperienceTimeline experience={getExperience()} compact />
@@ -92,13 +108,12 @@ export default function HomePage() {
               aria-hidden
               className="pointer-events-none absolute inset-x-0 -bottom-32 h-64 opacity-50 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_70%)]"
             />
-            <p className="eyebrow relative mb-5">{site.headline}</p>
+            <p className="eyebrow relative mb-5">Contact</p>
             <h2 className="relative mx-auto max-w-3xl font-display text-display-md font-semibold text-foreground">
-              Open to the next role.
+              Summer 2027 — let&apos;s talk.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Based in Ann Arbor, open to embedded and systems internships
-              nationally — email{" "}
+              {site.openTo} Email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"
