@@ -1,6 +1,6 @@
 ---
 title: Darul Uloom Michigan Platform
-summary: Production role-based school platform — schema, RLS, Edge Functions, and CI gating deploys for 70+ weekly users.
+summary: Production role-based school platform — schema, RLS, Edge Functions, and CI gating deploys for 250+ users.
 description: >-
   Software engineering intern: React + Supabase school platform with PostgreSQL
   Row-Level Security, Edge Functions for auth and privileged ops, and GitHub
@@ -21,15 +21,15 @@ tech:
 metricsLabel: Outcomes
 metrics:
   - label: Active users
-    value: 70+
-  - label: Access levels
-    value: "5"
-  - label: Automated tests
-    value: 75+
+    value: 250+
+  - label: RLS policies
+    value: "177"
+  - label: Postgres tables
+    value: "66"
 highlights:
-  - Live in production for a Michigan school (70+ users)
-  - Designed 30+ table Postgres schema with Row-Level Security
-  - CI with 75+ tests gating GitHub Actions deploys
+  - Live in production for a Michigan school (250+ users)
+  - 66-table Postgres schema with 177 Row-Level Security policies
+  - CI with automated tests gating GitHub Actions deploys
 links:
   - label: SAF product site
     href: https://safapp.org
@@ -56,7 +56,7 @@ draft: false
 
 The school needed grades, records, and administration offline from spreadsheets,
 with **five access levels** that must not see the same rows. The platform is
-**live in production** for **70+ users**. Authenticated admin rows stay private;
+**live in production** for **250+ users**. Authenticated admin rows stay private;
 public surfaces are [safapp.org](https://safapp.org) and
 [arshad.guide](https://arshad.guide).
 
@@ -77,23 +77,23 @@ React (Vite) — five role-differentiated UIs
 Edge Functions — authentication + privileged operations
         │
         ▼
-PostgreSQL (30+ tables) — Row-Level Security
-GitHub Actions — 75+ tests gate every deploy
+PostgreSQL (66 tables, 177 RLS policies)
+GitHub Actions — automated tests gate every deploy
 ```
 
 ## Technical decisions
 
-**1. Enforce access in the database.** RLS so a missing UI check cannot casually
-leak another role's rows.
+**1. Enforce access in the database.** **177** RLS policies so a missing UI check
+cannot casually leak another role's rows.
 
 **2. Privileged ops in Edge Functions.** Auth and sensitive writes stay off the
 client.
 
-**3. Block deploys with tests.** **75+** tests in GitHub Actions before ship.
+**3. Block deploys with tests.** Automated tests in GitHub Actions before ship.
 
 ## Validation
 
-Production use by **70+** people across **five** access levels; CI required
+Production use by **250+** people across **five** access levels; CI required
 green before deploy.
 
 ## Limitations

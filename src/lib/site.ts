@@ -61,9 +61,9 @@ export const site = {
    * experience — surfaced here so recruiters see them in two seconds.
    */
   heroStats: [
-    { value: "70+", label: "Users in production" },
-    { value: "Level 2", label: "High Voltage (600V)" },
-    { value: "75+", label: "CI tests gating deploys" },
+    { value: "250+", label: "Users in production" },
+    { value: "177", label: "RLS policies enforcing access" },
+    { value: "66", label: "Postgres tables under RLS" },
   ],
 
   /**

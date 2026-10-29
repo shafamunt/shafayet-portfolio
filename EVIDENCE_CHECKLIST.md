@@ -30,7 +30,7 @@ into public captions or case studies.
 
 1. Exact MRacing roster title wording?  
 2. Which DUM workflows did you personally implement vs inherit?  
-3. Numeric claims (70+ users, 30+ tables, 75+ tests) — still accurate?  
+3. Numeric claims (250+ users, 66 tables, 177 RLS policies, CI test count) — still accurate?  
 4. ENGR 100 term/year and “hardware lead” wording?  
 5. Public GitHub repos safe to link?  
 6. Production DUM frontend URL (or a redacted screen recording) for true UI photos?  
