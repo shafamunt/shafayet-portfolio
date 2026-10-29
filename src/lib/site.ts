@@ -62,8 +62,8 @@ export const site = {
    */
   heroStats: [
     { value: "250+", label: "Users in production" },
-    { value: "177", label: "RLS policies enforcing access" },
-    { value: "66", label: "Postgres tables under RLS" },
+    { value: "19", label: "Supabase Edge Functions" },
+    { value: "937", label: "CI tests gating deploys" },
   ],
 
   /**

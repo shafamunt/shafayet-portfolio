@@ -91,9 +91,9 @@ export const experience: Experience[] = [
     location: "Warren, MI",
     points: [
       "Built and shipped a role-based educational platform now in production with 250+ users across 5 access levels.",
-      "Designed a 66-table PostgreSQL schema with 177 Row-Level Security policies governing access at the row level.",
-      "Wrote serverless Edge Functions handling authentication and privileged operations.",
-      "Set up CI/CD on GitHub Actions with automated tests gating every deploy.",
+      "Designed a PostgreSQL schema (53 tables, 133 RLS policies) with access enforced at the row level.",
+      "Shipped 19 Supabase Edge Functions for auth, admissions, Stripe kiosk, push, and prayer sync.",
+      "Set up GitHub Actions CI with 937 Vitest tests gating every deploy.",
     ],
     tech: ["TypeScript", "React", "Supabase", "PostgreSQL", "Vite", "CI/CD"],
   },
