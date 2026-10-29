@@ -55,6 +55,13 @@ export const site = {
   location: "Ann Arbor, MI",
   email: "shafam@umich.edu",
 
+  /**
+   * Shared availability line for /contact, home CTA, and about.
+   * When / what / where — then a short human signal.
+   */
+  contactLead:
+    "Summer 2027 · embedded, firmware, and automotive internships · nationwide. I read everything.",
+
   // ── The C++ struct card on the home page ────────────────────────────────
   structName: "Shafayet",
   structFields: [

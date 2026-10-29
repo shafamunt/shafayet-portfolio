@@ -145,7 +145,7 @@ export default function AboutPage() {
               eyebrow="Contact"
               title="Say hello."
               titleId="contact-heading"
-              description="Open to internships, contract work, and interesting problems. Goes straight to my inbox."
+              description={`${site.contactLead} Goes straight to my inbox.`}
               className="mb-8"
             />
             <Reveal delay={0.2}>

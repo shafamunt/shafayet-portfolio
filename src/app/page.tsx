@@ -94,11 +94,10 @@ export default function HomePage() {
             />
             <p className="eyebrow relative mb-5">{site.headline}</p>
             <h2 className="relative mx-auto max-w-3xl font-display text-display-md font-semibold text-foreground">
-              Open to the next role.
+              Summer 2027 — let&apos;s talk.
             </h2>
             <p className="relative mx-auto mt-5 max-w-lg text-lead text-muted">
-              Based in Ann Arbor, open to embedded and systems internships
-              nationally — email{" "}
+              {site.contactLead} Email{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="text-foreground underline decoration-accent decoration-[1.5px] underline-offset-4"
