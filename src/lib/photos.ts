@@ -25,6 +25,8 @@ export type Photo = {
 export type HomeMoment = Photo & {
   /** Short caption under the homepage strip — literal, not invented lore. */
   caption: string;
+  /** CSS object-position when the card aspect crops the source. */
+  objectPosition?: string;
 };
 
 /**
@@ -32,7 +34,12 @@ export type HomeMoment = Photo & {
  * Captions stay close to the filename so nothing personal is invented.
  * Missing files are skipped at build time.
  */
-const HOME_MOMENT_SPECS: ReadonlyArray<{ file: string; caption: string; alt: string }> = [
+const HOME_MOMENT_SPECS: ReadonlyArray<{
+  file: string;
+  caption: string;
+  alt: string;
+  objectPosition?: string;
+}> = [
   {
     file: "engr100-lab-bench.jpg",
     caption: "ENGR 100 lab bench",
@@ -40,13 +47,16 @@ const HOME_MOMENT_SPECS: ReadonlyArray<{ file: string; caption: string; alt: str
   },
   {
     file: "science-fair-presentation.jpg",
-    caption: "Science fair presentation",
-    alt: "Science fair presentation",
+    caption: "Science fair with a friend",
+    alt: "Shafayet and a friend with their Creatine Conundrum science fair board",
+    // Keep both people + board in the 4:5 card crop.
+    objectPosition: "center 42%",
   },
   {
     file: "presentation-night-warren.jpg",
-    caption: "Presentation night, Warren",
-    alt: "Presentation night in Warren",
+    caption: "Presentation night with a friend",
+    alt: "Shafayet and a friend in suits at presentation night in Warren",
+    objectPosition: "center 38%",
   },
   {
     file: "graduation-day.jpg",
@@ -91,6 +101,7 @@ export function getHomeMoments(): HomeMoment[] {
         src: `/images/me/${encodeURIComponent(spec.file)}`,
         alt: spec.alt,
         caption: spec.caption,
+        objectPosition: spec.objectPosition,
       },
     ];
   });
