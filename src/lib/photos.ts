@@ -47,21 +47,21 @@ const HOME_MOMENT_SPECS: ReadonlyArray<{
   },
   {
     file: "science-fair-presentation.jpg",
-    caption: "Science fair with a friend",
-    alt: "Shafayet and a friend with their Creatine Conundrum science fair board",
+    caption: "Science fair presentation",
+    alt: "Creatine Conundrum science fair board with both presenters",
     // Keep both people + board in the 4:5 card crop.
     objectPosition: "center 42%",
   },
   {
     file: "presentation-night-warren.jpg",
-    caption: "Presentation night with a friend",
-    alt: "Shafayet and a friend in suits at presentation night in Warren",
+    caption: "Presentation night, Warren",
+    alt: "Presentation night in Warren",
     objectPosition: "center 38%",
   },
   {
     file: "graduation-day.jpg",
-    caption: "Graduation day with a friend",
-    alt: "Shafayet and a friend in graduation caps and gowns",
+    caption: "Graduation day",
+    alt: "Graduation day",
     objectPosition: "center 40%",
   },
 ];
