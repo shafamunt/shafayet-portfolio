@@ -124,6 +124,7 @@ export function PhotoSlideshow({ photos }: { photos: Photo[] }) {
               alt=""
               aria-hidden
               fill
+              quality={75}
               sizes="100vw"
               className="pointer-events-none scale-110 select-none object-cover opacity-40 blur-2xl"
             />
@@ -134,6 +135,7 @@ export function PhotoSlideshow({ photos }: { photos: Photo[] }) {
               alt={photo.alt}
               fill
               priority={index === 0}
+              quality={90}
               sizes="(min-width: 768px) 34rem, 100vw"
               className="pointer-events-none select-none object-contain"
             />

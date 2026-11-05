@@ -21,7 +21,10 @@ export function HomeMoments() {
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(min-width: 768px) 18vw, 45vw"
+                quality={90}
+                // Wider than the CSS box so 2x/3x DPR still gets a sharp source;
+                // these JPEGs are already capped in photos:optimize.
+                sizes="(min-width: 768px) 28vw, 90vw"
                 className="object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03]"
               />
             </div>

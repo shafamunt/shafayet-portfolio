@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       }
     : {
         images: {
+          // Next 16 defaults to [75] only — personal photos need a higher
+          // allowlisted value or the optimizer silently clamps / 400s.
+          qualities: [75, 90],
           formats: ["image/avif", "image/webp"] as ("image/avif" | "image/webp")[],
           remotePatterns: [
             { protocol: "https" as const, hostname: "i.scdn.co" },
