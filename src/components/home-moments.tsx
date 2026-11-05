@@ -25,6 +25,11 @@ export function HomeMoments() {
                 // Wider than the CSS box so 2x/3x DPR still gets a sharp source;
                 // these JPEGs are already capped in photos:optimize.
                 sizes="(min-width: 768px) 28vw, 90vw"
+                style={
+                  photo.objectPosition
+                    ? { objectPosition: photo.objectPosition }
+                    : undefined
+                }
                 className="object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.03]"
               />
             </div>
