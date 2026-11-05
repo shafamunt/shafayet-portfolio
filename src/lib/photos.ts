@@ -60,8 +60,9 @@ const HOME_MOMENT_SPECS: ReadonlyArray<{
   },
   {
     file: "graduation-day.jpg",
-    caption: "Graduation day",
-    alt: "Graduation day",
+    caption: "Graduation day with a friend",
+    alt: "Shafayet and a friend in graduation caps and gowns",
+    objectPosition: "center 40%",
   },
 ];
 
