@@ -22,6 +22,39 @@ export type Photo = {
   alt: string;
 };
 
+export type HomeMoment = Photo & {
+  /** Short caption under the homepage strip — literal, not invented lore. */
+  caption: string;
+};
+
+/**
+ * Curated homepage moments. Filenames must exist under `public/images/me/`.
+ * Captions stay close to the filename so nothing personal is invented.
+ * Missing files are skipped at build time.
+ */
+const HOME_MOMENT_SPECS: ReadonlyArray<{ file: string; caption: string; alt: string }> = [
+  {
+    file: "engr100-lab-bench.jpg",
+    caption: "ENGR 100 lab bench",
+    alt: "ENGR 100 lab bench",
+  },
+  {
+    file: "science-fair-presentation.jpg",
+    caption: "Science fair presentation",
+    alt: "Science fair presentation",
+  },
+  {
+    file: "presentation-night-warren.jpg",
+    caption: "Presentation night, Warren",
+    alt: "Presentation night in Warren",
+  },
+  {
+    file: "graduation-day.jpg",
+    caption: "Graduation day",
+    alt: "Graduation day",
+  },
+];
+
 function altFromFilename(filename: string): string {
   const base = filename.replace(IMAGE_RE, "");
 
@@ -44,4 +77,21 @@ export function getPhotos(): Photo[] {
       src: `/images/me/${encodeURIComponent(filename)}`,
       alt: altFromFilename(filename),
     }));
+}
+
+/** Compact static strip for the homepage — only files that are present. */
+export function getHomeMoments(): HomeMoment[] {
+  if (!fs.existsSync(PHOTOS_DIR)) return [];
+
+  return HOME_MOMENT_SPECS.flatMap((spec) => {
+    const diskPath = path.join(PHOTOS_DIR, spec.file);
+    if (!fs.existsSync(diskPath)) return [];
+    return [
+      {
+        src: `/images/me/${encodeURIComponent(spec.file)}`,
+        alt: spec.alt,
+        caption: spec.caption,
+      },
+    ];
+  });
 }

@@ -51,20 +51,11 @@ export const site = {
 
   /**
    * Hiring target — when / what / where + a human signal.
-   * Used in the hero, /contact, home CTA, about, and footer.
+   * Used near the hero intro and final contact surfaces (/contact, home CTA).
+   * Keep out of the footer and About body so it is not repeated on every scroll.
    */
   openTo:
     "Summer 2027 · embedded, firmware, and automotive internships · nationwide. I read everything.",
-
-  /**
-   * Proof strip under the hero grid. Numbers already claimed in case studies /
-   * experience — surfaced here so recruiters see them in two seconds.
-   */
-  heroStats: [
-    { value: "250+", label: "Users in production" },
-    { value: "19", label: "Supabase Edge Functions" },
-    { value: "937", label: "CI tests gating deploys" },
-  ],
 
   /**
    * Homepage embed (not a background) — the scroll-down track film from the
@@ -79,15 +70,13 @@ export const site = {
   },
 
   /**
-   * Cycled through by the decode effect under the hero heading.
-   * Each one has to read correctly after "I'm Shafayet,".
+   * Cycled under the hero name. Lead with the silicon line; keep the set short
+   * so the first viewport stays scannable.
    */
   headlinePhrases: [
     "building where software meets silicon.",
     "writing firmware for a Formula SAE car.",
     "shipping platforms schools actually use.",
-    "open for Summer 2027 embedded roles.",
-    "a CE student at Michigan.",
   ],
 
   location: "Ann Arbor, MI",
@@ -107,10 +96,10 @@ export const site = {
     },
   ] satisfies StructField[],
 
-  // ── About page bio ──────────────────────────────────────────────────────
+  // ── About page bio (personal — role chronology lives on /experience) ───
   bio: [
-    "I'm a Computer Engineering student at the University of Michigan. I work where software meets silicon — lap-trigger sensing on MRacing FSAE, a school platform in production, and board skills at MESH.",
-    "Current roles: Software Engineering Intern at Darul Uloom Michigan; Computer Consultant II and shift lead at Michigan ITS; MRacing FSAE (Level 2 High Voltage / 600V certification). Seeking Summer 2027 embedded, firmware, and automotive internships.",
+    "I'm a Computer Engineering student at the University of Michigan. I like the path from a breadboard or schema to something that has to work on Monday — lap-trigger sensing on MRacing FSAE, a school platform in production, and board practice at MESH.",
+    "Away from course projects: Formula SAE design reviews, ITS shift lead work, and figuring out what belongs on a board versus in software. Roles and dates are on Experience; this page is the rest of it.",
     "Ann Arbor, MI — shafam@umich.edu.",
   ],
   // ── URLs ────────────────────────────────────────────────────────────────
