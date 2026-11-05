@@ -13,7 +13,6 @@ export function SiteFooter() {
             <p className="font-display text-display-sm font-semibold text-foreground">
               Summer 2027 — embedded roles.
             </p>
-            <p className="mt-3 max-w-sm text-sm text-muted">{site.openTo}</p>
             <Link
               href="/contact"
               className="mt-5 inline-flex items-center gap-1.5 text-[0.9375rem] text-muted underline decoration-accent decoration-[1.5px] underline-offset-4 transition-colors hover:text-foreground"

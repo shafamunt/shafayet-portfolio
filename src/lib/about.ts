@@ -39,7 +39,7 @@ export const interests: Interest[] = [
     emoji: "🏫",
     label: "Shipping for real users",
     detail:
-      "A school platform with 250+ people logging in — 19 Edge Functions and 937 CI tests that gate Monday morning.",
+      "A school platform staff and students actually log into — production ops, not a demo weekend.",
   },
   {
     emoji: "🛠️",

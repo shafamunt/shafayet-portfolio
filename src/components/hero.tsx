@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { Magnetic } from "@/components/motion/magnetic";
 import { BlurCycle } from "@/components/motion/blur-cycle";
@@ -16,10 +16,10 @@ export function Hero() {
       {/* Soft accent wash — film lives below selected projects, not in the hero. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[64rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"
+        className="pointer-events-none absolute -top-32 left-1/2 h-[28rem] w-[56rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_65%)]"
       />
 
-      <div className="container-page relative z-10 pb-10 pt-12 md:pb-14 md:pt-16">
+      <div className="container-page relative z-10 pb-8 pt-8 md:pb-10 md:pt-10">
         {/* `grid-cols-1` is not cosmetic. Without it there is no
             grid-template-columns below lg, so the single implicit column is
             `auto` — content-sized — and inflates to the max-content of its
@@ -27,14 +27,14 @@ export function Hero() {
             Tailwind compiles grid-cols-N to repeat(N, minmax(0, 1fr)), and
             that 0 floor is what keeps the track tied to the container instead
             of to its contents. It is also why lg:grid-cols-12 never broke. */}
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
           {/* ── Left: name, typing line, intro ── */}
           {/* min-w-0: a grid item refuses to shrink below its min-content size
               by default, which lets a long headline push the column wider than
               the page instead of wrapping inside it. */}
           <div className="min-w-0 lg:col-span-7">
             <p
-              className="hero-enter eyebrow mb-7 flex items-center gap-2"
+              className="hero-enter eyebrow mb-4 flex items-center gap-2"
               style={{ "--enter-delay": "0s" } as React.CSSProperties}
             >
               <span className="relative flex size-1.5">
@@ -45,8 +45,8 @@ export function Hero() {
             </p>
 
             <h1
-              className="hero-enter font-display text-display-lg font-semibold text-foreground [overflow-wrap:break-word]"
-              style={{ "--enter-delay": "0.08s" } as React.CSSProperties}
+              className="hero-enter font-display text-display-md font-semibold text-foreground [overflow-wrap:break-word]"
+              style={{ "--enter-delay": "0.06s" } as React.CSSProperties}
             >
               {/* `break-words` is a backstop: at the smallest widths the longest
                   headline phrase has no slack, and a word breaking mid-way is a
@@ -57,28 +57,28 @@ export function Hero() {
             </h1>
 
             <p
-              className="hero-enter mt-8 max-w-xl text-lead text-muted"
-              style={{ "--enter-delay": "0.22s" } as React.CSSProperties}
+              className="hero-enter mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted md:text-lead"
+              style={{ "--enter-delay": "0.16s" } as React.CSSProperties}
             >
               {site.intro}
             </p>
 
             <p
-              className="hero-enter mt-5 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle"
-              style={{ "--enter-delay": "0.26s" } as React.CSSProperties}
+              className="hero-enter mt-3 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle"
+              style={{ "--enter-delay": "0.2s" } as React.CSSProperties}
             >
               {site.roleStack.join(" · ")}
             </p>
             <p
               className="hero-enter mt-2 text-sm text-muted"
-              style={{ "--enter-delay": "0.28s" } as React.CSSProperties}
+              style={{ "--enter-delay": "0.22s" } as React.CSSProperties}
             >
               {site.openTo}
             </p>
 
             <div
-              className="hero-enter mt-9 flex flex-wrap items-center gap-3"
-              style={{ "--enter-delay": "0.32s" } as React.CSSProperties}
+              className="hero-enter mt-6 flex flex-wrap items-center gap-3"
+              style={{ "--enter-delay": "0.26s" } as React.CSSProperties}
             >
               <Magnetic>
                 <Link href="/projects" className={cn(buttonVariants({ size: "lg" }))}>
@@ -99,8 +99,8 @@ export function Hero() {
             </div>
 
             <ul
-              className="hero-enter mt-12 flex flex-wrap items-center gap-x-6 gap-y-3"
-              style={{ "--enter-delay": "0.42s" } as React.CSSProperties}
+              className="hero-enter mt-7 flex flex-wrap items-center gap-x-5 gap-y-2"
+              style={{ "--enter-delay": "0.32s" } as React.CSSProperties}
             >
               {site.socials.map((social) => (
                 <li key={social.label}>
@@ -121,36 +121,10 @@ export function Hero() {
           {/* ── Right: the C++ struct ── */}
           <div
             className="hero-enter-struct lg:col-span-5"
-            style={{ "--enter-delay": "0.25s" } as React.CSSProperties}
+            style={{ "--enter-delay": "0.2s" } as React.CSSProperties}
           >
             <StructCard />
           </div>
-        </div>
-
-        {/* Proof strip — numbers already in case studies, surfaced for scan. */}
-        <ul
-          className="hero-enter mt-12 grid grid-cols-1 gap-6 border-t border-border pt-8 sm:grid-cols-3 sm:gap-8 md:mt-14"
-          style={{ "--enter-delay": "0.5s" } as React.CSSProperties}
-        >
-          {site.heroStats.map((stat) => (
-            <li key={stat.label}>
-              <p className="font-display text-3xl tracking-tight text-foreground md:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-1.5 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle">
-                {stat.label}
-              </p>
-            </li>
-          ))}
-        </ul>
-
-        <div
-          aria-hidden
-          className="hero-enter mt-10 hidden items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-widest text-subtle md:flex"
-          style={{ "--enter-delay": "0.6s" } as React.CSSProperties}
-        >
-          <ArrowDown className="size-3.5 animate-bounce" />
-          Scroll
         </div>
       </div>
     </section>

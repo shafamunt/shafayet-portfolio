@@ -145,7 +145,7 @@ export default function AboutPage() {
               eyebrow="Contact"
               title="Say hello."
               titleId="contact-heading"
-              description={`${site.openTo} Goes straight to my inbox.`}
+              description="Goes straight to my inbox — or use whichever channel you prefer."
               className="mb-8"
             />
             <Reveal delay={0.2}>

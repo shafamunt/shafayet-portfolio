@@ -6,43 +6,66 @@ import { BentoItem } from "@/components/bento-item";
 import { EmptyState } from "@/components/empty-state";
 import { ExperienceTimeline } from "@/components/experience-timeline";
 import { Hero } from "@/components/hero";
+import { HomeMoments } from "@/components/home-moments";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectCard } from "@/components/project-card";
-import { ProjectShowcase } from "@/components/project-showcase";
 import { SectionHeading } from "@/components/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { VideoEmbed } from "@/components/video-embed";
 import { getAllProjects, getAllTech, getFeaturedProjects } from "@/lib/content";
+import { getHomeMoments } from "@/lib/photos";
 import { getExperience } from "@/lib/resume";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
   const all = getAllProjects();
-  const featured = getFeaturedProjects();
+  const featured = getFeaturedProjects().slice(0, 3);
   const rest = all
     .filter((p) => !featured.some((f) => f.slug === p.slug))
     .sort((a, b) => a.order - b.order);
   const tech = getAllTech().slice(0, 16);
+  const moments = getHomeMoments();
 
   return (
     <>
       <Hero />
 
-      <section className="container-page py-16 md:py-24" aria-labelledby="work-heading">
+      <section className="container-page py-12 md:py-16" aria-labelledby="work-heading">
         <SectionHeading
           eyebrow="Projects"
           title="Selected builds."
           titleId="work-heading"
-          description="Production school platform, FPGA calculator, ENGR 100 hardware, and MRacing lap-trigger work in progress."
+          description="Production school platform, FPGA calculator, and MRacing lap-trigger work in progress — completed vs in-progress labeled on each card."
           action={{ label: "All projects", href: "/projects" }}
         />
 
-        {featured.length === 0 ? <EmptyState /> : <ProjectShowcase projects={featured} />}
+        {featured.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {featured.map((project, i) => (
+              <ProjectCard key={project.slug} project={project} size="md" priority={i === 0} />
+            ))}
+          </div>
+        )}
       </section>
 
+      {moments.length > 0 && (
+        <section className="container-page py-12 md:py-16" aria-labelledby="moments-heading">
+          <SectionHeading
+            eyebrow="Moments"
+            title="A few frames."
+            titleId="moments-heading"
+            description="From lab benches and presentation nights — more on About."
+            action={{ label: "About", href: "/about" }}
+          />
+          <HomeMoments />
+        </section>
+      )}
+
       {rest.length > 0 && (
-        <section className="container-page py-16 md:py-24" aria-labelledby="more-heading">
+        <section className="container-page py-12 md:py-16" aria-labelledby="more-heading">
           <SectionHeading eyebrow="More" title="Elsewhere in the lab." titleId="more-heading" />
           <BentoGrid>
             {rest.map((project, i) => (
@@ -72,7 +95,7 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section className="container-page py-16 md:py-24" aria-labelledby="experience-heading">
+      <section className="container-page py-12 md:py-16" aria-labelledby="experience-heading">
         <SectionHeading
           eyebrow="Experience"
           title="Roles & teams."
@@ -84,7 +107,7 @@ export default function HomePage() {
       </section>
 
       {tech.length > 0 && (
-        <section className="container-page py-16 md:py-24" aria-labelledby="stack-heading">
+        <section className="container-page py-12 md:py-16" aria-labelledby="stack-heading">
           <SectionHeading eyebrow="Stack" title="Tools I reach for." titleId="stack-heading" />
           <Reveal>
             <ul className="flex flex-wrap gap-2.5">
@@ -101,9 +124,9 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="container-page py-16 md:py-24">
+      <section className="container-page py-12 md:py-16">
         <Reveal>
-          <div className="relative overflow-hidden rounded-card border border-border bg-surface/40 px-6 py-16 text-center md:px-16 md:py-24">
+          <div className="relative overflow-hidden rounded-card border border-border bg-surface/40 px-6 py-14 text-center md:px-16 md:py-20">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-x-0 -bottom-32 h-64 opacity-50 blur-3xl [background:radial-gradient(ellipse_at_center,var(--color-accent-soft),transparent_70%)]"
