@@ -4,22 +4,41 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "motion/react";
-import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, Send } from "lucide-react";
 
 import { FieldError, Input, Label, Textarea } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import { contactSchema, type ContactInput } from "@/lib/contact-schema";
+import { deliverViaFormSubmit } from "@/lib/formsubmit";
+import { site } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
+
+type ContactApiResponse = {
+  ok?: boolean;
+  error?: string;
+  mailto?: string;
+  handoff?: "formsubmit";
+  to?: string;
+  subject?: string;
+};
+
+function buildMailto(values: ContactInput, to: string = site.email) {
+  const heading = values.subject?.trim() || `Message from ${values.name}`;
+  const body = `From: ${values.name} <${values.email}>\n\n${values.message}`;
+  return `mailto:${to}?subject=${encodeURIComponent(heading)}&body=${encodeURIComponent(body)}`;
+}
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
+  const [mailtoFallback, setMailtoFallback] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
@@ -29,6 +48,7 @@ export function ContactForm() {
   async function onSubmit(values: ContactInput) {
     setStatus("sending");
     setServerError(null);
+    setMailtoFallback(null);
 
     try {
       const response = await fetch("/api/contact", {
@@ -37,18 +57,44 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
 
-      const data: { error?: string } = await response.json().catch(() => ({}));
+      const data: ContactApiResponse = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
-        setServerError(data.error ?? "Could not send your message.");
+      if (response.ok && data.ok) {
+        reset();
+        setStatus("sent");
+        return;
+      }
+
+      if (response.status === 202 && data.handoff === "formsubmit" && data.to) {
+        const subject =
+          data.subject ?? values.subject?.trim() ?? `Message from ${values.name}`;
+        const delivered = await deliverViaFormSubmit({
+          to: data.to,
+          name: values.name,
+          email: values.email,
+          subject,
+          message: values.message,
+        });
+
+        if (delivered.ok) {
+          reset();
+          setStatus("sent");
+          return;
+        }
+
+        console.error("[contact] formsubmit handoff failed:", delivered.detail);
+        setServerError("Could not send right now. Email me directly instead.");
+        setMailtoFallback(data.mailto ?? buildMailto(values, data.to));
         setStatus("error");
         return;
       }
 
-      reset();
-      setStatus("sent");
+      setServerError(data.error ?? "Could not send your message.");
+      setMailtoFallback(data.mailto ?? buildMailto(values));
+      setStatus("error");
     } catch {
       setServerError("Network error — check your connection and try again.");
+      setMailtoFallback(buildMailto(getValues()));
       setStatus("error");
     }
   }
@@ -164,9 +210,18 @@ export function ContactForm() {
               </Button>
 
               {status === "error" && serverError && (
-                <p role="alert" className="text-sm text-red-500">
-                  {serverError}
-                </p>
+                <div role="alert" className="space-y-2 text-sm">
+                  <p className="text-red-500">{serverError}</p>
+                  {mailtoFallback && (
+                    <a
+                      href={mailtoFallback}
+                      className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-accent"
+                    >
+                      <Mail className="size-3.5" />
+                      Open email app instead
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           </motion.form>
