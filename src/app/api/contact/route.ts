@@ -7,11 +7,16 @@ import { site } from "@/lib/site";
  * Contact form endpoint.
  *
  * Providers, tried in order:
- *   1. RESEND_API_KEY  → sends via Resend
- *   2. FORMSPREE_ENDPOINT → forwards the payload to Formspree
- *   3. neither → 501 with an actionable message (never a silent success)
+ *   1. RESEND_API_KEY      → Resend (server-side)
+ *   2. FORMSPREE_ENDPOINT  → Formspree (server-side)
+ *   3. FormSubmit handoff  → returns 202 so the browser finishes delivery
+ *      via formsubmit.co (no API key). Server-side FormSubmit gets blocked
+ *      by bot protection on many hosts; the browser Referer works.
  *
- * See .env.example for setup.
+ * First FormSubmit submission emails an Activate Form link to
+ * CONTACT_TO_EMAIL / site.email — click once, then messages deliver.
+ *
+ * See .env.example.
  */
 
 export const runtime = "nodejs";
@@ -39,6 +44,18 @@ function escapeHtml(value: string) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function mailtoFor(input: {
+  to: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}) {
+  return `mailto:${input.to}?subject=${encodeURIComponent(input.subject)}&body=${encodeURIComponent(
+    `From: ${input.name} <${input.email}>\n\n${input.message}`,
+  )}`;
 }
 
 export async function POST(request: Request) {
@@ -79,6 +96,7 @@ export async function POST(request: Request) {
 
   const heading = subject?.trim() || `New message from ${name}`;
   const to = process.env.CONTACT_TO_EMAIL ?? site.email;
+  const mailto = mailtoFor({ to, name, email, subject: heading, message });
 
   try {
     if (process.env.RESEND_API_KEY) {
@@ -103,7 +121,10 @@ export async function POST(request: Request) {
       if (error) {
         console.error("[contact] resend error:", error);
         return NextResponse.json(
-          { error: "Could not send right now. Email me directly instead." },
+          {
+            error: "Could not send right now. Email me directly instead.",
+            mailto,
+          },
           { status: 502 },
         );
       }
@@ -121,7 +142,10 @@ export async function POST(request: Request) {
       if (!response.ok) {
         console.error("[contact] formspree responded", response.status);
         return NextResponse.json(
-          { error: "Could not send right now. Email me directly instead." },
+          {
+            error: "Could not send right now. Email me directly instead.",
+            mailto,
+          },
           { status: 502 },
         );
       }
@@ -131,16 +155,23 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("[contact] unexpected error:", error);
     return NextResponse.json(
-      { error: "Something went wrong. Email me directly instead." },
+      {
+        error: "Something went wrong. Email me directly instead.",
+        mailto,
+      },
       { status: 500 },
     );
   }
 
+  // No server provider configured — validate succeeded; browser finishes
+  // delivery through FormSubmit (works without API keys).
   return NextResponse.json(
     {
-      error:
-        "The contact form is not configured yet. Set RESEND_API_KEY or FORMSPREE_ENDPOINT — see .env.example.",
+      handoff: "formsubmit",
+      to,
+      subject: heading,
+      mailto,
     },
-    { status: 501 },
+    { status: 202 },
   );
 }

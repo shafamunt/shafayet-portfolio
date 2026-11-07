@@ -39,7 +39,7 @@ Full Next.js app with contact API, Spotify API, and image optimization.
 
 1. Push to `main` on GitHub (auto-deploys via the linked Vercel project).
 2. Env vars (see [`.env.example`](.env.example)): set `NEXT_PUBLIC_SITE_URL=https://shafam.dev` and `CONTACT_TO_EMAIL=shafam@umich.edu` in Vercel → Project → Settings → Environment Variables.
-3. Contact form needs either `RESEND_API_KEY` or `FORMSPREE_ENDPOINT`; without either, the form validates but the API returns a clear “not configured” error.
+3. Contact form delivers with zero API keys via FormSubmit (browser handoff after `/api/contact` validates). After the first live submission, click the **Activate Form** link emailed to `CONTACT_TO_EMAIL` once. Optional overrides: `RESEND_API_KEY` or `FORMSPREE_ENDPOINT`.
 
 DNS for `shafam.dev` is on Cloudflare (nameservers at Porkbun). Apex and `www` point at Vercel (DNS-only / grey cloud).
 
